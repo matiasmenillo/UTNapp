@@ -1,0 +1,10 @@
+[
+    {
+        "firstName": "matias",
+        "lastName": "Menillo",
+        "dni": "35619400",
+        "email": "matiasmenillo@gmail.com",
+        "password": "1234",
+        "rol": "admin"
+    }
+]
