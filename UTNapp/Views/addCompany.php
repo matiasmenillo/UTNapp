@@ -1,3 +1,6 @@
+<?php
+    require_once("navAdmin.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

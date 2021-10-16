@@ -24,6 +24,19 @@
             $this->SaveData();
         }
 
+        public function Remove(Company $company)
+        {
+            $this->RetrieveData();
+            foreach ($this->companyList as $key => $value) 
+            {
+                if ($value->getCuit() == $company->getCuit()) 
+                {
+                    unset($this->companyList[$key]);      
+                }
+            }
+            $this->saveData();
+        }
+
 
         public function GetAll(){
 
@@ -55,6 +68,7 @@
         private function RetrieveData(){
 
             $arrayToDecode = array();
+            $this->companyList = array();
 
             if(file_exists($this->fileName)){
 

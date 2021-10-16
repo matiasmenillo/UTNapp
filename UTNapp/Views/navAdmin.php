@@ -12,8 +12,9 @@
     <ul>
             <li><a href="<?php echo FRONT_ROOT."" ?>">Inicio</a></li>
             <li><a href="<?php echo FRONT_ROOT."Company/ShowAddView" ?>">Añadir Empresa</a></li>
-            <li><a href="<?php echo FRONT_ROOT."Company/ShowCompanyListView" ?>">Ver Empresas</a></li>
-            <li><a href="<?php echo FRONT_ROOT."deleteCompany.php" ?>">Eliminar Empresa</a></li> 
-            <li><a href="<?php echo FRONT_ROOT."modifyCompany.php" ?>">Modificar Empresa</a></li>
+            <li><a href="<?php echo FRONT_ROOT."Company/ShowCompanyListView" ?>">Gestionar Empresas</a></li>
     </ul>
+<?php
+    
+?>
 

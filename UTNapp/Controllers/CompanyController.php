@@ -7,7 +7,7 @@
     class CompanyController{ 
 
         private $CompanyDAO;
-        private $companyList = array();
+        private $companyList;
 
         public function __construct(){
 
@@ -15,14 +15,21 @@
         }
 
         public function ShowCompanyListView(){
-
-            
+            $companyList = $this->CompanyDAO->GetAll();
             require_once(VIEWS_PATH . "companyListAdmin.php");
         }
 
         public function ShowAddView(){
 
             require_once(VIEWS_PATH . "addCompany.php");
+        }
+
+        public function ShowModifView($Cuit, $Name){
+            $ModifCompany = new Company();
+            $ModifCompany->setCuit($Cuit);
+            $ModifCompany->setName($Name);
+
+            require_once(VIEWS_PATH . "modifyCompany.php");
         }
 
         public function Add($company_name, $company_cuit /*, $aboutUs, $active, $companyLink, $description, $id, $sector*/){
@@ -40,11 +47,38 @@
         
             $this->CompanyDAO->Add($newCompany);
 
-            $this->ShowAddView();
+            
+            $this->ShowCompanyListView();
+            
         }
 
+        public function Modify($company_name, $company_cuit /*, $aboutUs, $active, $companyLink, $description, $id, $sector*/){
 
+            $newCompany = new Company;
+         
+            $newCompany->setName($company_name);
+            $newCompany->setCuit($company_cuit);
+            //$newCompany->setAboutUs($aboutUs);
+            //$newCompany->setActive($active);
+            //$newCompany->setCompanyLink($companyLink);
+            //$newCompany->setDescription($description);
+            //$newCompany->setId($id);
+            //$newCompany->setSector($sector);
 
+            $this->CompanyDAO->Remove($newCompany);
+            $this->CompanyDAO->Add($newCompany);
+
+            $this->ShowCompanyListView();
+            
+        }
+
+        public function Remove($Cuit)
+        {
+            $Company = new Company();
+            $Company->setCuit($Cuit);
+            $this->CompanyDAO->Remove($Company);
+            $this->ShowCompanyListView();
+        }
     }
 
 ?>
