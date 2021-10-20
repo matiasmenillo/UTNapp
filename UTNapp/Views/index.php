@@ -9,7 +9,7 @@
     <div class="login">    
     <form action="<?php echo FRONT_ROOT?>Login/Login" method="POST" > 
         <label><b>E-Mail   
-        </b> <br>  
+        </b><br>  
         </label>    
         <input type="text" name="user_email" placeholder="Email">    
         <br><br>    

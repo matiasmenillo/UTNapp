@@ -1,41 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<html>
+<head>    
+    <title>Registrar</title>    
+    <link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH; ?>style.css">    
+<style>
+form { 
+margin: 0 auto; 
+width:130px;
+}
+</style>
+</head>    
 <body>
     <h2>Registrarse</h2>
-    <form action="<?php echo FRONT_ROOT ?> User/Add" method="POST">
+    <form action="<?php echo FRONT_ROOT ?> Home/Index" method="POST">
 
-        <label for="user_firstName">Nombre</label>
-        <input type="text" name="user_firstName">
+        <label for="user_firstName" style="color:white">Nombre</label>
+        <input type="text" name="user_firstName" >
 
-        <label for="user_lastName">Apellido</label>
-        <input type="text" name="user_lastName">
+        <label for="user_lastName" style="color:white">Apellido</label>
+        <input type="text" name="user_lastName" required>
 
-        <label for="user_email">Email</label>
-        <input type="text" name="user_email">
+        <label for="user_email" style="color:white">Email</label>
+        <input type="text" name="user_email" required>
 
-        <label for="user_dni">Dni</label>
-        <input type="number" name="user_dni">
+        <label for="user_dni" style="color:white">Dni</label>
+        <input type="number" name="user_dni" required>
 
-        <label for="user_rol">Seleccione un rol</label>
-        <select name="user_rol">
-            <option value="" selected disabled hidden>Seleccione</option>
+        <label for="user_rol" style="color:white">Seleccione un rol</label>
+        <select name="user_rol" style="color:white" required>
             <option value="admin">Administrador</option>
             <option value="student">Estudiante</option>
         </select>
         
-        <label for="user_password">Contraseña</label>
-        <input type="password" name="user_password">
+        <label for="user_password" style="color:white">Contraseña</label>
+        <input type="password" name="user_password" required>
 
-        
+        <br>
 
         <button type="submit">Agregar</button>
 
     </form>
 </body>
 </html>
+
+<?php
+    require_once("footer.php");
+?>

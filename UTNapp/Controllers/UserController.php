@@ -34,7 +34,7 @@
 
             require_once(VIEWS_PATH . "addUser.php");
         }
-
+        
 
         public function GetAll(){
 

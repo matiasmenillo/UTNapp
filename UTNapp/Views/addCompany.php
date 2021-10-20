@@ -1,5 +1,5 @@
 <?php
-    require_once("navAdmin.php");
+    require_once("nav-barAdmin.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +10,8 @@
     <title>Document</title>
 </head>
 <body>
-    <?php echo "Bienvenido " . $_SESSION["loggedUser"]->getRol();?>
+    <br><br>
+    <?php echo "Bienvenido, admin " . $_SESSION["loggedUser"]->getLastName(); ?>
     <h2>Ingrese los datos de la nueva empresa</h2>
 
     <form action="<?php echo FRONT_ROOT?> Company/Add" method="POST">
@@ -20,7 +21,7 @@
 
         <label for="company_cuit">Cuit</label>
         <input type="number" name="company_cuit">
-
+        <br><br>
         <button type="submit">Agregar</button>
     </form>
 
