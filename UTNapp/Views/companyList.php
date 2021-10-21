@@ -38,19 +38,26 @@
                     <tr>
                     <td style="color:black"><?php echo $company->getName() ?></td>
                     <td style="color:black"><?php echo $company->getCuit() ?></td>
-                        <td>
-                            <form action="<?php echo FRONT_ROOT ?>Company/Remove" method="POST">
-                                <button type="submit" class="btn" name="remove" value="<?php echo $company->getCuit() ?>"> Remove </button>
-                            </form>
-                        </td>
-                        <td style="color:black">
-                            <form action="<?php echo FRONT_ROOT ?>Company/ShowModifView" method="POST">
-                                <input type="hidden" name="Cuit" value="<?php echo $company->getCuit() ?>">
-                                <input type="hidden" name="Name" value="<?php echo $company->getName() ?>">
-                                <button type="submit" class="btn" name="modify"> Modify </button>
-                            </form>
+                    <?php
+                        if (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"]->getRol() == "admin")
+                        {
+                    ?>
+                            <td>
+                                <form action="<?php echo FRONT_ROOT ?>Company/Remove" method="POST">
+                                    <button type="submit" class="btn" name="remove" value="<?php echo $company->getCuit() ?>"> Remove </button>
+                                </form>
+                            </td>
+                            <td style="color:black">
+                                <form action="<?php echo FRONT_ROOT ?>Company/ShowModifView" method="POST">
+                                    <input type="hidden" name="Cuit" value="<?php echo $company->getCuit() ?>">
+                                    <input type="hidden" name="Name" value="<?php echo $company->getName() ?>">
+                                    <button type="submit" class="btn" name="modify"> Modify </button>
+                                </form>
 
-                        </td>
+                            </td>
+                        <?php
+                        }
+                        ?>
                     </tr>
                 <?php
                }
