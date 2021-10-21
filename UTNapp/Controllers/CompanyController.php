@@ -16,7 +16,8 @@
 
         public function ShowCompanyListView(){
             $companyList = $this->CompanyDAO->GetAll();
-            require_once(VIEWS_PATH . "companyListAdmin.php");
+
+            require_once(VIEWS_PATH . "companyList.php"); 
         }
 
         public function ShowAddView(){
@@ -78,6 +79,24 @@
             $Company->setCuit($Cuit);
             $this->CompanyDAO->Remove($Company);
             $this->ShowCompanyListView();
+        }
+
+        public function searchCompany($companyName)
+        {
+            $result = $this->CompanyDAO->getCompanyByName($companyName);
+
+            if ($result != false)
+            {
+                $companyList = array();
+                array_push($companyList, $result);
+                require_once(VIEWS_PATH . "companyList.php"); 
+            }
+            else
+            {
+              $errorMsg = "COMPANY NOT FOUND";
+              echo $errorMsg;
+              $this->ShowCompanyListView();
+            }
         }
     }
 
