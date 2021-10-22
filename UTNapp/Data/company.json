@@ -2,11 +2,11 @@
     {
         "company_name": "Globant",
         "company_cuit": "111",
-        "company_status": "active"
+        "company_status": "Activa"
     },
     {
         "company_name": "GlobalLogic",
         "company_cuit": "9988",
-        "company_status": "inactive"
+        "company_status": "active"
     }
 ]

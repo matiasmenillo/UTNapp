@@ -74,6 +74,7 @@
                                 <form action="<?php echo FRONT_ROOT ?>Company/ShowModifView" method="POST">
                                     <input type="hidden" name="Cuit" value="<?php echo $company->getCuit() ?>">
                                     <input type="hidden" name="Name" value="<?php echo $company->getName() ?>">
+                                    <input type="hidden" name="Status" value="<?php echo $company->getStatus() ?>">
                                     <button type="submit" class="btn" name="modify"> Modify </button>
                                 </form>
 

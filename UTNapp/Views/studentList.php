@@ -44,19 +44,6 @@
                                 echo "No";
                             }
                     ?></td>
-
-                    <?php
-                        if (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"]->getRol() == "admin")
-                        {
-                    ?>
-                            <td>
-                                <form action="<?php echo FRONT_ROOT ?>Company/Remove" method="POST">
-                                    <button type="submit" class="btn" name="remove" value="<?php echo $student->getStudentId() ?>"> Remove </button>
-                                </form>
-                            </td>
-                        <?php
-                        }
-                        ?>
                     </tr>
                 <?php
                }

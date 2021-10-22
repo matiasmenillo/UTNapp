@@ -16,13 +16,13 @@
     <form action="<?php echo FRONT_ROOT?> Company/Add" method="POST">
 
         <label for="company_name">Nombre de la empresa</label>
-        <input type="text" name="company_name">
+        <input type="text" name="company_name" style="color:black">
 
         <label for="company_cuit">Cuit</label>
-        <input type="number" name="company_cuit">
+        <input type="number" name="company_cuit" style="color:black">
 
         <label for="company_status">Estado</label>
-        <select name="company_status">
+        <select name="company_status" style="color:black">
             <option value="" selected disabled hidden>Seleccione</option>
             <option value="active">Activa</option>
             <option value="inactive">Inactiva</option>
