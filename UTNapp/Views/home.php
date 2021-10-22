@@ -13,9 +13,9 @@
 
   <div id="pageintro" class="hoc clear"> 
     <article class="center">
-      <h3 class="heading underline">asd</h3>
-      <p>Sigo testeando cosas, a ver</p>
-      <footer><a class="btn" href="#">APRETAME SOY BOTON</a></footer>
+      <h3 class="heading underline">UTN</h3>
+      <p>Gestor de Pasantias</p>
+      <footer></footer>
     </article>
   </div>
 </div>
