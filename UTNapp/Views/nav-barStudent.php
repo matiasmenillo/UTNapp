@@ -20,6 +20,7 @@
             <li><a class="drop" href="#">Alumnos</a>
               <ul>
                 <li><a href="#">Estado Academico</a></li>
+                <li><a href="<?php echo FRONT_ROOT."Student/ShowStudentListView" ?>">Lista Alumnos</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Company/ShowCompanyListView" ?>">Lista de Empresas</a></li>
                 <li><a href="#">Aplicar a propuesta</a></li>
                 <li><a href="#">Historial de propuestas</a></li>
