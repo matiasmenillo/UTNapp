@@ -69,6 +69,7 @@
 
                 $valuesArray["company_name"] = $company->getName();
                 $valuesArray["company_cuit"] = $company->getCuit();
+                $valuesArray["company_status"] = $company->getStatus();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -96,6 +97,7 @@
 
                     $company->setName($valuesArray["company_name"]);
                     $company->setCuit($valuesArray["company_cuit"]);
+                    $company->setStatus($valuesArray["company_status"]);
 
                     array_push($this->companyList, $company);
                 }

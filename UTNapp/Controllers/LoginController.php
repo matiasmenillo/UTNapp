@@ -7,29 +7,46 @@
 
         public function Login($user_email, $user_password){
 
-           $StudentController = new StudentController;
-
-           
+           $StudentController = new StudentController;       
         
            $studentList = $StudentController->GetAll();
-           
+           $founded = false;
+
            foreach($studentList as $student){
 
-                if(($user_email == $student->getEmail()) && ($user_password == $student->getPassword())){
+                if($user_email == $student->getEmail()){
 
-                $_SESSION["loggedUser"] = $student;
+                    $founded = true;
+                        
+                    if($user_password == $student->getPassword()){
 
-                ///Por ahora te manda a home.php. Deberia agregar en esta pagina todas las funciones de navAdmin
-                require_once(VIEWS_PATH."validate-session.php");
-                require(VIEWS_PATH . "home.php");
+                        $_SESSION["loggedUser"] = $student;
+                        ///Por ahora te manda a home.php. Deberia agregar en esta pagina todas las funciones de navAdmin
+                        require_once(VIEWS_PATH."validate-session.php");
+                        require(VIEWS_PATH . "home.php");
 
-
+                    }else{
+                        $errorMsg = "CONTRASEÑA INVALIDA";
+                        echo $errorMsg;
+                        require_once(VIEWS_PATH . "index.php");
+                    }
+                
               }
+            }
+            if($founded == false){
+                $errorMsg = "EMAIL IVALIDO";
+                echo $errorMsg;
+                require_once(VIEWS_PATH . "index.php");
         }
-    }
+      }
 
+
+
+
+    
     }
     
     
+
 
 ?>

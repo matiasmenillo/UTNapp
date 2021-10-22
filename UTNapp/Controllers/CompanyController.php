@@ -25,22 +25,23 @@
             require_once(VIEWS_PATH . "addCompany.php");
         }
 
-        public function ShowModifView($Cuit, $Name){
+        public function ShowModifView($Cuit, $Name, $Status){
             $ModifCompany = new Company();
             $ModifCompany->setCuit($Cuit);
             $ModifCompany->setName($Name);
+            $ModifCompany->setStatus($Status);
 
             require_once(VIEWS_PATH . "modifyCompany.php");
         }
 
-        public function Add($company_name, $company_cuit /*, $aboutUs, $active, $companyLink, $description, $id, $sector*/){
+        public function Add($company_name, $company_cuit, $company_status /*, $aboutUs, $companyLink, $description, $id, $sector*/){
 
             $newCompany = new Company;
          
             $newCompany->setName($company_name);
             $newCompany->setCuit($company_cuit);
+            $newCompany->setStatus($company_status);
             //$newCompany->setAboutUs($aboutUs);
-            //$newCompany->setActive($active);
             //$newCompany->setCompanyLink($companyLink);
             //$newCompany->setDescription($description);
             //$newCompany->setId($id);
@@ -53,14 +54,14 @@
             
         }
 
-        public function Modify($company_name, $company_cuit /*, $aboutUs, $active, $companyLink, $description, $id, $sector*/){
+        public function Modify($company_name, $company_cuit, $company_status /*, $aboutUs, $companyLink, $description, $id, $sector*/){
 
             $newCompany = new Company;
          
             $newCompany->setName($company_name);
             $newCompany->setCuit($company_cuit);
+            $newCompany->setStatus($company_status);
             //$newCompany->setAboutUs($aboutUs);
-            //$newCompany->setActive($active);
             //$newCompany->setCompanyLink($companyLink);
             //$newCompany->setDescription($description);
             //$newCompany->setId($id);

@@ -6,7 +6,7 @@
 
         private $name;
         private $aboutUs;
-        private $active;
+        private $status;
         private $companyLink;
         private $cuit;
         private $description;
@@ -35,25 +35,6 @@
                 return $this;
         }
 
-        /**
-         * Get the value of active
-         */ 
-        public function getActive()
-        {
-                return $this->active;
-        }
-
-        /**
-         * Set the value of active
-         *
-         * @return  self
-         */ 
-        public function setActive($active)
-        {
-                $this->active = $active;
-
-                return $this;
-        }
 
         /**
          * Get the value of companyLink
@@ -171,6 +152,26 @@
         public function setName($name)
         {
                 $this->name = $name;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of status
+         */ 
+        public function getStatus()
+        {
+                return $this->status;
+        }
+
+        /**
+         * Set the value of status
+         *
+         * @return  self
+         */ 
+        public function setStatus($status)
+        {
+                $this->status = $status;
 
                 return $this;
         }

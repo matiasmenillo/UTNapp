@@ -1,10 +1,13 @@
 <?php
+
     if (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"]->getRol() == "admin")
     {
+        $rol = 'admin';
         require_once("nav-barAdmin.php");
     }
     else
     {
+        $rol = 'student';
         require_once("nav-barStudent.php");
     }
 ?>
@@ -26,22 +29,42 @@
     <table style="text-align:center;">
         <thead>
         <tr>
-            <th style="width: 15%;">Code</th>
+            <th style="width: 15%;">NOMBRE</th>
             <th style="width: 30%;">CUIT</th>
+            <?php 
+                if($rol == 'admin'){
+            ?>
+            <th style="width: 30%;">ESTADO</th>
+            <?php
+                }
+            ?>
         </tr>
         </thead>
         <tbody>
             <?php
                 foreach($companyList as $company)
                 {
-                ?>
+                    if($rol == 'student'){
+
+                        if($company->getStatus() == 'active'){
+
+            ?>
                     <tr>
                     <td style="color:black"><?php echo $company->getName() ?></td>
                     <td style="color:black"><?php echo $company->getCuit() ?></td>
+            <?php
+            
+                }
+            }
+            ?>
+            
                     <?php
-                        if (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"]->getRol() == "admin")
-                        {
+                        if ($rol == 'admin')
+                        {         
                     ?>
+                            <td style="color:black"><?php echo $company->getName() ?></td>
+                            <td style="color:black"><?php echo $company->getCuit() ?></td>
+                            <td style="color:black"><?php echo $company->getStatus() ?></td>
                             <td>
                                 <form action="<?php echo FRONT_ROOT ?>Company/Remove" method="POST">
                                     <button type="submit" class="btn" name="remove" value="<?php echo $company->getCuit() ?>"> Remove </button>

@@ -11,13 +11,13 @@
         <label><b>E-Mail   
         </b><br>  
         </label>    
-        <input type="text" name="user_email" placeholder="Email">    
+        <input type="text" name="user_email" placeholder="Email" required>    
         <br><br>    
         <label><b>Contraseña   
         </b>    
         </label> 
         <br>   
-        <input type="password" name="user_password" placeholder="Contraseña">    
+        <input type="password" name="user_password" placeholder="Contraseña" required>    
         <br><br>    
         <button type="submit">Ingresar</button>      
         <br><br>    
