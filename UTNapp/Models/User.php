@@ -1,15 +1,13 @@
 <?php
     namespace Models;
 
-    class User{
-
+    abstract class  User{
         private $firstName;
         private $lastName;
         private $email;
         private $password;
         private $dni;
         private $rol;
-
 
         /**
          * Get the value of firstName

@@ -2,7 +2,7 @@
 <html>    
 <head>    
     <title>Login Form</title>    
-    <link rel="stylesheet" type="text/css" href="Views/css/style.css">    
+    <link rel="stylesheet" type="text/css" href="Views/css/syle.css">    
 </head>    
 <body>    
     <h2>Iniciar sesion</h2><br>    

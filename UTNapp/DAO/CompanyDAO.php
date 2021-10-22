@@ -24,6 +24,21 @@
             $this->SaveData();
         }
 
+        public function getCompanyByName($companyName)
+        {
+            $companys = $this->getAll();
+
+            foreach($companys as $company)
+            {
+                if ($company->getName() == $companyName)
+                {
+                    return $company;
+                }
+            }
+            
+            return false;
+        }
+
         public function Remove(Company $company)
         {
             $this->RetrieveData();

@@ -1,16 +1,30 @@
 <?php
-    namespace Controllers;
+     namespace Controllers;
+
+     use Models\Student as Student;
+     use DAO\StudentDAO as StudentDAO;
+ 
+     class StudentController{
+ 
+         private $StudentDAO;
+ 
+         public function __construct(){
+ 
+             $this->StudentDAO = new StudentDAO;
+         }
 
 
-    class StudentController{
+         public function GetAll(){
+ 
+             return $this->StudentDAO->GetAll();
+         }
 
-        public function GetStudentFromApi{
+         public function ShowStudentListView(){
+            $studentList = $this->StudentDAO->GetAll();
 
-            $url = "https://utn-students-api.herokuapp.com/index.html/api/Student";
-            $studentJson = file_get_contents($url);
-
+            require_once(VIEWS_PATH . "studentList.php"); 
         }
-    }
+     }
 
 
 ?>
