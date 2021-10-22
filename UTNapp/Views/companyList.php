@@ -42,7 +42,7 @@
         </thead>
         <tbody>
             <?php
-                foreach($companyList as $company)
+                foreach($result as $company)
                 {
                     if($rol == 'student'){
 

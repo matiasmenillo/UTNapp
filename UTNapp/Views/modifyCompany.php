@@ -24,8 +24,8 @@
         <label for="company_status">Estado de la empresa</label>
         <select name="company_status" required style="color:black">
             <option value="" selected disabled hidden><?php echo $ModifCompany->getStatus() ?></option>
-            <option value="active">Activa</option>
-            <option value="inactive">Inactiva</option>
+            <option value="active">active</option>
+            <option value="inactive">inactive</option>
         </select>
 
         <button type="submit">Guardar</button>

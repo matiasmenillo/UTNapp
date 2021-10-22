@@ -27,16 +27,17 @@
         public function getCompanyByName($companyName)
         {
             $companys = $this->getAll();
+            $result = array();
 
             foreach($companys as $company)
             {
-                if ($company->getName() == $companyName)
+                if (strpos(strtoupper($company->getName()), strtoupper($companyName)) !== false)
                 {
-                    return $company;
+                    array_push($result, $company);
                 }
             }
             
-            return false;
+            return $result;
         }
 
         public function Remove(Company $company)

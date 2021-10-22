@@ -15,7 +15,7 @@
         }
 
         public function ShowCompanyListView(){
-            $companyList = $this->CompanyDAO->GetAll();
+            $result = $this->CompanyDAO->GetAll();
 
             require_once(VIEWS_PATH . "companyList.php"); 
         }
@@ -86,10 +86,8 @@
         {
             $result = $this->CompanyDAO->getCompanyByName($companyName);
 
-            if ($result != false)
+            if (count($result) > 0)
             {
-                $companyList = array();
-                array_push($companyList, $result);
                 require_once(VIEWS_PATH . "companyList.php"); 
             }
             else
