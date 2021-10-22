@@ -18,6 +18,12 @@
  
              return $this->StudentDAO->GetAll();
          }
+
+         public function ShowStudentListView(){
+            $studentList = $this->StudentDAO->GetAll();
+
+            require_once(VIEWS_PATH . "studentList.php"); 
+        }
      }
 
 
