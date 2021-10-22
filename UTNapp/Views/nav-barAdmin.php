@@ -29,9 +29,9 @@
               <ul>
                 <li><a href="<?php echo FRONT_ROOT."Company/ShowAddView" ?>">Añadir Empresa</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Company/ShowCompanyListView" ?>">Gestionar Empresas</a></li>
+                <li><a href="<?php echo FRONT_ROOT."Student/ShowStudentListView" ?>">Gestionar Estudiantes</a></li>
                 <li><a href="#">Cargar propuesta</a></li>
                 <li><a href="#">Ver propuestas</a></li>
-                <li><a href="<?php echo FRONT_ROOT."User/ShowAddView" ?>">Crear usuario</a></li>
                 <li><a href="#">Cerrar sesion</a></li>
               </ul>
             </li>
