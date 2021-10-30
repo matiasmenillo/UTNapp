@@ -1,0 +1,15 @@
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS  GetCareerById;
+
+DELIMITER //
+
+CREATE PROCEDURE GetCareerById
+(
+	IN IdCareerParam INT
+)
+BEGIN
+	SELECT * FROM Career WHERE IdCareer = IdCareerParam;
+END //
+
+DELIMITER ;

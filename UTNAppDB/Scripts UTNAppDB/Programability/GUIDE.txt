@@ -1,0 +1,66 @@
+==========================================================================================================================================
+							!!!! ACLARACIONES !!!!
+==========================================================================================================================================
+0-) ANTES DE EJECUTAR LOS CREATE SP's, CREAR AL DB Y LAS TABLAS EN EL ORDEN INDICADO EN LA NUMERACION
+1-) EN INSERTS Y UPDATES, SI NO SE DESEA LLENAR ALGUN CAMPO, PASAR NULL.
+2-) EN UPDATES, SE DEBE PASAR TODOS LOS PARAMETROS QUE PIDE EL METODO, Y SOLO CAMBIAR LOS QUE SE DESEAN MODIFICAR, 
+    SINO PASAR LOS QUE YA TIENE EL REGISTRO EN LA BASE, PARA ELLO, PRIMERO HACER UN GET DEL OBJETO, EDITARLO Y 
+    LUEGO PASARLO EN EL UPDATE.
+==========================================================================================================================================
+Student (PK -> IdStudent, Email, Dni) ====================================================================================================
+
+GetAllStudents()
+GetAllActiveStudents()
+GetStudentById(IdStudent)
+InsertStudent(IdStudent, FirstName, LastName, Email, Password, Dni, Admin, IdCareer, FileNumber, Gender, BirthDate, PhoneNumber, Active)
+UpdateStudent(IdStudent, FirstName, LastName, Email, Password, Dni, Admin, IdCareer, FileNumber, Gender, BirthDate, PhoneNumber, Active)
+DeleteStudent(IdStudent)
+
+==========================================================================================================================================
+Company (PK -> IdCompany, Name, Cuit) ====================================================================================================
+
+GetAllCompanys()
+GetAllActiveCompanys()
+GetCompanyById(IdCompany)
+InsertCompany(Status, Sector, Name, Description, Cuit, CompanyLink, AboutUs) --> NO SE EL PASA EL IdCompany porque lo genera la base.
+UpdateCompany(IdComapny, Status, Sector, Name, Description, Cuit, CompanyLink, AboutUs)
+DeleteCompany(IdCompany)
+
+==========================================================================================================================================
+Career (PK -> IdCareer) =================================================================================================================
+
+GetAllCareers()
+GetCareerById(IdCareer)
+InsertCareer(IdCareer, Description, Active)
+UpdateCareer(IdCareer, Description, Active)
+DeleteCareer(IdCareer)
+
+==========================================================================================================================================
+JobPosition (PK -> IdJobPosition) ===========================================================================================================
+
+GetAllJobPosition()
+GetJobPositionById(IdJobPosition)
+InsertJobPosition(IdJobPosition, IdCareer, Description)
+UpdateJobPosition(IdJobPosition, IdCareer, Description)
+DeleteJobPosition(IdJobPosition)
+
+==========================================================================================================================================
+JobOffer (PK -> IdJobOffer) ==============================================================================================================
+
+GetAllJobOffers()
+GetJobOfferById(IdJobOffer)
+InsertJobOffer(IdJobPosition, IdCompany) --> NO SE EL PASA EL IdJobOffer porque lo genera la base.
+UpdateJobOffer(IdJobOffer,IdJobPosition, IdCompany)
+DeleteJobOffer(IdJobOffer)
+
+==========================================================================================================================================
+Postulation (PK -> IdStudent, IdJobOffer) ================================================================================================
+
+GetAllPostulations()
+GetPostulationByStudent(IdStudent)
+GetPostulationByJobOffer(IdJobOffer)
+InsertPostulation(IdStudent, IdJobOffer, PostulationDate)
+UpdatePostulation(IdStudent, IdJobOffer, PostulationDate)
+DeletePostulation(IdStudent, IdJobOffer)
+
+==========================================================================================================================================

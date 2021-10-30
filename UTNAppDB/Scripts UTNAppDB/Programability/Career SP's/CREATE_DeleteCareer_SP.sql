@@ -1,0 +1,15 @@
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS DeleteCareer;
+
+DELIMITER //
+
+CREATE PROCEDURE DeleteCareer
+(
+	IN IdCareerParam INT 
+)
+BEGIN
+	DELETE FROM Career WHERE IdCareer = IdCareerParam;
+END //
+
+DELIMITER ;
