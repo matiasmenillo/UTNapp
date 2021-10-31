@@ -13,10 +13,9 @@ CREATE PROCEDURE UpdatePostulation
 BEGIN
 	UPDATE Postulation 
 	SET
-        IdStudent = IdStudent,
         IdJobOffer = IdJobOffer,
         PostulationDate = PostulationDate
-	WHERE IdStudent = IdStudent AND IdJobOffer = IdJobOffer;
+	WHERE IdStudent = IdStudent;
 END //
 
 DELIMITER ;

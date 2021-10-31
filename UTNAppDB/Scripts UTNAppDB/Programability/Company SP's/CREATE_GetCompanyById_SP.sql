@@ -9,7 +9,7 @@ CREATE PROCEDURE GetCompanyById
 	IN IdCompanyParam INT
 )
 BEGIN
-	SELECT * FROM Company WHERE IdCompnay = IdCompanyParam;
+	SELECT * FROM Company WHERE IdCompany = IdCompanyParam;
 END //
 
 DELIMITER ;

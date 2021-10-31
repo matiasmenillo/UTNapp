@@ -6,10 +6,10 @@ DELIMITER //
 
 CREATE PROCEDURE DeletePostulation
 (
-	IN IdPostulationParam INT 
+	IN IdStudentParam INT 
 )
 BEGIN
-	DELETE FROM Postulation WHERE IdPostulation = IdPostulationParam;
+	DELETE FROM Postulation WHERE IdStudent = IdStudentParam;
 END //
 
 DELIMITER ;

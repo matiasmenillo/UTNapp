@@ -7,13 +7,13 @@ DELIMITER //
 CREATE PROCEDURE UpdateJobPosition
 (
 	IN IdJobPositionParam int,		
-	IN IdCareer	int,		
+	IN IdCompany int,		
 	IN Description varchar(200)
 )
 BEGIN
-	UPDATE Career 
+	UPDATE JobPosition 
 	SET
-		IdCareer = IdCareer,	
+		IdCompany = IdCompany,
         Description = Description
 	WHERE IdJobPosition = IdJobPositionParam;
 END //

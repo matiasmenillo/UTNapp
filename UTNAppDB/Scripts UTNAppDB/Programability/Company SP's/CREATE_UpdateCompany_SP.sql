@@ -6,7 +6,7 @@ DELIMITER //
 
 CREATE PROCEDURE UpdateCompany
 (
-	IN IdComapnyParam INT,
+	IN IdCompanyParam INT,
 	IN Status bit(1), 
 	IN Sector varchar(200), 
 	IN Name varchar(200),  

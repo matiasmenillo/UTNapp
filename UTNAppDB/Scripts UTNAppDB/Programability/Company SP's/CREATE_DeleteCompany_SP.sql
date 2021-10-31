@@ -6,7 +6,7 @@ DELIMITER //
 
 CREATE PROCEDURE DeleteCompany
 (
-	IN IdComapnyParam INT 
+	IN IdCompanyParam INT 
 )
 BEGIN
 	DELETE FROM Company WHERE IdCompany = IdCompanyParam;

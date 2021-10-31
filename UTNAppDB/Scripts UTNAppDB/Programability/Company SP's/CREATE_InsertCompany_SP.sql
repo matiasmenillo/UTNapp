@@ -16,12 +16,11 @@ CREATE PROCEDURE InsertCompany
 
 )
 BEGIN
-	INSERT INTO Student VALUES
+	INSERT INTO Company (Status, Sector, Name, Description, Cuit, CompanyLink, AboutUs) VALUES
     (
 		Status,
         Sector,
         Name,
-        IdCompany,
         Description,
         Cuit,
         CompanyLink,

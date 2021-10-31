@@ -10,7 +10,7 @@ CREATE PROCEDURE InsertJobOffer
 		IN IdCompany int
 )
 BEGIN
-	INSERT INTO JobOffer VALUES
+	INSERT INTO JobOffer (IdJobPosition, IdCompany) VALUES
     (
 		IdJobPosition,
         IdCompany

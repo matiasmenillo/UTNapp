@@ -61,6 +61,6 @@ GetPostulationByStudent(IdStudent)
 GetPostulationByJobOffer(IdJobOffer)
 InsertPostulation(IdStudent, IdJobOffer, PostulationDate)
 UpdatePostulation(IdStudent, IdJobOffer, PostulationDate)
-DeletePostulation(IdStudent, IdJobOffer)
+DeletePostulation(IdStudent)
 
 ==========================================================================================================================================

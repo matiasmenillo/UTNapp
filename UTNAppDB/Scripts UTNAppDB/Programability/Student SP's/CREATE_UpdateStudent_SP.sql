@@ -34,7 +34,7 @@ BEGIN
 		FileNumber = FileNumber, 
 		Gender = Gender, 
 		BirthDate = BirthDate, 
-		PhoneNumber = PhoneNumbe, 
+		PhoneNumber = PhoneNumber, 
 		Active = Active
 	WHERE IdStudent = IdStudentParam;
 END //
