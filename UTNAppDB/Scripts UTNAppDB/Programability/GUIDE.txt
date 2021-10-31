@@ -22,6 +22,7 @@ Company (PK -> IdCompany, Name, Cuit) ==========================================
 GetAllCompanys()
 GetAllActiveCompanys()
 GetCompanyById(IdCompany)
+GetCompanyByName(Name)
 InsertCompany(Status, Sector, Name, Description, Cuit, CompanyLink, AboutUs) --> NO SE EL PASA EL IdCompany porque lo genera la base.
 UpdateCompany(IdComapny, Status, Sector, Name, Description, Cuit, CompanyLink, AboutUs)
 DeleteCompany(IdCompany)

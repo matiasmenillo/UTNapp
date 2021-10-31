@@ -3,18 +3,15 @@
 
     use Models\Student as Student;
     use DAO\IStudentDAO as IStudentDAO;
+    use \Exception as Exception;
+    use DAO\Connection as Connection;
 
     class StudentDAO implements IStudentDAO{
 
-        private $studentList = array();
-        private $fileName;
+        private $connection;
+        private $tableName = "Student";
 
-        function __construct(){
-
-            $this->fileName = dirname(__DIR__) . "/Data/students.json";
-        }
-
-        private function getStudentsFromAPI()
+        public function getStudentsFromAPI()
         {
             //CURL
             $url = curl_init();
@@ -28,111 +25,187 @@
             $response = curl_exec($url);
             $toJson = json_decode($response);
 
-            foreach($toJson as $eachStudent)
+            if ($toJson != NULL)
             {
-                $newStudent = new Student;
+                foreach($toJson as $eachStudent)
+                {
+                    $newStudent = new Student;
 
-                $newStudent->setStudentId($eachStudent->studentId);
-                $newStudent->setCareerId($eachStudent->careerId);
-                $newStudent->setFirstName($eachStudent->firstName);
-                $newStudent->setLastName($eachStudent->lastName);
-                $newStudent->setDni($eachStudent->dni);
-                $newStudent->setFileNumber($eachStudent->fileNumber);
-                $newStudent->setGender($eachStudent->gender);
-                $newStudent->setBirthDate($eachStudent->birthDate);
-                $newStudent->setEmail($eachStudent->email);
-                $newStudent->setPhoneNumber($eachStudent->phoneNumber);
-                $newStudent->setActive($eachStudent->active);
-                $newStudent->setRol("student");
-                $newStudent->setPassword(1234); // Como la API NO LO TRAE PONGO 1234 DE DAFAULT.
+                    $newStudent->setStudentId($eachStudent->studentId);
+                    $newStudent->setCareerId($eachStudent->careerId);
+                    $newStudent->setFirstName($eachStudent->firstName);
+                    $newStudent->setLastName($eachStudent->lastName);
+                    $newStudent->setDni($eachStudent->dni);
+                    $newStudent->setFileNumber($eachStudent->fileNumber);
+                    $newStudent->setGender($eachStudent->gender);
+                    $newStudent->setBirthDate($eachStudent->birthDate);
+                    $newStudent->setEmail($eachStudent->email);
+                    $newStudent->setPhoneNumber($eachStudent->phoneNumber);
+                    $newStudent->setActive($eachStudent->active);
+                    $newStudent->setAdmin(false);
+                    $newStudent->setPassword(1234); // Como la API NO LO TRAE PONGO 1234 DE DAFAULT.
 
-                $this->Add($newStudent);
+                    if ($this->GetById($newStudent->getStudentId()) == NULL) // SI NO LO TENGO EN LA BASE, LO AGREGO.
+                    {
+                        $this->Add($newStudent);
+                    }
+                }
             }
+
             curl_close($url);   
         }
 
-        private function Add($student){
+        private function Add(Student $student){
 
-            $this->RetrieveData();
+            try
+            {
+                $query = "CALL InsertStudent(:IdStudent, :FirstName, :LastName, :Email, :Password, :Dni, :Admin, :IdCareer, :FileNumber, :Gender, :BirthDate, :PhoneNumber, :Active);";
+                
+                $parameters["IdStudent"] = $student->getStudentId();
+                $parameters["FirstName"] = $student->getFirstName();
+                $parameters["LastName"] = $student->getLastName();
+                $parameters["Email"] = $student->getEmail();
+                $parameters["Password"] = $student->getPassword();
+                $parameters["Dni"] = $student->getDni();
+                $parameters["Admin"] = $student->getAdmin();
+                $parameters["IdCareer"] = $student->getCareerId();
+                $parameters["FileNumber"] = $student->getFileNumber();
+                $parameters["Gender"] = $student->getGender();
+                $parameters["BirthDate"] = $student->getBirthDate();
+                $parameters["PhoneNumber"] = $student->getPhoneNumber();
+                $parameters["Active"] = $student->getActive();
 
-            array_push($this->studentList, $student);
+                $this->connection = Connection::GetInstance();
 
-            $this->SaveData();
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
 
 
         public function GetAll(){
 
-            $this->RetrieveData();
-
-            if(!file_exists($this->fileName)) // Solo consulto la API si tengo que cargar el JSON por primera ves.
+            try
             {
-                $this->getStudentsFromAPI();
-            }
+                $studentList = array();
 
-            return $this->studentList;
+                $query = "CALL GetAllStudents();";
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $student = new Student();
+                    $student->setStudentId($row["IdStudent"]);
+                    $student->setFirstName($row["FirstName"]);
+                    $student->setLastName($row["LastName"]);
+                    $student->setEmail($row["Email"]);
+                    $student->setPassword($row["Password"]);
+                    $student->setDni($row["Dni"]);
+                    $student->setAdmin($row["Admin"]);
+                    $student->setCareerId($row["IdCareer"]);
+                    $student->setFileNumber($row["FileNumber"]);
+                    $student->setGender($row["Gender"]);
+                    $student->setBirthDate($row["BirthDate"]);
+                    $student->setPhoneNumber($row["PhoneNumber"]);
+                    $student->setActive($row["Active"]);
+
+                    array_push($studentList, $student);
+                }
+
+                return $studentList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
 
-       
-        private function SaveData()
-        {
-            $arrayToEncode = array();
-    
-            foreach($this->studentList as $student)
-            {            
-                $valuesArray["studentId"] = $student->getStudentId();
-                $valuesArray["careerId"] = $student->getCareerId();
-                $valuesArray["firstName"] = $student->getFirstName();
-                $valuesArray["lastName"] = $student->getLastName();
-                $valuesArray["dni"] = $student->getDni();
-                $valuesArray["fileNumber"] = $student->getFileNumber();
-                $valuesArray["gender"] = $student->getGender();
-                $valuesArray["birthDate"] = $student->getBirthDate();
-                $valuesArray["email"] = $student->getEmail();
-                $valuesArray["phoneNumber"] = $student->getPhoneNumber();
-                $valuesArray["active"] = $student->getActive();
-                $valuesArray["rol"] = $student->getRol();
-                $valuesArray["password"] = $student->getPassword();
-    
-                array_push($arrayToEncode, $valuesArray);
+        public function GetById($studentId){
+
+            try
+            {
+                $student= new Student;
+
+                $query = "CALL GetStudentById(". $studentId .");";
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                             
+                $student = new Student();
+                $student->setStudentId($resultSet["IdStudent"]);
+                $student->setFirstName($resultSet["FirstName"]);
+                $student->setLastName($resultSet["LastName"]);
+                $student->setEmail($resultSet["Email"]);
+                $student->setPassword($resultSet["Password"]);
+                $student->setDni($resultSet["Dni"]);
+                $student->setAdmin($resultSet["Admin"]);
+                $student->setCareerId($resultSet["IdCareer"]);
+                $student->setFileNumber($resultSet["FileNumber"]);
+                $student->setGender($resultSet["Gender"]);
+                $student->setBirthDate($resultSet["BirthDate"]);
+                $student->setPhoneNumber($resultSet["PhoneNumber"]);
+                $student->setActive($resultSet["Active"]);
+
+                return $student;
             }
-    
-            $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-            
-            
-            file_put_contents($this->fileName, $jsonContent);
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
 
+        public function Update(Student $student){
 
-        private function RetrieveData(){
+            try
+            {
+                $query = "CALL UpdateStudent(:IdStudent, :FirstName, :LastName, :Email, :Password, :Dni, :Admin, :IdCareer, :FileNumber, :Gender, :BirthDate, :PhoneNumber, :Active);";
+                
+                $parameters["IdStudent"] = $student->getStudentId();
+                $parameters["FirstName"] = $student->getFirstName();
+                $parameters["LastName"] = $student->getLastName();
+                $parameters["Email"] = $student->getEmail();
+                $parameters["Password"] = $student->getPassword();
+                $parameters["Dni"] = $student->getDni();
+                $parameters["Admin"] = $student->getAdmin();
+                $parameters["IdCareer"] = $student->getCareerId();
+                $parameters["FileNumber"] = $student->getFileNumber();
+                $parameters["Gender"] = $student->getGender();
+                $parameters["BirthDate"] = $student->getBirthDate();
+                $parameters["PhoneNumber"] = $student->getPhoneNumber();
+                $parameters["Active"] = $student->getActive();
 
-            $this->studentList = array();
+                $this->connection = Connection::GetInstance();
 
-            if(file_exists($this->fileName)){
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
 
-                $jsonContent = file_get_contents($this->fileName);
-                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
+        public function Delete($studentId){
 
-                foreach($arrayToDecode as $valuesArray){
+            try
+            {
+                $query = "CALL DeleteStudent(:IdStudent);";
 
-                    $student = new Student;
+                $parameters["IdStudent"] = $studentId;
 
-                    $student->setStudentId($valuesArray["studentId"]);
-                    $student->setCareerId($valuesArray["careerId"]);
-                    $student->setFirstName($valuesArray["firstName"]);
-                    $student->setLastName($valuesArray["lastName"]);
-                    $student->setDni($valuesArray["dni"]);
-                    $student->setFileNumber($valuesArray["fileNumber"]);
-                    $student->setGender($valuesArray["gender"]);
-                    $student->setBirthDate($valuesArray["birthDate"]);
-                    $student->setEmail($valuesArray["email"]);
-                    $student->setPhoneNumber($valuesArray["phoneNumber"]);
-                    $student->setActive($valuesArray["active"]);
-                    $student->setRol($valuesArray["rol"]);
-                    $student->setPassword($valuesArray["password"]);
+                $this->connection = Connection::GetInstance();
 
-                    array_push($this->studentList, $student);
-                }                
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
             }
         }
     }

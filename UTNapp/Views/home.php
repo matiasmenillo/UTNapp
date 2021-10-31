@@ -1,10 +1,10 @@
 <?php 
     include_once('header.php'); 
 
-    if($_SESSION["loggedUser"]->getRol() == "admin"){
+    if($_SESSION["loggedUser"]->getAdmin() == 1){
       include_once('nav-barAdmin.php'); 
     }
-    if($_SESSION["loggedUser"]->getRol() == "student")
+    if($_SESSION["loggedUser"]->getAdmin() == 0)
     {
       include_once('nav-barStudent.php');
     }

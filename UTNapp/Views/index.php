@@ -19,7 +19,7 @@
         <br>   
         <input type="password" name="user_password" placeholder="Contraseña" required>    
         <br><br>    
-        <button type="submit">Ingresar</button>      
+        <button type="submit" style="color:black">Ingresar</button>      
         <br><br>    
 
     </form>     

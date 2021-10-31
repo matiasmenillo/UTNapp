@@ -10,7 +10,7 @@
     <title>Document</title>
 </head>
 <body>
-    <?php echo "Bienvenido " . $_SESSION["loggedUser"]->getRol();?>
+    <?php echo "Bienvenido " . $_SESSION["loggedUser"]->getFirstName();?>
     <h2>Ingrese los datos de la nueva empresa</h2>
 
     <form action="<?php echo FRONT_ROOT?> Company/Add" method="POST">

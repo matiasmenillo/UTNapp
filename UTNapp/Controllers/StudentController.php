@@ -19,6 +19,11 @@
              return $this->StudentDAO->GetAll();
          }
 
+         public function CheckApi()
+         {
+            $this->StudentDAO->getStudentsFromAPI();
+         }
+
          public function ShowStudentListView(){
             $studentList = $this->StudentDAO->GetAll();
 

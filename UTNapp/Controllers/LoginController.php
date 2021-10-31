@@ -7,16 +7,19 @@
 
         public function Login($user_email, $user_password){
 
-           $StudentController = new StudentController;       
+           $StudentController = new StudentController;
+           
+           $StudentController->CheckApi();
         
            $studentList = $StudentController->GetAll();
-           $founded = false;
+
+           $found = false;
 
            foreach($studentList as $student){
 
                 if($user_email == $student->getEmail()){
 
-                    $founded = true;
+                    $found = true;
                         
                     if($user_password == $student->getPassword()){
 
@@ -33,7 +36,7 @@
                 
               }
             }
-            if($founded == false){
+            if($found == false){
                 $errorMsg = "EMAIL IVALIDO";
                 echo $errorMsg;
                 require_once(VIEWS_PATH . "index.php");

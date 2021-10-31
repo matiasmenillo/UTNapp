@@ -25,11 +25,16 @@
             require_once(VIEWS_PATH . "addCompany.php");
         }
 
-        public function ShowModifView($Cuit, $Name, $Status){
+        public function ShowModifView($company_cuit,  $id, $company_name, $company_status , $aboutUs, $companyLink, $description, $sector){
             $ModifCompany = new Company();
-            $ModifCompany->setCuit($Cuit);
-            $ModifCompany->setName($Name);
-            $ModifCompany->setStatus($Status);
+            $ModifCompany->setName($company_name);
+            $ModifCompany->setCuit($company_cuit);
+            $ModifCompany->setStatus($company_status);
+            $ModifCompany->setAboutUs($aboutUs);
+            $ModifCompany->setCompanyLink($companyLink);
+            $ModifCompany->setDescription($description);
+            $ModifCompany->setId($id);
+            $ModifCompany->setSector($sector);
 
             require_once(VIEWS_PATH . "modifyCompany.php");
         }
@@ -54,30 +59,29 @@
             
         }
 
-        public function Modify($company_name, $company_cuit, $company_status /*, $aboutUs, $companyLink, $description, $id, $sector*/){
+        public function Modify($id, $company_name, $company_cuit , $aboutUs, $companyLink, $description, $sector,$company_status){
 
             $newCompany = new Company;
          
             $newCompany->setName($company_name);
             $newCompany->setCuit($company_cuit);
             $newCompany->setStatus($company_status);
-            //$newCompany->setAboutUs($aboutUs);
-            //$newCompany->setCompanyLink($companyLink);
-            //$newCompany->setDescription($description);
-            //$newCompany->setId($id);
-            //$newCompany->setSector($sector);
+            $newCompany->setAboutUs($aboutUs);
+            $newCompany->setCompanyLink($companyLink);
+            $newCompany->setDescription($description);
+            $newCompany->setId($id);
+            $newCompany->setSector($sector);
 
-            $this->CompanyDAO->Remove($newCompany);
-            $this->CompanyDAO->Add($newCompany);
+            $this->CompanyDAO->Update($newCompany);
 
             $this->ShowCompanyListView();
             
         }
 
-        public function Remove($Cuit)
+        public function Remove($CompanyId)
         {
             $Company = new Company();
-            $Company->setCuit($Cuit);
+            $Company->setId(intval($CompanyId));
             $this->CompanyDAO->Remove($Company);
             $this->ShowCompanyListView();
         }

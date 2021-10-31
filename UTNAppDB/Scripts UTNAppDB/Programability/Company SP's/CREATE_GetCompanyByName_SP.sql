@@ -1,0 +1,15 @@
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS  GetCompanyByName;
+
+DELIMITER //
+
+CREATE PROCEDURE GetCompanyByName
+(
+	IN CompanyNameParam VARCHAR(200)
+)
+BEGIN
+	SELECT * FROM Company WHERE Name LIKE CONCAT('%', CompanyNameParam, '%');
+END //
+
+DELIMITER ;
