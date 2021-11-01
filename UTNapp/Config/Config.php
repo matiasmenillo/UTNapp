@@ -9,7 +9,9 @@ define("JS_PATH", FRONT_ROOT.VIEWS_PATH . "js/");
 define("IMG_PATH", VIEWS_PATH . "img/");
 
 //Path to API
-define("URLAPI", "https://utn-students-api.herokuapp.com/api/Student");
+define("URL_API_STUDENT", "https://utn-students-api.herokuapp.com/api/Student");
+define("URL_API_CAREER", "https://utn-students-api.herokuapp.com/api/Career");
+define("URL_API_JOBPOSITION", "https://utn-students-api.herokuapp.com/api/JobPosition");
 define("HTTPHEADER", ['x-api-key:4f3bceed-50ba-4461-a910-518598664c08']);
 
 //Path to DB

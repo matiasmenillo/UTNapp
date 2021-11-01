@@ -16,7 +16,7 @@
             //CURL
             $url = curl_init();
             //Sets URL
-            curl_setopt($url, CURLOPT_URL, URLAPI);
+            curl_setopt($url, CURLOPT_URL, URL_API_STUDENT);
             //Sets Header key
             curl_setopt($url, CURLOPT_HTTPHEADER, HTTPHEADER);
             curl_setopt($url, CURLOPT_RETURNTRANSFER, 1);
@@ -25,14 +25,14 @@
             $response = curl_exec($url);
             $toJson = json_decode($response);
 
-            if ($toJson != NULL)
+            if ($toJson != null)
             {
                 foreach($toJson as $eachStudent)
                 {
                     $newStudent = new Student;
 
                     $newStudent->setStudentId($eachStudent->studentId);
-                    $newStudent->setCareerId($eachStudent->careerId);
+                    $newStudent->setCareerId(1); //$eachStudent->careerId
                     $newStudent->setFirstName($eachStudent->firstName);
                     $newStudent->setLastName($eachStudent->lastName);
                     $newStudent->setDni($eachStudent->dni);
@@ -41,15 +41,18 @@
                     $newStudent->setBirthDate($eachStudent->birthDate);
                     $newStudent->setEmail($eachStudent->email);
                     $newStudent->setPhoneNumber($eachStudent->phoneNumber);
-                    $newStudent->setActive($eachStudent->active);
-                    $newStudent->setAdmin(false);
+                    $newStudent->setActive(intval($eachStudent->active));
+                    $newStudent->setAdmin(0);
                     $newStudent->setPassword(1234); // Como la API NO LO TRAE PONGO 1234 DE DAFAULT.
 
-                    if ($this->GetById($newStudent->getStudentId()) == NULL) // SI NO LO TENGO EN LA BASE, LO AGREGO.
+                    $result = $this->GetById($newStudent->getStudentId());
+
+                    if ($result == null) // SI NO LO TENGO EN LA BASE, LO AGREGO.
                     {
                         $this->Add($newStudent);
                     }
                 }
+                
             }
 
             curl_close($url);   
@@ -106,14 +109,14 @@
                     $student->setLastName($row["LastName"]);
                     $student->setEmail($row["Email"]);
                     $student->setPassword($row["Password"]);
-                    $student->setDni($row["Dni"]);
-                    $student->setAdmin($row["Admin"]);
+                    $student->setDni($row["DNI"]);
+                    $student->setAdmin($row["admin"]);
                     $student->setCareerId($row["IdCareer"]);
                     $student->setFileNumber($row["FileNumber"]);
-                    $student->setGender($row["Gender"]);
+                    $student->setGender($row["gender"]);
                     $student->setBirthDate($row["BirthDate"]);
-                    $student->setPhoneNumber($row["PhoneNumber"]);
-                    $student->setActive($row["Active"]);
+                    $student->setPhoneNumber($row["phonenumber"]);
+                    $student->setActive($row["active"]);
 
                     array_push($studentList, $student);
                 }
@@ -132,28 +135,36 @@
             {
                 $student= new Student;
 
-                $query = "CALL GetStudentById(". $studentId .");";
+                $query = "CALL GetStudentById(:IdStudent);";
+
+                $parameters["IdStudent"] = $studentId;
 
                 $this->connection = Connection::GetInstance();
 
-                $resultSet = $this->connection->Execute($query);
-                             
-                $student = new Student();
-                $student->setStudentId($resultSet["IdStudent"]);
-                $student->setFirstName($resultSet["FirstName"]);
-                $student->setLastName($resultSet["LastName"]);
-                $student->setEmail($resultSet["Email"]);
-                $student->setPassword($resultSet["Password"]);
-                $student->setDni($resultSet["Dni"]);
-                $student->setAdmin($resultSet["Admin"]);
-                $student->setCareerId($resultSet["IdCareer"]);
-                $student->setFileNumber($resultSet["FileNumber"]);
-                $student->setGender($resultSet["Gender"]);
-                $student->setBirthDate($resultSet["BirthDate"]);
-                $student->setPhoneNumber($resultSet["PhoneNumber"]);
-                $student->setActive($resultSet["Active"]);
+                $resultSet = $this->connection->Execute($query , $parameters);
 
-                return $student;
+                foreach ($resultSet as $row)
+                {                
+                    $student = new Student();
+                    $student->setStudentId($row["IdStudent"]);
+                    $student->setFirstName($row["FirstName"]);
+                    $student->setLastName($row["LastName"]);
+                    $student->setEmail($row["Email"]);
+                    $student->setPassword($row["Password"]);
+                    $student->setDni($row["DNI"]);
+                    $student->setAdmin($row["admin"]);
+                    $student->setCareerId($row["IdCareer"]);
+                    $student->setFileNumber($row["FileNumber"]);
+                    $student->setGender($row["gender"]);
+                    $student->setBirthDate($row["BirthDate"]);
+                    $student->setPhoneNumber($row["phonenumber"]);
+                    $student->setActive($row["active"]);
+
+                    return $student;
+                }
+
+                return null;             
+               
             }
             catch(Exception $ex)
             {

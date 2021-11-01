@@ -6,7 +6,7 @@ DELIMITER //
 
 CREATE PROCEDURE GetStudentById
 (
-	IdStudentParam INT
+	IN IdStudentParam INT
 )
 BEGIN
 	SELECT * FROM Student WHERE IdStudent = IdStudentParam;
