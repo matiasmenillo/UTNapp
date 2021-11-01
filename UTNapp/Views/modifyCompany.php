@@ -38,8 +38,8 @@
 
         <label for="company_status">Estado</label>
         <select name="company_status" style="color:black">
-            <option value="<?php echo $ModifCompany->getStatus() ?>" selected><?php if ($ModifCompany->getStatus() == 1) {echo "Active";} else {echo "Inactive";} ?></option>
-            <option value="<?php echo $ModifCompany->getStatus() ?>"><?php if ($ModifCompany->getStatus() == 1) {echo "Inactive";} else {echo "Active";} ?></option>
+            <option value="<?php if ($ModifCompany->getStatus() == 1) {echo 1;} else {echo 0;} ?>" selected><?php if ($ModifCompany->getStatus() == 1) {echo "Active";} else {echo "Inactive";} ?></option>
+            <option value="<?php if ($ModifCompany->getStatus() == 1) {echo 0;} else {echo 1;} ?>"><?php if ($ModifCompany->getStatus() == 1) {echo "Inactive";} else {echo "Active";} ?></option>
         </select>
 
         <button type="submit" style="color:black">Guardar</button>

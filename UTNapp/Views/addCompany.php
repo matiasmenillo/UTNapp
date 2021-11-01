@@ -10,25 +10,45 @@
     <title>Document</title>
 </head>
 <body>
+
+    <?php
+        if (isset($error))
+        {
+            echo $error;
+            unset($error);
+        } 
+    ?>
+
     <?php echo "Bienvenido " . $_SESSION["loggedUser"]->getFirstName();?>
     <h2>Ingrese los datos de la nueva empresa</h2>
 
     <form action="<?php echo FRONT_ROOT?> Company/Add" method="POST">
 
-        <label for="company_name">Nombre de la empresa</label>
-        <input type="text" name="company_name" style="color:black">
+        <label for="company_name">Nombre</label>
+        <input type="text" name="company_name" required style="color:black">
 
         <label for="company_cuit">Cuit</label>
-        <input type="number" name="company_cuit" style="color:black">
+        <input type="number" name="company_cuit" required style="color:black">
+
+        <label for="company_AboutUs">About Us</label>
+        <input type="text" name="company_AboutUs" required style="color:black">
+
+        <label for="company_Link">Link</label>
+        <input type="text" name="company_Link" required style="color:black">
+
+        <label for="company_descripcion">Descripcion</label>
+        <input type="text" name="company_descripcion" required style="color:black">
+
+        <label for="company_sector">Sector</label>
+        <input type="text" name="company_sector" required style="color:black">
 
         <label for="company_status">Estado</label>
         <select name="company_status" style="color:black">
-            <option value="" selected disabled hidden>Seleccione</option>
-            <option value="active">Activa</option>
-            <option value="inactive">Inactiva</option>
+            <option value="1" selected>Active</option>
+            <option value="0">Inactive</option>
         </select>
 
-        <button type="submit">Agregar</button>
+        <button type="submit" style="color:black">Agregar</button>
     </form>
 
 </body>

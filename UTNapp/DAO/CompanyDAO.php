@@ -31,7 +31,7 @@
             }
             catch(Exception $ex)
             {
-                throw $ex;
+                return "LA EMPRESA QUE DESEA CARGAR YA ESTA PRESENTE EN EL SISTEMA";
             }
         }
 
@@ -85,8 +85,6 @@
                 $parameters["CompanyLink"] = $company->getCompanyLink();
                 $parameters["AboutUs"] = $company->getAboutUs();
 
-                var_dump($parameters);
-
                 $this->connection = Connection::GetInstance();
 
                 $this->connection->ExecuteNonQuery($query, $parameters);
@@ -103,8 +101,6 @@
             {
                 $query = "CALL DeleteCompany(:IdCompany);";
 
-                var_dump($company);
-
                 $parameters["IdCompany"] = $company->GetId();
 
                 $this->connection = Connection::GetInstance();
@@ -113,7 +109,7 @@
             }
             catch(Exception $ex)
             {
-                throw $ex;
+                return "NO SE PUEDEN BORRAR EMPRESAS CON JOB OFFERS RELACIONADAS";
             }
         }
 

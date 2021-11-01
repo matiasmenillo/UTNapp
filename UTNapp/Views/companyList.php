@@ -51,7 +51,7 @@
                 {
                     if($rol == 'student'){
 
-                        if($company->getStatus() == 'active'){
+                        if($company->getStatus() == 1){
 
             ?>
                     <tr>
@@ -69,7 +69,7 @@
             
                     <?php
                         if ($rol == 'admin')
-                        {         
+                        {       
                     ?>
                             <td style="color:black"><?php echo $company->getName() ?></td>
                             <td style="color:black"><?php echo $company->getCuit() ?></td>

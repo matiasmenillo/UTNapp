@@ -39,23 +39,30 @@
             require_once(VIEWS_PATH . "modifyCompany.php");
         }
 
-        public function Add($company_name, $company_cuit, $company_status /*, $aboutUs, $companyLink, $description, $id, $sector*/){
+        public function Add($company_name, $company_cuit , $aboutUs, $companyLink, $description, $sector,$company_status){
 
             $newCompany = new Company;
          
             $newCompany->setName($company_name);
             $newCompany->setCuit($company_cuit);
-            $newCompany->setStatus($company_status);
-            //$newCompany->setAboutUs($aboutUs);
-            //$newCompany->setCompanyLink($companyLink);
-            //$newCompany->setDescription($description);
-            //$newCompany->setId($id);
-            //$newCompany->setSector($sector);
+            $newCompany->setStatus(intval($company_status));
+            $newCompany->setAboutUs($aboutUs);
+            $newCompany->setCompanyLink($companyLink);
+            $newCompany->setDescription($description);
+            $newCompany->setSector($sector);
         
-            $this->CompanyDAO->Add($newCompany);
+            $error = $this->CompanyDAO->Add($newCompany);
 
-            
-            $this->ShowCompanyListView();
+            if (isset($error))
+            {
+                echo $error;
+                unset($error);
+                $this->ShowAddView();
+            }
+            else
+            {
+                $this->ShowCompanyListView();
+            } 
             
         }
 
@@ -82,7 +89,14 @@
         {
             $Company = new Company();
             $Company->setId(intval($CompanyId));
-            $this->CompanyDAO->Remove($Company);
+            $error = $this->CompanyDAO->Remove($Company);
+
+            if (isset($error))
+            {
+                echo $error;
+                unset($error);
+            }  
+
             $this->ShowCompanyListView();
         }
 

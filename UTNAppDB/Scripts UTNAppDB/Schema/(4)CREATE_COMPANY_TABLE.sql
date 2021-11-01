@@ -1,7 +1,5 @@
 USE UTNAppDB;
 
-/*DROP TABLE IF EXISTS Company;*/
-
 CREATE TABLE Company
 (
 IdCompany INT Unique auto_increment NOT NULL,
@@ -13,5 +11,6 @@ Cuit INT NOT NULL,
 Description VARCHAR(200) NULL,
 Sector VARCHAR(200) NULL,
 
-Primary Key (IdCompany, Name, Cuit)
+Primary Key (Name, Cuit)
 )
+

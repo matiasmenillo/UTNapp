@@ -6,7 +6,7 @@ DELIMITER //
 
 CREATE PROCEDURE GetAllActiveStudents()
 BEGIN
-	SELECT * FROM Student WHERE Active = True;
+	SELECT * FROM Student WHERE Active = 1;
 END //
 
 DELIMITER ;

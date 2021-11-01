@@ -6,7 +6,7 @@ DELIMITER //
 
 CREATE PROCEDURE GetAllActiveCompanys()
 BEGIN
-	SELECT * FROM Company WHERE Status = True;
+	SELECT * FROM Company WHERE Status = 1;
 END //
 
 DELIMITER ;

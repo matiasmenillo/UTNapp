@@ -11,14 +11,14 @@ CREATE PROCEDURE UpdateStudent
 	IN LastName varchar(200), 
 	IN Email varchar(200), 
 	IN Password varchar(200), 
-	IN Dni int, 
-	IN Admin bit(1), 
+	IN Dni varchar(200), 
+	IN Admin INT, 
 	IN IdCareer int, 
 	IN FileNumber varchar(200), 
-	IN Gender char(1), 
+	IN Gender varchar(200), 
 	IN BirthDate date, 
-	IN PhoneNumber int, 
-	IN Active bit(1) 
+	IN PhoneNumber varchar(200), 
+	IN Active INT 
 
 )
 BEGIN
