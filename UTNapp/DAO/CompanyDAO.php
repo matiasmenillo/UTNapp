@@ -39,7 +39,7 @@
 
             try
             {
-                $studentList = array();
+                $companyList = array();
 
                 $query = "CALL GetAllCompanys();";
 
@@ -59,10 +59,10 @@
                     $company->setCompanyLink($row["CompanyLink"]);
                     $company->setAboutUs($row["AboutUs"]);
 
-                    array_push($studentList, $company);
+                    array_push($companyList, $company);
                 }
 
-                return $studentList;
+                return $companyList;
             }
             catch(Exception $ex)
             {
@@ -117,7 +117,7 @@
         {
             try
             {
-                $studentList = array();
+                $companyList = array();
 
                 $query = "CALL GetCompanyByName(:Name);";
 
@@ -139,10 +139,10 @@
                     $company->setCompanyLink($row["CompanyLink"]);
                     $company->setAboutUs($row["AboutUs"]);
 
-                    array_push($studentList, $company);
+                    array_push($companyList, $company);
                 }
 
-                return $studentList;
+                return $companyList;
             }
             catch(Exception $ex)
             {

@@ -6,7 +6,7 @@ CREATE TABLE Career
 (
 IdCareer INT Unique NOT NULL,
 Description VARCHAR(200) NOT NULL,
-Active BIT NOT NULL,
+Active INT NOT NULL,
 
 Primary Key (IdCareer)
 )

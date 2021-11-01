@@ -8,7 +8,9 @@
         public function Login($user_email, $user_password){
 
            $StudentController = new StudentController;
+           $CareerController = new CareerController;
            
+           $CareerController->CheckApi();
            $StudentController->CheckApi();
         
            $studentList = $StudentController->GetAll();

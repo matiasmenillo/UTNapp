@@ -8,7 +8,7 @@ CREATE PROCEDURE InsertCareer
 (
 	IN IdCareer int, 
 	IN Description varchar(200), 
-	IN Active bit(1)
+	IN Active int
 
 )
 BEGIN

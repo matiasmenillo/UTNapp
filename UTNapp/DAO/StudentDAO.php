@@ -32,7 +32,7 @@
                     $newStudent = new Student;
 
                     $newStudent->setStudentId($eachStudent->studentId);
-                    $newStudent->setCareerId(1); //$eachStudent->careerId
+                    $newStudent->setCareerId($eachStudent->careerId);
                     $newStudent->setFirstName($eachStudent->firstName);
                     $newStudent->setLastName($eachStudent->lastName);
                     $newStudent->setDni($eachStudent->dni);

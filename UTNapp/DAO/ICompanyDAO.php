@@ -8,9 +8,8 @@
         function Add(Company $company);
         function Remove(Company $company);
         function getCompanyByName($companyName);
+        function Update(Company $company);
         function GetAll();
-        //function GetById($id);
-
     }
 
 ?>
