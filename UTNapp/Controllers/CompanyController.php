@@ -40,30 +40,37 @@
         }
 
         public function Add($company_name, $company_cuit , $aboutUs, $companyLink, $description, $sector,$company_status){
-
-            $newCompany = new Company;
-         
-            $newCompany->setName($company_name);
-            $newCompany->setCuit($company_cuit);
-            $newCompany->setStatus(intval($company_status));
-            $newCompany->setAboutUs($aboutUs);
-            $newCompany->setCompanyLink($companyLink);
-            $newCompany->setDescription($description);
-            $newCompany->setSector($sector);
         
-            $error = $this->CompanyDAO->Add($newCompany);
-
-            if (isset($error))
+            if (strlen((String)$company_cuit) == 10)
             {
-                echo $error;
-                unset($error);
-                $this->ShowAddView();
+                $newCompany = new Company;
+            
+                $newCompany->setName($company_name);
+                $newCompany->setCuit($company_cuit);
+                $newCompany->setStatus(intval($company_status));
+                $newCompany->setAboutUs($aboutUs);
+                $newCompany->setCompanyLink($companyLink);
+                $newCompany->setDescription($description);
+                $newCompany->setSector($sector);
+            
+                $error = $this->CompanyDAO->Add($newCompany);
+
+                if (isset($error))
+                {
+                    echo $error;
+                    unset($error);
+                    $this->ShowAddView();
+                }
+                else
+                {
+                    $this->ShowCompanyListView();
+                } 
             }
             else
             {
-                $this->ShowCompanyListView();
-            } 
-            
+                echo "El Campo CUIT debe tener 10 Digitos Numericos";
+                $this->ShowAddView();
+            }
         }
 
         public function Modify($id, $company_name, $company_cuit , $aboutUs, $companyLink, $description, $sector,$company_status){

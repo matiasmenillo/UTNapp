@@ -31,7 +31,7 @@
             }
             catch(Exception $ex)
             {
-                return "LA EMPRESA QUE DESEA CARGAR YA ESTA PRESENTE EN EL SISTEMA";
+                return "YA EXISTE UNA EMPRESA CON LOS DATOS INGRESADOS EN EL SISTEMA";
             }
         }
 
