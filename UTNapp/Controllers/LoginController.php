@@ -7,10 +7,12 @@
 
         public function Login($user_email, $user_password){
 
-           $StudentController = new StudentController;
            $CareerController = new CareerController;
+           $JobPositionController = new JobPositionController;
+           $StudentController = new StudentController;
            
            $CareerController->CheckApi();
+           $JobPositionController->CheckApi();
            $StudentController->CheckApi();
         
            $studentList = $StudentController->GetAll();

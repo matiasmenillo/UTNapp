@@ -42,7 +42,7 @@
                     $newStudent->setEmail($eachStudent->email);
                     $newStudent->setPhoneNumber($eachStudent->phoneNumber);
                     $newStudent->setActive(intval($eachStudent->active));
-                    $newStudent->setAdmin(0);
+                    $newStudent->setAdmin(0); //SON ESTUDIANTES, VA ADMIN EN 0.
                     $newStudent->setPassword(1234); // Como la API NO LO TRAE PONGO 1234 DE DAFAULT.
 
                     $result = $this->GetById($newStudent->getStudentId());
