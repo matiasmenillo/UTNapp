@@ -10,6 +10,15 @@
     }
 
 ?>
+  <div class="hoc clear">
+    <br>
+    <h3>Bienvenido <?php echo $_SESSION["loggedUser"]->GetFirstName() . ' ' . $_SESSION["loggedUser"]->GetLastName() ?>!</h3>
+    <p>Legajo: <?php echo $_SESSION["loggedUser"]->getFileNumber(); ?></p>
+    <p>Carrera: <?php echo $_SESSION["loggedUserCareer"]->getDescription(); ?></p>
+    <p>Sexo: <?php echo $_SESSION["loggedUser"]->getGender(); ?></p>
+    <p>Fecha de Nacimiento: <?php echo $_SESSION["loggedUser"]->getBirthDate(); ?></p>
+    <p>Telefono: <?php echo $_SESSION["loggedUser"]->getPhoneNumber(); ?></p>
+  </div>
 
   <div id="pageintro" class="hoc clear"> 
     <article class="center">

@@ -1,11 +1,14 @@
 <?php
     namespace Controllers;
 
+    use Controllers\CareerController as CareerController;
+
     class HomeController
     {
         public function Home()
         {
             require_once(VIEWS_PATH."home.php");
+
         }      
         
         public function Index()

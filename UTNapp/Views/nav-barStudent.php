@@ -10,7 +10,7 @@
   <div class="wrapper row1">
     <header id="header" class="hoc clear"> 
       <div id="logo" class="fl_left">
-        <h1><a href="#">Universidad Tecnológica Nacional</a></h1>
+        <h1><a href="<?php echo FRONT_ROOT."Home/Home" ?>">Universidad Tecnológica Nacional</a></h1>
       </div>
       <!-- Add path routes below -->
       <nav id="mainav" class="fl_right">
