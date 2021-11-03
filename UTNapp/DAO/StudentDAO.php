@@ -58,7 +58,7 @@
             curl_close($url);   
         }
 
-        private function Add(Student $student){
+        public function Add(Student $student){
 
             try
             {
@@ -84,7 +84,7 @@
             }
             catch(Exception $ex)
             {
-                throw $ex;
+                return "El Estudiante que esta intentando cargar ya existe en el sistema.";
             }
         }
 
@@ -213,6 +213,24 @@
                 $this->connection = Connection::GetInstance();
 
                 $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function GetMaxId(){
+
+            try
+            {
+                $query = "SELECT MAX(IdStudent) AS MaxId FROM ". $this->tableName .";";
+
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query);
+
+                return $result[0][0];
             }
             catch(Exception $ex)
             {

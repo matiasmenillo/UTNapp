@@ -9,6 +9,8 @@
         function getStudentsFromAPI();
         function GetById($studentId);
         function Update(Student $student);
+        function Add(Student $student);
         function Delete($studentId);
+        function GetMaxId();
     }
 ?>
