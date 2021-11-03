@@ -1,0 +1,15 @@
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS  GetCompanyById;
+
+DELIMITER //
+
+CREATE PROCEDURE GetCompanyById
+(
+	IN IdCompanyParam INT
+)
+BEGIN
+	SELECT * FROM Company WHERE IdCompany = IdCompanyParam;
+END //
+
+DELIMITER ;

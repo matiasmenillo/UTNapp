@@ -1,0 +1,12 @@
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS GetAllPostulations;
+
+DELIMITER //
+
+CREATE PROCEDURE GetAllPostulations()
+BEGIN
+	SELECT * FROM Postulation;
+END //
+
+DELIMITER ;

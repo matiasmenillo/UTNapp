@@ -1,0 +1,15 @@
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS  GetStudentById;
+
+DELIMITER //
+
+CREATE PROCEDURE GetStudentById
+(
+	IN IdStudentParam INT
+)
+BEGIN
+	SELECT * FROM Student WHERE IdStudent = IdStudentParam;
+END //
+
+DELIMITER ;

@@ -1,0 +1,12 @@
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS GetAllActiveCompanys;
+
+DELIMITER //
+
+CREATE PROCEDURE GetAllActiveCompanys()
+BEGIN
+	SELECT * FROM Company WHERE Status = 1;
+END //
+
+DELIMITER ;
