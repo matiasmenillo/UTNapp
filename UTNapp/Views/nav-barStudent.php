@@ -1,4 +1,3 @@
-<div class="bgded overlay" style="background-image:url('<?php echo IMG_PATH; ?>fondo.jpg');"> 
   <div class="wrapper row0">
     <div id="topbar" class="hoc clear">  
     <ul class="nospace">
@@ -10,15 +9,16 @@
   <div class="wrapper row1">
     <header id="header" class="hoc clear"> 
       <div id="logo" class="fl_left">
-        <h1><a href="#">Universidad Tecnológica Nacional</a></h1>
+        <h1 style="color: white"><a href="<?php echo FRONT_ROOT."Home/Home" ?>">Universidad Tecnológica Nacional</a></h1>
       </div>
       <!-- Add path routes below -->
       <nav id="mainav" class="fl_right">
         <ul class="clear">
             <li class="active"><a href="<?php echo FRONT_ROOT ?>">CERRAR SESION</a></li>
 
-            <li><a class="drop" href="#">Alumnos</a>
+            <li><a class="drop" href="#">Alumno</a>
               <ul>
+                <li><a href="#">Estado Academico</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Student/ShowStudentListView" ?>">Lista Alumnos</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Company/ShowCompanyListView" ?>">Lista de Empresas</a></li>
                 <li><a href="#">Aplicar a propuesta</a></li>

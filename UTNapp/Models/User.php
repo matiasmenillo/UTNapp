@@ -7,7 +7,7 @@
         private $email;
         private $password;
         private $dni;
-        private $rol;
+        private $Admin;
 
         /**
          * Get the value of firstName
@@ -110,21 +110,21 @@
         }
 
         /**
-         * Get the value of rol
+         * Get the value of Admin
          */ 
-        public function getRol()
+        public function getAdmin()
         {
-                return $this->rol;
+                return $this->Admin;
         }
 
         /**
-         * Set the value of rol
+         * Set the value of Admin
          *
          * @return  self
          */ 
-        public function setRol($rol)
+        public function setAdmin($Admin)
         {
-                $this->rol = $rol;
+                $this->Admin = $Admin;
 
                 return $this;
         }

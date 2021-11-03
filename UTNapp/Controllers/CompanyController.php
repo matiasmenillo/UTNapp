@@ -15,7 +15,7 @@
         }
 
         public function ShowCompanyListView(){
-            $companyList = $this->CompanyDAO->GetAll();
+            $result = $this->CompanyDAO->GetAll();
 
             require_once(VIEWS_PATH . "companyList.php"); 
         }
@@ -25,59 +25,85 @@
             require_once(VIEWS_PATH . "addCompany.php");
         }
 
-        public function ShowModifView($Cuit, $Name){
+        public function ShowModifView($company_cuit,  $id, $company_name, $company_status , $aboutUs, $companyLink, $description, $sector){
             $ModifCompany = new Company();
-            $ModifCompany->setCuit($Cuit);
-            $ModifCompany->setName($Name);
+            $ModifCompany->setName($company_name);
+            $ModifCompany->setCuit($company_cuit);
+            $ModifCompany->setStatus($company_status);
+            $ModifCompany->setAboutUs($aboutUs);
+            $ModifCompany->setCompanyLink($companyLink);
+            $ModifCompany->setDescription($description);
+            $ModifCompany->setId($id);
+            $ModifCompany->setSector($sector);
 
             require_once(VIEWS_PATH . "modifyCompany.php");
         }
 
-        public function Add($company_name, $company_cuit /*, $aboutUs, $active, $companyLink, $description, $id, $sector*/){
-
-            $newCompany = new Company;
-         
-            $newCompany->setName($company_name);
-            $newCompany->setCuit($company_cuit);
-            //$newCompany->setAboutUs($aboutUs);
-            //$newCompany->setActive($active);
-            //$newCompany->setCompanyLink($companyLink);
-            //$newCompany->setDescription($description);
-            //$newCompany->setId($id);
-            //$newCompany->setSector($sector);
+        public function Add($company_name, $company_cuit , $aboutUs, $companyLink, $description, $sector,$company_status){
         
-            $this->CompanyDAO->Add($newCompany);
+            if (strlen((String)$company_cuit) == 10)
+            {
+                $newCompany = new Company;
+            
+                $newCompany->setName($company_name);
+                $newCompany->setCuit($company_cuit);
+                $newCompany->setStatus(intval($company_status));
+                $newCompany->setAboutUs($aboutUs);
+                $newCompany->setCompanyLink($companyLink);
+                $newCompany->setDescription($description);
+                $newCompany->setSector($sector);
+            
+                $error = $this->CompanyDAO->Add($newCompany);
 
-            
-            $this->ShowCompanyListView();
-            
+                if (isset($error))
+                {
+                    echo $error;
+                    unset($error);
+                    $this->ShowAddView();
+                }
+                else
+                {
+                    $this->ShowCompanyListView();
+                } 
+            }
+            else
+            {
+                echo "El Campo CUIT debe tener 10 Digitos Numericos";
+                $this->ShowAddView();
+            }
         }
 
-        public function Modify($company_name, $company_cuit /*, $aboutUs, $active, $companyLink, $description, $id, $sector*/){
+        public function Modify($id, $company_name, $company_cuit , $aboutUs, $companyLink, $description, $sector,$company_status){
 
             $newCompany = new Company;
          
             $newCompany->setName($company_name);
             $newCompany->setCuit($company_cuit);
-            //$newCompany->setAboutUs($aboutUs);
-            //$newCompany->setActive($active);
-            //$newCompany->setCompanyLink($companyLink);
-            //$newCompany->setDescription($description);
-            //$newCompany->setId($id);
-            //$newCompany->setSector($sector);
+            $newCompany->setStatus($company_status);
+            $newCompany->setAboutUs($aboutUs);
+            $newCompany->setCompanyLink($companyLink);
+            $newCompany->setDescription($description);
+            $newCompany->setId($id);
+            $newCompany->setSector($sector);
 
-            $this->CompanyDAO->Remove($newCompany);
-            $this->CompanyDAO->Add($newCompany);
+            $this->CompanyDAO->Update($newCompany);
 
             $this->ShowCompanyListView();
             
         }
 
-        public function Remove($Cuit)
+        public function Remove($CompanyId)
         {
             $Company = new Company();
-            $Company->setCuit($Cuit);
-            $this->CompanyDAO->Remove($Company);
+            $Company->setId(intval($CompanyId));
+            $error = $this->CompanyDAO->Remove($Company);
+
+            if (isset($error))
+            {
+                echo $error;
+                unset($error);
+            }  
+
             $this->ShowCompanyListView();
         }
 
@@ -85,10 +111,8 @@
         {
             $result = $this->CompanyDAO->getCompanyByName($companyName);
 
-            if ($result != false)
+            if (count($result) > 0)
             {
-                $companyList = array();
-                array_push($companyList, $result);
                 require_once(VIEWS_PATH . "companyList.php"); 
             }
             else

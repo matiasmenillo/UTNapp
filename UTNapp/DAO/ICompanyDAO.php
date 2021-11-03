@@ -7,8 +7,9 @@
 
         function Add(Company $company);
         function Remove(Company $company);
-        //function GetById($id);
-
+        function getCompanyByName($companyName);
+        function Update(Company $company);
+        function GetAll();
     }
 
 ?>
