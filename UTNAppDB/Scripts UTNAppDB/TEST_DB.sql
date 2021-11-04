@@ -45,6 +45,7 @@ CALL DeleteCareer(3);
 
 /*STUDENT ====================================================================================================*/
 CALL GetAllStudents();
+DESCRIBE STUDENT;
 
 CALL DeleteStudent(2);
 
@@ -83,7 +84,7 @@ CALL UpdateJobOffer((SELECT IdJobOffer FROM JobOffer WHERE IdJobPosition = 2), 2
 
 CALL GetJobOfferById((SELECT IdJobOffer FROM JobOffer WHERE IdJobPosition = 2));
 
-CALL DeleteJobOffer((SELECT IdJobOffer FROM JobOffer WHERE IdJobPosition = 2));
+CALL DeleteJobOffer((SELECT IdJobOffer FROM JobOffer WHERE IdJobPosition = 5));
 
 /*JobOffer  ========================================================================================================*/
 CALL GetAllPostulations();

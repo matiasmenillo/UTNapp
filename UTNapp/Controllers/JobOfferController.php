@@ -3,6 +3,9 @@
 
      use Models\JobOffer as JobOffer;
      use DAO\JobOfferDAO as JobOfferDAO;
+     use DAO\CareerDAO as CareerDAO;
+     use DAO\CompanyDAO as CompanyDAO;
+     use DAO\JobPositionDAO as JobPositionDAO;
  
      class JobOfferController{
  
@@ -14,9 +17,17 @@
          }
 
          public function ShowJobOfferListView(){
-            $result = $this->JobOfferDAO->GetAll();
+            $JobOfferDAO = new JobOfferDAO;
+            $CareerDAO = new CareerDAO;
+            $JobPositionDAO = new JobPositionDAO;
+            $CompanyDAO = new CompanyDAO;
 
-            require_once(VIEWS_PATH . ""); 
+            $JobOffersList = $JobOfferDAO->GetAll();
+            $CareersList = $CareerDAO->GetALL();
+            $JobPositionsList = $JobPositionDAO->GetAll();
+            $CompanyList = $CompanyDAO->GetAll();
+
+            require_once(VIEWS_PATH . "postulateView.php");
         }
 
         public function ShowAddView(){

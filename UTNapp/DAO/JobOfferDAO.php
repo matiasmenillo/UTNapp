@@ -43,11 +43,11 @@
                 $resultSet = $this->connection->Execute($query);
                 
                 foreach ($resultSet as $row)
-                {                
+                {   
                     $JobOffer = new JobOffer();
-                    $JobOffer->setJobOfferId($row["idJobOffer"]);
-                    $JobOffer->setJobPositionId($row["jobPositionId"]);
-                    $JobOffer->setCompanyId($row["companyId"]);
+                    $JobOffer->setJobOfferId($row["IdJobOffer"]);
+                    $JobOffer->setJobPositionId($row["IdJobPosition"]);
+                    $JobOffer->setCompanyId($row["IdCompany"]);
 
                     array_push($JobOfferList, $JobOffer);
                 }
