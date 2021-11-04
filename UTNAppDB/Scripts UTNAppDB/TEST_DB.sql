@@ -18,6 +18,7 @@ CALL InsertCareer(3, 'Arquitecto de Sistemas', True);
 
 CALL InsertStudent(1, 'Mauro', 'Porzio', 'mauro@gmail.com', 1234, 1231231, True, 1, null, 'M', '2021-12-02', 22323454, True);
 CALL InsertStudent(2, 'Matias', 'Menillo', 'matias@gmail.com', 1234, 1112231, True, 2, null, 'M', '2000-01-01', 22354363, True);
+CALL InsertStudent(3, 'Rodrigo', 'Moreno', 'rodrigo@gmail.com', 1234, 1234123, True, 2, null, 'M', '1997-01-10', 223560654, True);
 
 CALL InsertCompany(1, 'Software', 'EDSA', 'Empresa Tandilense', 1111111111, 'WWW.EDSA.COM.AR', 'Estrategias Diferenciadas S.A');
 CALL InsertCompany(1, 'Software', 'Globant', 'Empresa Internacional', 2222222222, 'WWW.Globant.COM.AR', 'Globant Company');

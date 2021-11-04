@@ -1,4 +1,3 @@
-<div class="bgded overlay" style="background-image:url('<?php echo IMG_PATH; ?>fondo.jpg');"> 
   <div class="wrapper row0">
     <div id="topbar" class="hoc clear">  
     <ul class="nospace">
@@ -10,7 +9,7 @@
   <div class="wrapper row1">
     <header id="header" class="hoc clear"> 
       <div id="logo" class="fl_left">
-        <h1><a href="<?php echo FRONT_ROOT."Home/Home" ?>">Universidad Tecnológica Nacional</a></h1>
+        <h1 style="color: white"><a href="<?php echo FRONT_ROOT."Home/Home" ?>">Universidad Tecnológica Nacional</a></h1>
       </div>
       <!-- Add path routes below -->
       <nav id="mainav" class="fl_right">
