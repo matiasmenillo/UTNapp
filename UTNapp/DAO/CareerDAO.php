@@ -52,7 +52,7 @@
 
             try
             {
-                $query = "CALL InsertCareer(:IdCareer, :Description, :Active)";
+                $query = "CALL InsertCareer(:IdCareer, :Description, :Active);";
                 
                 $parameters["IdCareer"] = $career->getCareerId();
                 $parameters["Description"] = $career->getDescription();

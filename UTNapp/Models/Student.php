@@ -10,17 +10,6 @@
         private $birthDate;
         private $phoneNumber;
         private $active;
-        private $DNI;
-
-        public function setDNI($DNI)
-        {
-            $this->DNI = $DNI;
-        }
-
-        public function getDNI()
-        {
-            return $this->DNI;
-        }
 
         public function setStudentId($id)
         {

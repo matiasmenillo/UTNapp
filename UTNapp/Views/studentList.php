@@ -8,9 +8,6 @@
         require_once("nav-barStudent.php");
     }
 ?>
-
-
-
 <br>
 <h2 style="text-align:center; color: white">Estudiantes</h2>
 
@@ -19,7 +16,7 @@
         <tr>
             <th style="width: 3%;">Nombre y apellido</th>
             <th style="width: 1%;">ID</th>
-            <th style="width: 1%;">DNI</th>
+            <th style="width: 10%;">DNI</th>
             <th style="width: 1%;">Genero</th>
             <th style="width: 1%;">Email</th>
             <th style="width: 1%;">Carrera</th>
@@ -71,4 +68,4 @@
                }
                
                 ?>
-        </tbody>        
+        </tbody>  
