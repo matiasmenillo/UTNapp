@@ -13,7 +13,10 @@
  
          public function __construct(){
  
-             $this->JobOfferDAO = new JobOfferDAO;
+            $this->JobOfferDAO = new JobOfferDAO;
+            $this->CareerDAO = new CareerDAO;
+            $this->CompanyDAO = new CompanyDAO;
+            $this->JobPositionDAO = new JobPositionDAO;
          }
 
          public function ShowJobOfferListView(){
@@ -23,7 +26,11 @@
 
         public function ShowAddView(){
 
-            require_once(VIEWS_PATH . "");
+            $careerList = $this->CareerDAO->GetAll();
+            $companyList = $this->CompanyDAO->GetAll();
+            $jobPositionList = $this->JobPositionDAO->GetAll();
+
+            require_once(VIEWS_PATH . "addJobOffer.php");
         }
 
         public function ShowModifView($jobOfferId,  $jobPositionId, $companyId){
