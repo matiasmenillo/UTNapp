@@ -31,7 +31,6 @@
                 <li><a href="<?php echo FRONT_ROOT."Student/ShowStudentListView" ?>">Ver Estudiantes</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Student/ShowAddStudentView" ?>">Agregar Estudiante</a></li>
                 <li><a href="<?php echo FRONT_ROOT."JobOffer/ShowAddView" ?>">Cargar propuesta</a></li>
-                <li><a href="#">Ver propuestas</a></li>
               </ul>
             </li>
                 

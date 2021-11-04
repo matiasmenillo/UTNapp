@@ -1,6 +1,6 @@
 <div class="wrapper row6">
   <div id="copyright" class="clear" align="center"> 
-    <p >Copyright &copy; <?php echo date('Y'); ?> - TP Final de Laboratorio IV, probando 1,2,3</p>
+    <p >Copyright &copy; <?php echo date('Y'); ?> - TP Final</p>
   </div>
 </div>
 <!-- JAVASCRIPTS -->
