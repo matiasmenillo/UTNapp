@@ -17,17 +17,8 @@
          }
 
          public function ShowJobOfferListView(){
-            $JobOfferDAO = new JobOfferDAO;
-            $CareerDAO = new CareerDAO;
-            $JobPositionDAO = new JobPositionDAO;
-            $CompanyDAO = new CompanyDAO;
-
-            $JobOffersList = $JobOfferDAO->GetAll();
-            $CareersList = $CareerDAO->GetALL();
-            $JobPositionsList = $JobPositionDAO->GetAll();
-            $CompanyList = $CompanyDAO->GetAll();
-
-            require_once(VIEWS_PATH . "postulateView.php");
+            $PostulationController = new PostulationController;
+            $PostulationController->ShowPostulateView();
         }
 
         public function ShowAddView(){

@@ -17,6 +17,76 @@
              $this->PostulationDAO = new PostulationDAO;
          }
 
+        
+         public function FilterJobOffersByCareer($CareerId)
+         {
+            $JobOfferDAO = new JobOfferDAO;
+            $JobPositionDAO = new JobPositionDAO;
+            $JobOffersList = $JobOfferDAO->GetAll();
+
+            foreach ($JobOffersList as $JobOffer => $val)
+            {
+                $JobPosition = $JobPositionDAO->GetById($val->getJobPositionId());
+
+                if ($JobPosition->getCareerId() != intval($CareerId))
+                {
+                    unset($JobOffersList[$JobOffer]);
+                }
+            }
+
+            if (count($JobOffersList) > 0)
+            {
+                $CompanyDAO = new CompanyDAO;
+                $JobPositionDAO = new JobPositionDAO;
+                $CareerDAO = new CareerDAO;
+
+                $CareersList = $CareerDAO->GetALL();
+                $JobPositionsList = $JobPositionDAO->GetAll();
+                $CompanyList = $CompanyDAO->GetAll();
+
+                require_once(VIEWS_PATH . "postulateView.php"); 
+            }
+            else
+            {
+              $errorMsg = "NO SE ENCONTRARON OFERTAS PARA EL FILTRO INGRESADO";
+              echo $errorMsg;
+              $this->ShowPostulateView();
+            }
+         }
+
+         public function FilterJobOffersByJobPosition($jobPositionId)
+         {
+            $JobOfferDAO = new JobOfferDAO;
+            $JobOffersList = $JobOfferDAO->GetAll();
+
+            foreach ($JobOffersList as $JobOffer => $val)
+            {
+                if ($val->getJobPositionId() != intval($jobPositionId))
+                {
+                    unset($JobOffersList[$JobOffer]);
+                }
+            }
+
+            if (count($JobOffersList) > 0)
+            {
+                $CareerDAO = new CareerDAO;
+                $CompanyDAO = new CompanyDAO;
+                $JobPositionDAO = new JobPositionDAO;
+
+                $JobPositionsList = $JobPositionDAO->getAll();
+                $CareersList = $CareerDAO->GetALL();
+                $CompanyList = $CompanyDAO->GetAll();
+
+                require_once(VIEWS_PATH . "postulateView.php"); 
+            }
+            else
+            {
+              $errorMsg = "NO SE ENCONTRARON OFERTAS PARA EL FILTRO INGRESADO";
+              echo $errorMsg;
+              $this->ShowPostulateView();
+            }
+         }
+
          public function ShowPostulateView()
          {
              $JobOfferDAO = new JobOfferDAO;
