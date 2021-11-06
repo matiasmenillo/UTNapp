@@ -4,6 +4,7 @@ USE UTNAppDB;
 SET SQL_SAFE_UPDATES = 0;
 
 /*DELETE ALL ====================================================================================================*/
+DELETE FROM H_Postulation;
 DELETE FROM Postulation;
 DELETE FROM JobOffer;
 DELETE FROM JobPosition;

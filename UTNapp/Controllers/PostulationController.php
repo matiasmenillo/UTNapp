@@ -95,13 +95,27 @@ class PostulationController{
             
         }
 
+        public function showPostulationHistoryView()
+        {
+             $JobOffersList =  $this->JobOfferDAO->GetAll();
+             $CareersList =  $this->CareerDAO->GetALL();
+             $JobPositionsList =  $this->JobPositionDAO->GetAll();
+             $CompanyList =  $this->CompanyDAO->GetAll();
+
+             $PostulationHistory = $this->PostulationDAO->GetAllHistoryByStudent($_SESSION["loggedUser"]);
+
+             $PostulacionVigente = $this->PostulationDAO->GetByStudent($_SESSION["loggedUser"]->getStudentId());
+ 
+             require_once(VIEWS_PATH . "postulationHistoryList.php");
+        }
+
         public function Remove($StudentId)
         {
             $RemovePostulation = new Postulation();
             $RemovePostulation->setStudentId($StudentId);
             $this->PostulationDAO->Remove($RemovePostulation);
 
-            $this->ShowPostulateView();
+            $this->showPostulationHistoryView();
         }
 
          public function GetAll(){

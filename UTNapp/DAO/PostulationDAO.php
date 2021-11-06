@@ -3,6 +3,7 @@
 
     use DAO\IPostulationDAO as IPostulationDAO;
     use Models\Postulation as Postulation;
+    use Models\Student as Student;
     use \Exception as Exception;
     use DAO\Connection as Connection;
 
@@ -138,6 +139,68 @@
                 $this->connection = Connection::GetInstance();
 
                 $this->connection->ExecuteNonQuery($query, $parameters);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function GetAllHistory(){
+
+            try
+            {
+                $PostulationList = array();
+
+                $query = "CALL GetAllHistoricPostulations();";
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $Postulation = new Postulation();
+                    $Postulation->setStudentId($row["IdStudent"]);
+                    $Postulation->setJobOfferId($row["IdJobOffer"]);
+                    $Postulation->setPostulationDate($row["PostulationDate"]);
+
+                    array_push($PostulationList, $Postulation);
+                }
+
+                return $PostulationList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function GetAllHistoryByStudent(Student $student){
+
+            try
+            {
+                $PostulationList = array();
+
+                $query = "CALL GetAllHistoricPostulationsByStudent(:IdStudent);";
+
+                $parameters["IdStudent"] = $student->getStudentId();
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query, $parameters);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $Postulation = new Postulation();
+                    $Postulation->setStudentId($row["IdStudent"]);
+                    $Postulation->setJobOfferId($row["IdJobOffer"]);
+                    $Postulation->setPostulationDate($row["PostulationDate"]);
+
+                    array_push($PostulationList, $Postulation);
+                }
+
+                return $PostulationList;
             }
             catch(Exception $ex)
             {
