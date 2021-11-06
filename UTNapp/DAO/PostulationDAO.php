@@ -109,6 +109,8 @@
 
                 $resultSet = $this->connection->Execute($query , $parameters);
 
+                $returnArray = array();
+
                 foreach ($resultSet as $row)
                 {                    
                     $Postulation = new Postulation();
@@ -116,10 +118,10 @@
                     $Postulation->setJobOfferId($row["IdJobOffer"]);
                     $Postulation->setPostulationDate($row["PostulationDate"]);
 
-                    return $Postulation;
+                   array_push($returnArray, $Postulation);
                 }
 
-                return null;             
+                return $returnArray;             
                
             }
             catch(Exception $ex)

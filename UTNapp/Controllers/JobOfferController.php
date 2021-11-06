@@ -6,10 +6,17 @@
      use DAO\CareerDAO as CareerDAO;
      use DAO\CompanyDAO as CompanyDAO;
      use DAO\JobPositionDAO as JobPositionDAO;
+     use DAO\StudentDAO as StudentDAO;
+     use DAO\PostulationDAO as PostulationDAO;
  
      class JobOfferController{
  
          private $JobOfferDAO;
+         private $CareerDAO;
+         private $CompanyDAO;
+         private $JobPositionDAO;
+         private $StudentDAO;
+         private $PostulationDAO;
  
          public function __construct(){
  
@@ -17,6 +24,9 @@
             $this->CareerDAO = new CareerDAO;
             $this->CompanyDAO = new CompanyDAO;
             $this->JobPositionDAO = new JobPositionDAO;
+            $this->StudentDAO = new StudentDAO;
+            $this->PostulationDAO = new PostulationDAO;
+
          }
 
          public function ShowJobOfferListView(){
@@ -44,6 +54,39 @@
             $jobPositionList = $this->JobPositionDAO->GetAll();
 
             require_once(VIEWS_PATH . "modifyJobOffer.php");
+        }
+
+        public function ShowPostulatedStudents($JobOfferId, $CompanyId, $JobPositionId)
+        {
+            $JobOffer = new JobOffer();
+            $JobOffer->setjobOfferId($JobOfferId);
+            $JobOffer->setCompanyId($CompanyId);
+            $JobOffer->setJobPositionId($JobPositionId);
+
+            $jobPosition = $this->JobPositionDAO->GetById($JobOffer->getJobPositionId());
+            $careerList = $this->CareerDAO->GetAll();
+            $companyList = $this->CompanyDAO->GetAll();
+
+            $postulationList = $this->PostulationDAO->GetByJobOffer($JobOffer->getjobOfferId());
+
+            $allStudentsList = $this->StudentDAO->GetAll();
+            $studentList = array();
+
+            if ($postulationList != null)
+            {
+                foreach($postulationList as $postulation)
+                {
+                    foreach($allStudentsList as $student)
+                    {
+                        if ($student->getStudentId() == $postulation->getStudentId())
+                        {
+                            array_push($studentList, $student);
+                        }
+                    }
+                }
+            }
+
+            require_once(VIEWS_PATH . "postulatedStudentsJobOfferList.php");
         }
 
         public function Add($jobPositionId, $companyId){

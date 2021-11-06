@@ -49,6 +49,17 @@
             <th style="width: 15%;">DESCRIPCION</th>
             <th style="width: 30%;">CARRERA</th>
             <th style="width: 30%;">EMPRESA</th>
+
+            <?php
+                if ($rol == 'admin')
+                {
+                    ?>
+                        <th style="width: 10%;"></th>
+                        <th style="width: 30%;"></th>
+                        <th style="width: 30%;"></th>
+                    <?php
+                }
+            ?>
         </tr>
         </thead>
         <tbody>
@@ -82,7 +93,6 @@
 
                     if($rol == 'student')
                     {
-
                         ?>
                                 <tr>
                                 <td style="color:black"><?php echo $JobPositionDescription ?></td>
@@ -93,18 +103,19 @@
                                     <input type="hidden" name="studentId" value="<?php echo  $_SESSION["loggedUser"]->getStudentId();?>">
                                     <input type="hidden" name="JobOfferId" value="<?php echo $JobOffer->getJobOfferId(); ?>">
                                     <input type="hidden" name="postulationDate" value="<?php echo date('y-m-d'); ?>">
-                                        <button type="submit" class="btn" name="remove" value="<?php ?>"> Aplicar </button>
+                                        <button type="submit" class="btn" name="Apply" value="<?php ?>"> Aplicar </button>
                                     </form>
                                 </td>
                         <?php
                         
                     }
-                        ?>
+                    ?>
 
                     <?php
                         if ($rol == 'admin')
                         {       
                     ?>
+                        </tr>
                             <td style="color:black"><?php echo $JobPositionDescription ?></td>
                             <td style="color:black"><?php echo $CarrerDescription ?></td>
                             <td style="color:black"><?php echo $CompanyName ?></td>
@@ -120,15 +131,21 @@
                                     <input type="hidden" name="CompanyId" value="<?php echo $JobOffer->getCompanyId(); ?>">
                                     <button type="submit" class="btn" name="modify"> Modify </button>
                                 </form>
-
                             </td>
+
+                            <td style="color:black">
+                                <form action="<?php echo FRONT_ROOT ?>JobOffer/ShowPostulatedStudents" method="POST">
+                                    <input type="hidden" name="JobOfferId" value="<?php echo $JobOffer->getJobOfferId(); ?>">
+                                    <input type="hidden" name="CompanyId" value="<?php echo $JobOffer->getCompanyId(); ?>">
+                                    <input type="hidden" name="JobPositionId" value="<?php echo $JobOffer->getJobPositionId(); ?>">
+                                    <button type="submit" class="btn" name="modify"> Ver Postulados </button>
+                                </form>
+                            </td>
+                            </tr>
                         <?php
                         }
                         ?>
-                        
-                    </tr>
                 <?php
                }
-               
                 ?>
         </tbody>        
