@@ -7,7 +7,7 @@
      use DAO\CareerDAO as CareerDAO;
      use DAO\CompanyDAO as CompanyDAO;
      use DAO\JobPositionDAO as JobPositionDAO;
-     use DAO\StudentDAO;
+     use DAO\StudentDAO as StudentDAO;
 
 class PostulationController{
  
@@ -16,6 +16,7 @@ class PostulationController{
          private $CareerDAO;
          private $JobPositionDAO;
          private $CompanyDAO;
+         private $StudentDAO;
  
          public function __construct(){
  
@@ -102,11 +103,22 @@ class PostulationController{
              $JobPositionsList =  $this->JobPositionDAO->GetAll();
              $CompanyList =  $this->CompanyDAO->GetAll();
 
-             $PostulationHistory = $this->PostulationDAO->GetAllHistoryByStudent($_SESSION["loggedUser"]);
+             if ($_SESSION["loggedUser"]->getAdmin() == 0)
+             {
+                $PostulationHistory = $this->PostulationDAO->GetAllHistoryByStudent($_SESSION["loggedUser"]);
 
-             $PostulacionVigente = $this->PostulationDAO->GetByStudent($_SESSION["loggedUser"]->getStudentId());
- 
-             require_once(VIEWS_PATH . "postulationHistoryList.php");
+                $PostulacionVigente = $this->PostulationDAO->GetByStudent($_SESSION["loggedUser"]->getStudentId());
+
+                require_once(VIEWS_PATH . "postulationHistoryList.php");
+             }
+             else
+             {
+
+                $PostulationHistory = $this->PostulationDAO->GetAllHistory();
+
+                require_once(VIEWS_PATH . "postulationHistoryListAdmin.php");
+             }
+
         }
 
         public function Remove($StudentId)

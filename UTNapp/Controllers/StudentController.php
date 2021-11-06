@@ -3,14 +3,17 @@
 
      use Models\Student as Student;
      use DAO\StudentDAO as StudentDAO;
+     use DAO\CareerDAO as CareerDAO;
  
      class StudentController{
  
          private $StudentDAO;
+         private $CareerDAO;
  
          public function __construct(){
  
              $this->StudentDAO = new StudentDAO;
+             $this->CareerDAO = new CareerDAO;
          }
 
          public function Add($user_firstName, $user_lastName , $user_email, $user_dni, $user_Gender, $user_BirthDate,$user_PhoneNumber, $user_FileNumber, $user_CareerId,$user_rol, $user_Active, $user_password){
@@ -65,6 +68,14 @@
             $careerController = new CareerController;
             $careerList = $careerController->GetAll();
             require_once(VIEWS_PATH . "addStudent.php"); 
+        }
+
+        public function ShowViewStudentDetails($studentId)
+        {
+            $student = $this->StudentDAO->GetById($studentId);
+            $career = $this->CareerDAO->GetById($student->getCareerId());
+
+            require_once(VIEWS_PATH . "studentDetails.php");
         }
      }
 
