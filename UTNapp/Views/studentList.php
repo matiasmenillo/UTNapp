@@ -1,10 +1,12 @@
 <?php
     if (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"]->getAdmin() == 1)
     {
+        $rol = 'admin';
         require_once("nav-barAdmin.php");
     }
     else
     {
+        $rol = 'student';
         require_once("nav-barStudent.php");
     }
 ?>
@@ -15,15 +17,25 @@
         <thead>
         <tr>
             <th style="width: 3%;">Nombre y apellido</th>
-            <th style="width: 1%;">ID</th>
+            <?php
+                    if ($rol == 'admin')
+                    { 
+                        echo "<th style=".'"width: 1%;"'.">ID</th>";
+                    }
+            ?>
             <th style="width: 10%;">DNI</th>
             <th style="width: 1%;">Genero</th>
             <th style="width: 1%;">Email</th>
             <th style="width: 1%;">Carrera</th>
              <th style="width: 10%;">Fecha de Nacimiento</th>
             <th style="width: 10%;">Numero de telefono</th>
-            <th style="width: 1%;">Activo</th>
-            <th style="width: 1%;">Rol</th>
+            <?php
+                if ($rol == 'admin')
+                { 
+                    echo "<th style=".'"width: 1%;"'.">Activo</th>";
+                    echo "<th style=".'"width: 1%;".'.">Rol</th>";
+                }
+            ?>
         </tr>
         </thead>
         <tbody>
@@ -33,7 +45,12 @@
                 ?>
                     <tr>
                     <td style="color:black"><?php echo $student->getLastName() ?>, <?php echo $student->getFirstName() ?></td>
-                    <td style="color:black"><?php echo $student->getStudentId() ?></td>
+                <?php
+                    if ($rol == 'admin')
+                    {   
+                        echo "<td style=".'"color:black">'. $student->getStudentId() . "</td>";
+                    }
+                ?>
                     <td style="color:black"><?php echo $student->getDNI() ?></td>
                     <td style="color:black"><?php echo $student->getGender() ?></td>
                     <td style="color:black"><?php echo $student->getEmail() ?></td>
@@ -44,7 +61,9 @@
                     <td style="color:black"><?php echo date_format($date, "Y/m/d") ?></td>
                     <td style="color:black"><?php echo $student->getPhoneNumber() ?></td>
                     <td style="color:black">
-                    <?php 
+                <?php  
+                    if ($rol == 'admin')
+                    {
                             if($student->getActive())
                             {
                                 echo "Si";
@@ -52,8 +71,7 @@
                             {
                                 echo "No";
                             }
-                    ?></td>
-                    <td style="color:black">
+                ?>          </td><td style="color:black">
                             <?php 
                             if($student->getAdmin())
                             {
@@ -65,7 +83,7 @@
                     ?></td>
                     </tr>
                 <?php
-               }
-               
+                    }
+                }
                 ?>
         </tbody>  

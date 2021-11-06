@@ -42,19 +42,7 @@
             }
         ?>
         </select>
-
-    <label for="careerId" style="color:White">Seleccione una Carrera</label>
-        <select name="careerId" style="color:black" required>
-        <?php
-            foreach($careerList as $career)
-            {
-                echo "<option value='".$career->getCareerId()."'>".$career->getDescription()."</option>";
-                $careerId = $career->getCareerId();
-            }
-        ?>
-        </select>
-
- 
+        <br>
         <button type="submit" style="color:black">Agregar</button>
     </form>
 

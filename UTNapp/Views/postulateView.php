@@ -14,7 +14,7 @@
 <br>
 <h2 style="text-align:center;">Ofertas Laborales disponibles</h2>
     <table style="text-align:center;">
-    <form action="<?php echo FRONT_ROOT ?>Postulation/FilterJobOffersByJobPosition" method="get">
+    <form action="<?php echo FRONT_ROOT ?>JobOffer/FilterJobOffersByJobPosition" method="get">
         <label for="user_CareerId" style="color:White">Filtrar por Puesto Laboral</label>
             <select name="filter_JobPostitionId" style="color:black">
             <?php
@@ -28,7 +28,7 @@
         <button type="submit" class="btn" name="Filtrar"> Filtrar por Puesto Laboral </button>
     </form>
     <br>
-    <form action="<?php echo FRONT_ROOT ?>Postulation/FilterJobOffersByCareer" method="get">
+    <form action="<?php echo FRONT_ROOT ?>JobOffer/FilterJobOffersByCareer" method="get">
         <label for="filter_CareerId" style="color:White">Filtrar por Carrera</label>
         <select name="filter_CareerId" style="color:black">
             <?php
@@ -114,8 +114,10 @@
                                 </form>
                             </td>
                             <td style="color:black">
-                                <form action="<?php echo FRONT_ROOT ?>Company/ShowModifView" method="POST">
-                                    <input type="hidden" name="Cuit" value="<?php ?>">
+                                <form action="<?php echo FRONT_ROOT ?>JobOffer/ShowModifView" method="POST">
+                                    <input type="hidden" name="JobOfferId" value="<?php echo $JobOffer->getJobOfferId(); ?>">
+                                    <input type="hidden" name="JobPositionId" value="<?php echo $JobOffer->getJobPositionId(); ?>">
+                                    <input type="hidden" name="CompanyId" value="<?php echo $JobOffer->getCompanyId(); ?>">
                                     <button type="submit" class="btn" name="modify"> Modify </button>
                                 </form>
 
