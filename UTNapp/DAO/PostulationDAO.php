@@ -76,8 +76,10 @@
 
                 $resultSet = $this->connection->Execute($query , $parameters);
 
-                foreach ($resultSet as $row)
-                {                    
+                $row = array_pop($resultSet);
+
+                if($row != null)
+                {                        
                     $Postulation = new Postulation();
                     $Postulation->setStudentId($row["IdStudent"]);
                     $Postulation->setJobOfferId($row["IdJobOffer"]);

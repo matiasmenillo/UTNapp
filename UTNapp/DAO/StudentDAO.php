@@ -143,8 +143,10 @@
 
                 $resultSet = $this->connection->Execute($query , $parameters);
 
-                foreach ($resultSet as $row)
-                {                
+                $row = array_pop($resultSet);
+
+                if($row != null)
+                {                    
                     $student = new Student();
                     $student->setStudentId($row["IdStudent"]);
                     $student->setFirstName($row["FirstName"]);
