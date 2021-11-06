@@ -7,27 +7,32 @@
      use DAO\CareerDAO as CareerDAO;
      use DAO\CompanyDAO as CompanyDAO;
      use DAO\JobPositionDAO as JobPositionDAO;
- 
-     class PostulationController{
+     use DAO\StudentDAO;
+
+class PostulationController{
  
          private $PostulationDAO;
+         private $JobOfferDAO;
+         private $CareerDAO;
+         private $JobPositionDAO;
+         private $CompanyDAO;
  
          public function __construct(){
  
              $this->PostulationDAO = new PostulationDAO;
+             $this-> JobOfferDAO = new JobOfferDAO;
+             $this->CareerDAO = new CareerDAO;
+             $this->JobPositionDAO = new JobPositionDAO;
+             $this->CompanyDAO = new CompanyDAO;
+             $this->StudentDAO = new StudentDAO;
          }
 
          public function ShowPostulateView()
          {
-             $JobOfferDAO = new JobOfferDAO;
-             $CareerDAO = new CareerDAO;
-             $JobPositionDAO = new JobPositionDAO;
-             $CompanyDAO = new CompanyDAO;
-
-             $JobOffersList = $JobOfferDAO->GetAll();
-             $CareersList = $CareerDAO->GetALL();
-             $JobPositionsList = $JobPositionDAO->GetAll();
-             $CompanyList = $CompanyDAO->GetAll();
+             $JobOffersList =  $this->JobOfferDAO->GetAll();
+             $CareersList =  $this->CareerDAO->GetALL();
+             $JobPositionsList =  $this->JobPositionDAO->GetAll();
+             $CompanyList =  $this->CompanyDAO->GetAll();
  
              require_once(VIEWS_PATH . "postulateView.php");
          }
@@ -48,22 +53,38 @@
 
         public function Add($studentId,  $JobOfferId, $postulationDate)
         {
-            $PostulationDAO = new PostulationDAO;
+            $result =  $this->PostulationDAO->GetByStudent(intval($studentId));
+            $student = $this->StudentDAO->GetById($studentId);
+            $JobOffer = $this->JobOfferDAO->GetById($JobOfferId);
 
-            $result = $PostulationDAO->GetByStudent(intval($studentId));
+            foreach($this->JobPositionDAO->GetAll() as $JobPosition)
+            {
+                if ($JobPosition->getJobPositionId() == $JobOffer->getJobPositionId())
+                {
+                    $careerId = $JobPosition->getCareerId();
+                }
+            }
 
             if ($result == null)
             {
-                $newPostulation = new Postulation;
+                if ($careerId == $student->GetCareerID())
+                {
+                    $newPostulation = new Postulation;
             
-                $newPostulation->setStudentId($studentId);
-                $newPostulation->setJobOfferId($JobOfferId);
-                $newPostulation->setPostulationDate($postulationDate);
-            
-                $this->PostulationDAO->Add($newPostulation);
-
-                echo "Postulado correctamente!";
-                $this->ShowPostulateView();
+                    $newPostulation->setStudentId($studentId);
+                    $newPostulation->setJobOfferId($JobOfferId);
+                    $newPostulation->setPostulationDate($postulationDate);
+                
+                    $this->PostulationDAO->Add($newPostulation);
+    
+                    echo "Postulado correctamente!";
+                    $this->ShowPostulateView();
+                }
+                else
+                {
+                    echo "Usted no pertenece a la carrera requerida para postularse en la Oferta Laboral";
+                    $this->ShowPostulateView();
+                }
             }
             else
             {
