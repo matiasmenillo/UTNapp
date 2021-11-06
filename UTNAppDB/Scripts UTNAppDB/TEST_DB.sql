@@ -87,7 +87,7 @@ CALL GetJobOfferById((SELECT IdJobOffer FROM JobOffer WHERE IdJobPosition = 2));
 
 CALL DeleteJobOffer((SELECT IdJobOffer FROM JobOffer WHERE IdJobPosition = 5));
 
-/*JobOffer  ========================================================================================================*/
+/*Postultions  ========================================================================================================*/
 CALL GetAllPostulations();
 
 CALL GetPostulationByJobOffer((SELECT IdJobOffer FROM JobOffer WHERE IdJobPosition = 3));
@@ -97,6 +97,12 @@ CALL UpdatePostulation(1, (SELECT IdJobOffer FROM JobOffer WHERE IdJobPosition =
 CALL GetPostulationByStudent(1);
 
 CALL DeletePostulation(1);
+
+/*Postultions  ========================================================================================================*/
+
+CALL GetAllHistoricPostulations();
+
+CALL GetAllHistoricPostulationsByStudent(189);
 
 
 
