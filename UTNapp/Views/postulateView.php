@@ -49,6 +49,7 @@
             <th style="width: 15%;">DESCRIPCION</th>
             <th style="width: 30%;">CARRERA</th>
             <th style="width: 30%;">EMPRESA</th>
+            <th style="width: 30%;"></th>
 
             <?php
                 if ($rol == 'admin')

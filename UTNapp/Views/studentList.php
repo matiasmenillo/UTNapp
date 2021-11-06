@@ -23,11 +23,11 @@
                         echo "<th style=".'"width: 1%;"'.">ID</th>";
                     }
             ?>
-            <th style="width: 10%;">DNI</th>
+            <th style="width: 20%;">DNI</th>
             <th style="width: 1%;">Genero</th>
             <th style="width: 1%;">Email</th>
-            <th style="width: 1%;">Carrera</th>
-             <th style="width: 10%;">Fecha de Nacimiento</th>
+            <th style="width: 25%;">Carrera</th>
+            <th style="width: 15%;">Fecha de Nacimiento</th>
             <th style="width: 10%;">Numero de telefono</th>
             <?php
                 if ($rol == 'admin')
@@ -54,33 +54,41 @@
                     <td style="color:black"><?php echo $student->getDNI() ?></td>
                     <td style="color:black"><?php echo $student->getGender() ?></td>
                     <td style="color:black"><?php echo $student->getEmail() ?></td>
-                    <td style="color:black"><?php echo $student->getCareerId() ?></td>
+
+                    <?php
+                        foreach ($careerList as $career)
+                        {
+                            if ($career->getCareerId() == $student->getCareerId())
+                            {
+                                echo "<td style=".'"color:black"'.">" . $career->getDescription() . "</td>";
+                            }
+                        }
+                    ?>
                 
                 </td>
                     <?php $date=date_create($student->getBirthDate())?>
                     <td style="color:black"><?php echo date_format($date, "Y/m/d") ?></td>
                     <td style="color:black"><?php echo $student->getPhoneNumber() ?></td>
-                    <td style="color:black">
                 <?php  
                     if ($rol == 'admin')
                     {
+                        echo "<td style=".'"color:black"'.">";
                             if($student->getActive())
                             {
-                                echo "Si";
+                                echo "Si </td>";
                             }else 
                             {
-                                echo "No";
-                            }
-                ?>          </td><td style="color:black">
-                            <?php 
+                                echo "No </td>";
+                            }  
+                        echo "<td style=".'"color:black"'.">";
                             if($student->getAdmin())
                             {
-                                echo "Administrador";
+                                echo "Administrador</td>";
                             }else 
                             {
-                                echo "Estudiante";
+                                echo "Estudiante</td>";
                             }
-                    ?></td>
+                    ?>
                     </tr>
                 <?php
                     }
