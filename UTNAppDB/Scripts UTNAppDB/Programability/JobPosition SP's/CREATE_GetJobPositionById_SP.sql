@@ -6,10 +6,10 @@ DELIMITER //
 
 CREATE PROCEDURE GetJobPositionById
 (
-	IN IdJobPositionParam INT
+	IN IdJobPositionDBParam INT
 )
 BEGIN
-	SELECT * FROM JobPosition WHERE IdJobPosition = IdJobPositionParam;
+	SELECT * FROM JobPosition WHERE IdJobPositionDB = IdJobPositionDBParam;
 END //
 
 DELIMITER ;

@@ -12,7 +12,13 @@ CREATE PROCEDURE InsertCareer
 
 )
 BEGIN
-	INSERT INTO Career VALUES
+	INSERT INTO Career
+    (
+		IdCareer,
+        Description,
+        Active
+    )
+    VALUES
     (
 		IdCareer,
         Description,

@@ -40,6 +40,8 @@
             ?>
             <th style="width: 30%;">ESTADO</th>
             <th style="width: 30%;">ID</th>
+            <th style="width: 30%;"></th>
+            <th style="width: 30%;"></th>
             <?php
                 }
             ?>

@@ -83,7 +83,7 @@
                 foreach ($resultSet as $row)
                 {                
                     $career = new Career();
-                    $career->setCareerId($row["IdCareer"]);
+                    $career->setCareerId($row["IdCareerDB"]);
                     $career->setDescription($row["Description"]);
                     $career->setActive($row["Active"]);
 
@@ -117,7 +117,7 @@
                 if($row != null)
                 {                
                     $career = new Career();
-                    $career->setCareerId($row["IdCareer"]);
+                    $career->setCareerId($row["IdCareerDB"]);
                     $career->setDescription($row["Description"]);
                     $career->setActive($row["Active"]);
 

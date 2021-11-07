@@ -6,11 +6,11 @@ DELIMITER //
 
 CREATE PROCEDURE DeleteStudent
 (
-	IN IdStudentParam INT
+	IN IdStudentParamDB INT
 
 )
 BEGIN
-	DELETE FROM Student WHERE IdStudent = IdStudentParam;
+	DELETE FROM Student WHERE IdStudentDB = IdStudentDBParam;
 END //
 
 DELIMITER ;

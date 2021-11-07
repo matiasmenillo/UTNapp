@@ -6,7 +6,7 @@ DELIMITER //
 
 CREATE PROCEDURE UpdateCareer
 (
-	IN IdCareerParam int, 
+	IN IdCareerDBParam int, 
 	IN Description varchar(200), 
 	IN Active int
 )
@@ -15,7 +15,7 @@ BEGIN
 	SET
         Description = Description,
         Active = Active
-	WHERE IdCareer = IdCareerParam;
+	WHERE IdCareer = IdCareerDBParam;
 END //
 
 DELIMITER ;

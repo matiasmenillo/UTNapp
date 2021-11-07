@@ -6,10 +6,10 @@ DELIMITER //
 
 CREATE PROCEDURE GetCareerById
 (
-	IN IdCareerParam INT
+	IN IdCareerDBParam INT
 )
 BEGIN
-	SELECT * FROM Career WHERE IdCareer = IdCareerParam;
+	SELECT * FROM Career WHERE IdCareerDB = IdCareerDBParam;
 END //
 
 DELIMITER ;

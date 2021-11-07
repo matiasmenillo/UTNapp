@@ -11,7 +11,13 @@ CREATE PROCEDURE InsertJobPosition
 	IN Description varchar(200)			
 )
 BEGIN
-	INSERT INTO JobPosition VALUES
+	INSERT INTO JobPosition 
+    (
+		IdJobPosition,		
+		IdCareer,	
+        Description	
+    )
+    VALUES
     (
 		IdJobPosition,		
 		IdCareer,	

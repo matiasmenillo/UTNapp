@@ -1,11 +1,13 @@
 ==========================================================================================================================================
 							!!!! ACLARACIONES !!!!
 ==========================================================================================================================================
-0-) ANTES DE EJECUTAR LOS CREATE SP's, CREAR AL DB Y LAS TABLAS EN EL ORDEN INDICADO EN LA NUMERACION
-1-) EN INSERTS Y UPDATES, SI NO SE DESEA LLENAR ALGUN CAMPO, PASAR NULL.
-2-) EN UPDATES, SE DEBE PASAR TODOS LOS PARAMETROS QUE PIDE EL METODO, Y SOLO CAMBIAR LOS QUE SE DESEAN MODIFICAR, 
-    SINO PASAR LOS QUE YA TIENE EL REGISTRO EN LA BASE, PARA ELLO, PRIMERO HACER UN GET DEL OBJETO, EDITARLO Y 
-    LUEGO PASARLO EN EL UPDATE.
+EN LA RUTA: \UTNapp\UTNAppDB\Scripts UTNAppDB\GetDBReady
+1-) EJECUTAR "(1) EXECUTE_SCHEMA_AND_SPs_DB".
+2-) LEVANTAR WEB Y INTENTAR LOGIN CON CUALQUIER COSA PARA QUE LEVANTE DATOS DE API.
+3-) EJECUTAR "(2) ADD_ADMINS".
+4-) EJECUTAR "(3) ADD_TEST_DATA".
+==========================================================================================================================================
+							   <-- GUIA SPs -->
 ==========================================================================================================================================
 Student (PK -> IdStudent, Email, Dni) ====================================================================================================
 

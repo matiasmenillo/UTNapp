@@ -11,7 +11,7 @@ CREATE PROCEDURE UpdateCompany
 	IN Sector varchar(200), 
 	IN Name varchar(200),  
 	IN Description varchar(200), 
-	IN Cuit int, 
+	IN Cuit bigint, 
 	IN CompanyLink varchar(200), 
 	IN AboutUs varchar(200)  
 

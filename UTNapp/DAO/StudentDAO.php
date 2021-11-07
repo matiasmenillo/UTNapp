@@ -104,19 +104,19 @@
                 foreach ($resultSet as $row)
                 {                
                     $student = new Student();
-                    $student->setStudentId($row["IdStudent"]);
+                    $student->setStudentId($row["IdStudentDB"]);
                     $student->setFirstName($row["FirstName"]);
                     $student->setLastName($row["LastName"]);
                     $student->setEmail($row["Email"]);
                     $student->setPassword($row["Password"]);
-                    $student->setDni($row["DNI"]);
-                    $student->setAdmin($row["admin"]);
+                    $student->setDni($row["Dni"]);
+                    $student->setAdmin($row["Admin"]);
                     $student->setCareerId($row["IdCareer"]);
                     $student->setFileNumber($row["FileNumber"]);
-                    $student->setGender($row["gender"]);
+                    $student->setGender($row["Gender"]);
                     $student->setBirthDate($row["BirthDate"]);
-                    $student->setPhoneNumber($row["phonenumber"]);
-                    $student->setActive($row["active"]);
+                    $student->setPhoneNumber($row["PhoneNumber"]);
+                    $student->setActive($row["Active"]);
 
                     array_push($studentList, $student);
                 }
@@ -145,22 +145,24 @@
 
                 $row = array_pop($resultSet);
 
+                //var_dump($row);
+
                 if($row != null)
                 {                    
                     $student = new Student();
-                    $student->setStudentId($row["IdStudent"]);
+                    $student->setStudentId($row["IdStudentDB"]);
                     $student->setFirstName($row["FirstName"]);
                     $student->setLastName($row["LastName"]);
                     $student->setEmail($row["Email"]);
                     $student->setPassword($row["Password"]);
-                    $student->setDni($row["DNI"]);
-                    $student->setAdmin($row["admin"]);
+                    $student->setDni($row["Dni"]);
+                    $student->setAdmin($row["Admin"]);
                     $student->setCareerId($row["IdCareer"]);
                     $student->setFileNumber($row["FileNumber"]);
-                    $student->setGender($row["gender"]);
+                    $student->setGender($row["Gender"]);
                     $student->setBirthDate($row["BirthDate"]);
-                    $student->setPhoneNumber($row["phonenumber"]);
-                    $student->setActive($row["active"]);
+                    $student->setPhoneNumber($row["PhoneNumber"]);
+                    $student->setActive($row["Active"]);
 
                     return $student;
                 }
@@ -226,7 +228,7 @@
 
             try
             {
-                $query = "SELECT MAX(IdStudent) AS MaxId FROM ". $this->tableName .";";
+                $query = "SELECT MAX(IdStudentDB) AS MaxId FROM ". $this->tableName .";";
 
                 $this->connection = Connection::GetInstance();
 
