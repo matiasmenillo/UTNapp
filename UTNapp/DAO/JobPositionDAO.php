@@ -83,7 +83,7 @@
                 foreach ($resultSet as $row)
                 {                
                     $JobPosition = new JobPosition();
-                    $JobPosition->setJobPositionId($row["IdJobPosition"]);
+                    $JobPosition->setJobPositionId($row["IdJobPositionDB"]);
                     $JobPosition->setDescription($row["Description"]);
                     $JobPosition->setCareerId($row["IdCareer"]);
 
@@ -112,11 +112,13 @@
 
                 $resultSet = $this->connection->Execute($query , $parameters);
 
-                foreach ($resultSet as $row)
-                {                    
+                $row = array_pop($resultSet);
+
+                if($row != null)
+                {                      
 
                     $JobPosition = new JobPosition();
-                    $JobPosition->setJobPositionId($row["IdJobPosition"]);
+                    $JobPosition->setJobPositionId($row["IdJobPositionDB"]);
                     $JobPosition->setDescription($row["Description"]);
                     $JobPosition->setCareerId($row["IdCareer"]);
 

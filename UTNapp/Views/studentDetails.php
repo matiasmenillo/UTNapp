@@ -1,0 +1,28 @@
+<?php
+        require_once("nav-barAdmin.php");
+?>
+<br>
+<h3 style="text-align:center; color:white">Detalles de <?php echo $student->GetFirstName() . ' ' . $student->GetLastName() ?></h3>
+
+<table style="text-align:center; color:orange">
+    <thead>
+        <tr>
+            <th style="width: 3%;">Legajo</th>
+            <th style="width: 1%;">Carrera</th>
+            <th style="width: 1%;">Sexo</th>
+            <th style="width: 1%;">Fecha de Nacimiento</th>
+            <th style="width: 1%;">Email</th>
+            <th style="width: 1%;">Telefono</th>
+        </tr>
+  </thead>
+  <tbody>
+  <tr>
+      <td style="color:black"><?php echo $student->getFileNumber(); ?></td>
+      <td style="color:black"><?php echo $career->getDescription(); ?></td>
+      <td style="color:black"><?php echo $student->getGender(); ?></td>
+      <td style="color:black"><?php echo $student->getBirthDate(); ?></td>
+      <td style="color:black"><?php echo $student->getEmail(); ?></td>
+      <td style="color:black"><?php echo $student->getPhoneNumber(); ?></td>
+  </tr>
+  </tbody>
+    </table>

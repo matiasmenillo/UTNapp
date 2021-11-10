@@ -83,7 +83,7 @@
                 foreach ($resultSet as $row)
                 {                
                     $career = new Career();
-                    $career->setCareerId($row["IdCareer"]);
+                    $career->setCareerId($row["IdCareerDB"]);
                     $career->setDescription($row["Description"]);
                     $career->setActive($row["Active"]);
 
@@ -112,10 +112,12 @@
 
                 $resultSet = $this->connection->Execute($query , $parameters);
 
-                foreach ($resultSet as $row)
+                $row = array_pop($resultSet);
+
+                if($row != null)
                 {                
                     $career = new Career();
-                    $career->setCareerId($row["IdCareer"]);
+                    $career->setCareerId($row["IdCareerDB"]);
                     $career->setDescription($row["Description"]);
                     $career->setActive($row["Active"]);
 

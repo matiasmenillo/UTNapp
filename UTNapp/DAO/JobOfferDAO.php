@@ -74,12 +74,14 @@
 
                 $resultSet = $this->connection->Execute($query , $parameters);
 
-                foreach ($resultSet as $row)
-                {                
+                $row = array_pop($resultSet);
+
+                if($row != null)
+                {     
                     $JobOffer = new JobOffer();
-                    $JobOffer->setJobOfferId($row["idJobOffer"]);
-                    $JobOffer->setJobPositionId($row["jobPositionId"]);
-                    $JobOffer->setCompanyId($row["companyId"]);
+                    $JobOffer->setJobOfferId($row["IdJobOffer"]);
+                    $JobOffer->setJobPositionId($row["IdJobPosition"]);
+                    $JobOffer->setCompanyId($row["IdCompany"]);
 
                     return $JobOffer;
                 }

@@ -104,7 +104,7 @@
                 foreach ($resultSet as $row)
                 {                
                     $student = new Student();
-                    $student->setStudentId($row["IdStudent"]);
+                    $student->setStudentId($row["IdStudentDB"]);
                     $student->setFirstName($row["FirstName"]);
                     $student->setLastName($row["LastName"]);
                     $student->setEmail($row["Email"]);
@@ -143,10 +143,14 @@
 
                 $resultSet = $this->connection->Execute($query , $parameters);
 
-                foreach ($resultSet as $row)
-                {                
+                $row = array_pop($resultSet);
+
+                //var_dump($row);
+
+                if($row != null)
+                {                    
                     $student = new Student();
-                    $student->setStudentId($row["IdStudent"]);
+                    $student->setStudentId($row["IdStudentDB"]);
                     $student->setFirstName($row["FirstName"]);
                     $student->setLastName($row["LastName"]);
                     $student->setEmail($row["Email"]);
@@ -224,7 +228,7 @@
 
             try
             {
-                $query = "SELECT MAX(IdStudent) AS MaxId FROM ". $this->tableName .";";
+                $query = "SELECT MAX(IdStudentDB) AS MaxId FROM ". $this->tableName .";";
 
                 $this->connection = Connection::GetInstance();
 
