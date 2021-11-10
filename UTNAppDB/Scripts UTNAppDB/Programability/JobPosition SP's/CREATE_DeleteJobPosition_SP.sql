@@ -6,10 +6,10 @@ DELIMITER //
 
 CREATE PROCEDURE DeleteJobPosition
 (
-	IN IdJobPositionParam INT 
+	IN IdJobPositionDBParam INT 
 )
 BEGIN
-	DELETE FROM JobPosition WHERE IdJobPosition = IdJobPositionParam;
+	DELETE FROM JobPosition WHERE IdJobPositionDB = IdJobPositionDBParam;
 END //
 
 DELIMITER ;

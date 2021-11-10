@@ -6,10 +6,10 @@ DELIMITER //
 
 CREATE PROCEDURE GetStudentById
 (
-	IN IdStudentParam INT
+	IN IdStudentDBParam INT
 )
 BEGIN
-	SELECT * FROM Student WHERE IdStudent = IdStudentParam;
+	SELECT * FROM Student WHERE IdStudentDB = IdStudentDBParam;
 END //
 
 DELIMITER ;

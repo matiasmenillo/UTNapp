@@ -22,7 +22,23 @@ CREATE PROCEDURE InsertStudent
 
 )
 BEGIN
-	INSERT INTO Student VALUES
+	INSERT INTO Student 
+    (
+		IdStudent,
+		FirstName, 
+		LastName, 
+		Email, 
+		Password, 
+		Dni, 
+		Admin, 
+		IdCareer, 
+		FileNumber, 
+		Gender, 
+		BirthDate, 
+		PhoneNumber, 
+		Active
+    )
+    VALUES
     (
 		IdStudentParam,
 		FirstName, 

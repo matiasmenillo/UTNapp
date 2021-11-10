@@ -7,10 +7,9 @@ Name VARCHAR(200) NOT NULL,
 AboutUs VARCHAR(200) NULL,
 Status BIT NOT NULL,
 CompanyLink VARCHAR(200) NULL,
-Cuit INT NOT NULL,
+Cuit BIGINT NOT NULL,
 Description VARCHAR(200) NULL,
 Sector VARCHAR(200) NULL,
 
 Primary Key (Name, Cuit)
-)
-
+);

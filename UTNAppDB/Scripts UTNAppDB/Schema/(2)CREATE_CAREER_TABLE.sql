@@ -5,8 +5,9 @@ USE UTNAppDB;
 CREATE TABLE Career
 (
 IdCareer INT Unique NOT NULL,
+IdCareerDB INT Unique auto_increment NOT NULL,
 Description VARCHAR(200) NOT NULL,
 Active INT NOT NULL,
 
-Primary Key (IdCareer)
+Primary Key (IdCareer, IdCareerDB)
 )

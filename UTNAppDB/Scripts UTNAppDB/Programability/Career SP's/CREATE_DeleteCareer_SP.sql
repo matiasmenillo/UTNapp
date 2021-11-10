@@ -6,10 +6,10 @@ DELIMITER //
 
 CREATE PROCEDURE DeleteCareer
 (
-	IN IdCareerParam INT 
+	IN IdCareerDBParam INT 
 )
 BEGIN
-	DELETE FROM Career WHERE IdCareer = IdCareerParam;
+	DELETE FROM Career WHERE IdCareerDB = IdCareerParamDB;
 END //
 
 DELIMITER ;

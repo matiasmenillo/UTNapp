@@ -1,12 +1,11 @@
 USE UTNAppDB;
 
-DESCRIBE Student;
-
 /*DROP TABLE IF EXISTS Student;*/
 
 CREATE TABLE Student
 (
 IdStudent INT Unique NOT NULL,
+IdStudentDB INT Unique auto_increment NOT NULL,
 FirstName VARCHAR(200) NOT NULL,
 LastName VARCHAR(200) NOT NULL,
 Email VARCHAR(200) NOT NULL,
@@ -20,7 +19,7 @@ BirthDate DATE NOT NULL,
 PhoneNumber varchar(200) NULL,
 Active INT NOT NULL,
 
-Primary Key (IdStudent, Email, Dni),
+Primary Key (IdStudent, Email, Dni, IdStudentDB),
 CONSTRAINT fk_Career_Student FOREIGN KEY (IdCareer)
 REFERENCES Career(IdCareer)
 )

@@ -6,7 +6,7 @@ DELIMITER //
 
 CREATE PROCEDURE UpdateStudent
 (
-	IN IdStudentParam INT,
+	IN IdStudentDBParam INT,
 	IN FirstName varchar(200), 
 	IN LastName varchar(200), 
 	IN Email varchar(200), 
@@ -36,7 +36,7 @@ BEGIN
 		BirthDate = BirthDate, 
 		PhoneNumber = PhoneNumber, 
 		Active = Active
-	WHERE IdStudent = IdStudentParam;
+	WHERE IdStudentDB = IdStudentDBParam;
 END //
 
 DELIMITER ;
