@@ -7,12 +7,13 @@
         unset($error);
     } 
 ?>
-    <h2 style="color:White">Seleccione las opciones para Modificar la oferta laboral</h2>
+<br>
+    <h2 style="text-align:center;color:White">Seleccione las opciones para Modificar la oferta laboral</h2>
 
-    <form action="<?php echo FRONT_ROOT?> JobOffer/Modify" method="POST">
+    <form style="text-align:center;color:white" action="<?php echo FRONT_ROOT?> JobOffer/Modify" method="POST">
     
     <label for="jobPositionId" style="color:White">Seleccione la Posicion</label>
-        <select name="jobPositionId" style="color:black" required>
+        <select style="margin:auto;color:black" name="jobPositionId" style="color:black" required>
             <?php
                 foreach($jobPositionList as $jobPosition)
                 {
@@ -29,7 +30,7 @@
         </select>
 
     <label for="companyId" style="color:White">Seleccione una Empresa</label>
-        <select name="companyId" style="color:black" required>
+        <select style="margin:auto;color:black" name="companyId" style="color:black" required>
             <?php
                 foreach($companyList as $company)
                 {
@@ -46,7 +47,7 @@
         </select>
         <br>
         <input type="hidden" name="JobOfferId" value="<?php echo $ModifJobOffer->getJobOfferId(); ?>">
-        <button type="submit" style="color:black">Guardar</button>
+        <button style="margin:auto;color:black" type="submit" style="color:black">Guardar</button>
     </form>
 <?php
     require_once("footer.php");
