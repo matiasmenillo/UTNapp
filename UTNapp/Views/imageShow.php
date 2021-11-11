@@ -1,5 +1,12 @@
 <?php
-    require_once('nav-barStudent.php');
+if(isset($_SESSION['loggedUser']))
+{
+     if($_SESSION['loggedUser']->getAdmin() == 0)
+     {
+           require_once('nav-barStudent.php');
+      }
+     else
+          require_once('nav-barAdmin.php');
 ?>
 <main class="py-5">
      <section id="listado" class="mb-5">
@@ -17,3 +24,6 @@
           </div>
      </section>
 </main>
+<?php
+}
+?>

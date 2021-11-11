@@ -20,6 +20,7 @@
               <ul>
                 <li><a href="<?php echo FRONT_ROOT."Student/ShowStudentListView" ?> ">Lista Alumnos</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Postulation/showPostulationHistoryView" ?>">Historial de propuestas</a></li>
+                <li><a href="<?php echo FRONT_ROOT."Image/ShowListView"?>">Ver CVs</a></li>
               </ul>
             </li>
                 <li><a class="drop" href="#" style="color:white">Administrador</a>
