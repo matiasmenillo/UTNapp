@@ -141,7 +141,7 @@
             }
             catch(Exception $ex)
             {
-                return "NO SE PUEDEN BORRAR EMPRESAS CON JOB OFFERS RELACIONADAS";
+                return "No se pueden borrar empresas con job offers relacionadas";
             }
         }
 

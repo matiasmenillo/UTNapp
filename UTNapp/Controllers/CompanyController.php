@@ -100,7 +100,7 @@
 
             if (isset($error))
             {
-                echo $error;
+                echo "<script>alert('". $error ."')</script>";
                 unset($error);
             }  
 
