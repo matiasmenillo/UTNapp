@@ -11,22 +11,57 @@
         private $connection;
         private $tableName = "JobOffer";
 
-        public function Add(JobOffer $JobOffer){
+        public function Add(JobOffer $JobOffer)
+        {
+            if (!$this->JobOfferExists($JobOffer))
+            {
+                try
+                {
+                    $query = "CALL InsertJobOffer(:IdJobPosition, :IdCompany);";
+                    
+                    $parameters["IdJobPosition"] = $JobOffer->getJobPosition()->getJobPositionId();
+                    $parameters["IdCompany"] = $JobOffer->getCompany()->getId();
 
+                    $this->connection = Connection::GetInstance();
+
+                    $this->connection->ExecuteNonQuery($query, $parameters);
+                }
+                catch(Exception $ex)
+                {
+                   throw $ex;
+                }
+            }
+            else
+            {
+                return "Ya existe una oferta laboral con los datos ingresados";
+            }      
+        }
+
+        private function JobOfferExists($JobOffer)
+        {
             try
             {
-                $query = "CALL InsertJobOffer(:IdJobPosition, :IdCompany);";
+                $query = "CALL JobOfferExists(:IdJobPosition, :IdCompany);";
                 
                 $parameters["IdJobPosition"] = $JobOffer->getJobPosition()->getJobPositionId();
                 $parameters["IdCompany"] = $JobOffer->getCompany()->getId();
 
                 $this->connection = Connection::GetInstance();
 
-                $this->connection->ExecuteNonQuery($query, $parameters);
+                $resultSet = $this->connection->Execute($query, $parameters);
+
+                if (intval($resultSet[0][1]) == 1)
+                {
+                    return  true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch(Exception $ex)
             {
-                return "YA EXISTE UNA JOB OFFER CON LOS DATOS INGRESADOS";
+                throw $ex;
             }
         }
 

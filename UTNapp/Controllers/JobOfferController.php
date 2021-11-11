@@ -91,7 +91,13 @@
             $newJobOffer->setJobPosition($this->JobPositionDAO->GetById($jobPositionId));
             $newJobOffer->setCompany($this->CompanyDAO->GetById($companyId));
         
-            $this->JobOfferDAO->Add($newJobOffer);
+            $error = $this->JobOfferDAO->Add($newJobOffer);
+
+            if ($error != null)
+            {   
+                echo "<script>alert('". $error ."')</script>";
+            }
+
             $this->ShowJobOfferListView();
         }
 

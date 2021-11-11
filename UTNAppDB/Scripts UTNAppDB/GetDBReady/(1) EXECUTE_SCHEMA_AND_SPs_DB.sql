@@ -103,12 +103,12 @@ IdCompany INT NOT NULL,
 
 Primary Key (IdJobOffer),
 
-CONSTRAINT fk_JobPosition_JobOffer FOREIGN KEY (IdJobPosition)
+FOREIGN KEY (IdJobPosition)
 REFERENCES JobPosition(IdJobPosition),
 
-CONSTRAINT fk_Company_JobOffer FOREIGN KEY (IdCompany)
+FOREIGN KEY (IdCompany)
 REFERENCES Company(IdCompany)
-);
+)ENGINE=INNODB;
 
 USE UTNAppDB;
 
@@ -486,6 +486,31 @@ CREATE PROCEDURE GetJobOfferById
 )
 BEGIN
 	SELECT * FROM JobOffer WHERE IdJobOffer = IdJobOfferParam;
+END //
+
+DELIMITER ;
+
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS  JobOfferExists;
+
+DELIMITER //
+
+CREATE PROCEDURE JobOfferExists
+(
+	IN IdJobPositionParam INT,
+    IN IdCompanyParam INT
+)
+BEGIN
+	IF EXISTS (SELECT 1 FROM JobOffer WHERE IdJobPosition = IdJobPositionParam AND IdCompany = IdCompanyParam) THEN
+		BEGIN
+			SELECT 1;
+		END;
+		ELSE
+		BEGIN 
+			SELECT 0;
+		END;
+	END IF;
 END //
 
 DELIMITER ;
