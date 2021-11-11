@@ -39,7 +39,10 @@
         <?php
             foreach($companyList as $company)
             {
-                echo "<option value='".$company->getId()."'>".$company->getName()."</option>";
+                if ($company->getStatus() == 1)
+                {
+                    echo "<option value='".$company->getId()."'>".$company->getName()."</option>";
+                }
             }
         ?>
         </select>
