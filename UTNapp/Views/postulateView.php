@@ -12,11 +12,12 @@
     }
 ?>
 <br>
-<h2 style="text-align:center;">Ofertas Laborales disponibles</h2>
+<h2 style="text-align:center; color:white">Ofertas Laborales disponibles</h2>
     <table style="text-align:center;">
     <form action="<?php echo FRONT_ROOT ?>JobOffer/FilterJobOffersByJobPosition" method="get">
-        <label for="user_CareerId" style="color:White">Filtrar por Puesto Laboral</label>
-            <select name="filter_JobPostitionId" style="color:black">
+    <label for="user_CareerId" style="color:White">Filtrar por Puesto Laboral</label>
+    <div style="display:flex; flex-direction: row;">
+         <select name="filter_JobPostitionId" style="color:black">
             <?php
                 foreach($JobPositionsList as $JobPosition)
                 {
@@ -24,12 +25,13 @@
                 }
             ?>
         </select>
-        <br>
         <button type="submit" class="btn" name="Filtrar"> Filtrar por Puesto Laboral </button>
     </form>
+    </div>
     <br>
     <form action="<?php echo FRONT_ROOT ?>JobOffer/FilterJobOffersByCareer" method="get">
         <label for="filter_CareerId" style="color:White">Filtrar por Carrera</label>
+        <div style="display:flex; flex-direction: row;">
         <select name="filter_CareerId" style="color:black">
             <?php
                 foreach($CareersList as $Career)
@@ -38,9 +40,10 @@
                 }
             ?>
         </select>
-        <br>
         <button type="submit" class="btn" name="Filtrar"> Filtrar por Carrera </button>
     </form>
+    </div>
+    <br>
     <form action="<?php echo FRONT_ROOT ?>Postulation/ShowPostulateView" method="get">
             <button type="submit" style="color:black" >Limpiar Filtros</button>
     </form>

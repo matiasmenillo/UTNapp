@@ -35,16 +35,14 @@
                         require(VIEWS_PATH . "home.php");
 
                     }else{
-                        $errorMsg = "CONTRASEÑA INVALIDA";
-                        echo $errorMsg;
+                        echo "<script>alert('Contraseña invalida.')</script>";
                         require_once(VIEWS_PATH . "index.php");
                     }
                 
               }
             }
             if($found == false){
-                $errorMsg = "EMAIL IVALIDO";
-                echo $errorMsg;
+                echo "<script>alert('E-Mail invalido')</script>";
                 require_once(VIEWS_PATH . "index.php");
         }
       }

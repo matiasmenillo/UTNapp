@@ -19,12 +19,13 @@
         } 
     ?>
 
-    <h2>Seleccione las opciones para crea la oferta laboral</h2>
+    <br>
+    <h2 style="color:white;text-align:center">Seleccione las opciones para crea la oferta laboral</h2>
 
     <form action="<?php echo FRONT_ROOT?> JobOffer/Add" method="POST">
     
-    <label for="jobPositionId" style="color:White">Seleccione la Posicion</label>
-        <select name="jobPositionId" style="color:black" required>
+    <label for="jobPositionId" style="color:White;text-align:center">Seleccione la Posicion</label>
+        <select name="jobPositionId" style="color:black;margin:auto" required>
         <?php
             foreach($jobPositionList as $jobPosition)
             {
@@ -33,8 +34,8 @@
         ?>
         </select>
 
-    <label for="companyId" style="color:White">Seleccione una Empresa</label>
-        <select name="companyId" style="color:black" required>
+    <label for="companyId" style="color:White;text-align:center">Seleccione una Empresa</label>
+        <select name="companyId" style="color:black;margin:auto" required>
         <?php
             foreach($companyList as $company)
             {
@@ -43,7 +44,7 @@
         ?>
         </select>
         <br>
-        <button type="submit" style="color:black">Agregar</button>
+        <button type="submit" style="color:black; margin:auto">Agregar</button>
     </form>
 
 </body>

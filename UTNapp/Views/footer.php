@@ -1,6 +1,7 @@
 <div class="wrapper row6">
   <div id="copyright" class="clear" align="center"> 
-    <p >Copyright &copy; <?php echo date('Y'); ?> - TP Final</p>
+    <p style="color:white">Copyright &copy; <?php echo date('Y'); ?> - Laboratorio IV</p>
+    <p style="color:white">Rodrigo Moreno, Mauro Porzio, Matias Menillo</p>
   </div>
 </div>
 <!-- JAVASCRIPTS -->

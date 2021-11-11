@@ -1,3 +1,4 @@
+USE UTNAppDB;
 
 /*DROP TABLE Student;
 DROP TABLE Career;
@@ -8,14 +9,16 @@ DROP TABLE JobPosition;
 DROP DATABASE UTNAppDB;
 CREATE DATABASE UTNAppDB;*/
 
-USE UTNAppDB;
+/*DROP TABLE IF EXISTS Career;*/
+
 CREATE TABLE Career
 (
 IdCareer INT Unique NOT NULL,
+IdCareerDB INT Unique auto_increment NOT NULL,
 Description VARCHAR(200) NOT NULL,
 Active INT NOT NULL,
 
-Primary Key (IdCareer)
+Primary Key (IdCareer, IdCareerDB)
 );
 
 /*DROP TABLE IF EXISTS Student;*/
@@ -23,6 +26,7 @@ Primary Key (IdCareer)
 CREATE TABLE Student
 (
 IdStudent INT Unique NOT NULL,
+IdStudentDB INT Unique auto_increment NOT NULL,
 FirstName VARCHAR(200) NOT NULL,
 LastName VARCHAR(200) NOT NULL,
 Email VARCHAR(200) NOT NULL,
@@ -36,7 +40,7 @@ BirthDate DATE NOT NULL,
 PhoneNumber varchar(200) NULL,
 Active INT NOT NULL,
 
-Primary Key (IdStudent, Email, Dni),
+Primary Key (IdStudent, Email, Dni, IdStudentDB),
 CONSTRAINT fk_Career_Student FOREIGN KEY (IdCareer)
 REFERENCES Career(IdCareer)
 );
@@ -48,7 +52,7 @@ Name VARCHAR(200) NOT NULL,
 AboutUs VARCHAR(200) NULL,
 Status BIT NOT NULL,
 CompanyLink VARCHAR(200) NULL,
-Cuit INT NOT NULL,
+Cuit BIGINT NOT NULL,
 Description VARCHAR(200) NULL,
 Sector VARCHAR(200) NULL,
 
@@ -60,15 +64,14 @@ Primary Key (Name, Cuit)
 CREATE TABLE JobPosition
 (
 IdJobPosition INT Unique NOT NULL,
+IdJobPositionDB INT Unique auto_increment NOT NULL,
 IdCareer INT NOT NULL,
 Description VARCHAR(200) NOT NULL,
 
-Primary Key (IdJobPosition),
+Primary Key (IdJobPosition, IdJobPositionDB),
 CONSTRAINT fk_Career_JobPosition FOREIGN KEY (IdCareer)
 REFERENCES Career(IdCareer)
 );
-
-/*DROP TABLE IF EXISTS JobOffer;*/
 
 CREATE TABLE JobOffer
 (
@@ -100,22 +103,45 @@ CONSTRAINT fk_JobOffer_Postulation FOREIGN KEY (IdJobOffer)
 REFERENCES JobOffer(IdJobOffer)
 );
 
-/*FUNCIONES*/
-/*FUNCIONES*/
-/*FUNCIONES*/
-/*FUNCIONES*/
+/*DROP TABLE IF EXISTS H_Postulation;*/
 
+CREATE TABLE H_Postulation
+(
+IdHPostulation INT Unique auto_increment NOT NULL,
+IdStudent INT NOT NULL,
+IdJobOffer INT NOT NULL,
+PostulationDate DATE,
 
+Primary Key (IdHPostulation),
+
+CONSTRAINT fk_Student_H_Postulation FOREIGN KEY (IdStudent)
+REFERENCES Student(IdStudent),
+
+CONSTRAINT fk_JobOffer_H_Postulation FOREIGN KEY (IdJobOffer)
+REFERENCES JobOffer(IdJobOffer)
+);
+
+/*DROP TRIGGER IF EXISTS PostulationTrigger_Insert_H_Postulation;*/
+
+delimiter //
+
+create trigger PostulationTrigger_Insert_H_Postulation after insert on Postulation
+   FOR EACH ROW
+		BEGIN
+			INSERT INTO H_Postulation(IdStudent , IdJobOffer, PostulationDate) values (new.IdStudent, new.IdJobOffer, new.PostulationDate);
+		END
+   //
+   
 DROP PROCEDURE IF EXISTS DeleteCareer;
 
 DELIMITER //
 
 CREATE PROCEDURE DeleteCareer
 (
-	IN IdCareerParam INT 
+	IN IdCareerDBParam INT 
 )
 BEGIN
-	DELETE FROM Career WHERE IdCareer = IdCareerParam;
+	DELETE FROM Career WHERE IdCareerDB = IdCareerParamDB;
 END //
 
 DELIMITER ;
@@ -137,10 +163,10 @@ DELIMITER //
 
 CREATE PROCEDURE GetCareerById
 (
-	IN IdCareerParam INT
+	IN IdCareerDBParam INT
 )
 BEGIN
-	SELECT * FROM Career WHERE IdCareer = IdCareerParam;
+	SELECT * FROM Career WHERE IdCareerDB = IdCareerDBParam;
 END //
 
 DELIMITER ;
@@ -157,7 +183,13 @@ CREATE PROCEDURE InsertCareer
 
 )
 BEGIN
-	INSERT INTO Career VALUES
+	INSERT INTO Career
+    (
+		IdCareer,
+        Description,
+        Active
+    )
+    VALUES
     (
 		IdCareer,
         Description,
@@ -165,16 +197,13 @@ BEGIN
     );
 END //
 
-DELIMITER ;
-
-
 DROP PROCEDURE IF EXISTS UpdateCareer;
 
 DELIMITER //
 
 CREATE PROCEDURE UpdateCareer
 (
-	IN IdCareerParam int, 
+	IN IdCareerDBParam int, 
 	IN Description varchar(200), 
 	IN Active int
 )
@@ -183,12 +212,10 @@ BEGIN
 	SET
         Description = Description,
         Active = Active
-	WHERE IdCareer = IdCareerParam;
+	WHERE IdCareer = IdCareerDBParam;
 END //
 
 DELIMITER ;
-
-/*COMPANY*/
 
 DROP PROCEDURE IF EXISTS DeleteCompany;
 
@@ -203,7 +230,7 @@ BEGIN
 END //
 
 DELIMITER ;
-
+   
 DROP PROCEDURE IF EXISTS GetAllActiveCompanys;
 
 DELIMITER //
@@ -264,7 +291,7 @@ CREATE PROCEDURE InsertCompany
 	IN Sector varchar(200), 
 	IN Name varchar(200), 
 	IN Description varchar(200), 
-	IN Cuit int, 
+	IN Cuit bigint, 
 	IN CompanyLink varchar(200), 
 	IN AboutUs varchar(200)  
 
@@ -295,7 +322,7 @@ CREATE PROCEDURE UpdateCompany
 	IN Sector varchar(200), 
 	IN Name varchar(200),  
 	IN Description varchar(200), 
-	IN Cuit int, 
+	IN Cuit bigint, 
 	IN CompanyLink varchar(200), 
 	IN AboutUs varchar(200)  
 
@@ -315,7 +342,30 @@ END //
 
 DELIMITER ;
 
-/*JOB OFFER*/
+DROP PROCEDURE IF EXISTS GetAllHistoricPostulations;
+
+DELIMITER //
+
+CREATE PROCEDURE GetAllHistoricPostulations()
+BEGIN
+	SELECT * FROM H_Postulation;
+END //
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS  GetAllHistoricPostulationsByStudent;
+
+DELIMITER //
+
+CREATE PROCEDURE GetAllHistoricPostulationsByStudent
+(
+	IN IdStudentParam INT
+)
+BEGIN
+	SELECT * FROM H_Postulation WHERE IdStudent = IdStudentParam;
+END //
+
+DELIMITER ;
 
 DROP PROCEDURE IF EXISTS DeleteJobOffer;
 
@@ -341,7 +391,6 @@ BEGIN
 END //
 
 DELIMITER ;
-
 DROP PROCEDURE IF EXISTS  GetJobOfferById;
 
 DELIMITER //
@@ -395,19 +444,16 @@ END //
 
 DELIMITER ;
 
-/*job position*/
-
-
 DROP PROCEDURE IF EXISTS DeleteJobPosition;
 
 DELIMITER //
 
 CREATE PROCEDURE DeleteJobPosition
 (
-	IN IdJobPositionParam INT 
+	IN IdJobPositionDBParam INT 
 )
 BEGIN
-	DELETE FROM JobPosition WHERE IdJobPosition = IdJobPositionParam;
+	DELETE FROM JobPosition WHERE IdJobPositionDB = IdJobPositionDBParam;
 END //
 
 DELIMITER ;
@@ -429,10 +475,10 @@ DELIMITER //
 
 CREATE PROCEDURE GetJobPositionById
 (
-	IN IdJobPositionParam INT
+	IN IdJobPositionDBParam INT
 )
 BEGIN
-	SELECT * FROM JobPosition WHERE IdJobPosition = IdJobPositionParam;
+	SELECT * FROM JobPosition WHERE IdJobPositionDB = IdJobPositionDBParam;
 END //
 
 DELIMITER ;
@@ -448,7 +494,13 @@ CREATE PROCEDURE InsertJobPosition
 	IN Description varchar(200)			
 )
 BEGIN
-	INSERT INTO JobPosition VALUES
+	INSERT INTO JobPosition 
+    (
+		IdJobPosition,		
+		IdCareer,	
+        Description	
+    )
+    VALUES
     (
 		IdJobPosition,		
 		IdCareer,	
@@ -464,7 +516,7 @@ DELIMITER //
 
 CREATE PROCEDURE UpdateJobPosition
 (
-	IN IdJobPositionParam int,		
+	IN IdJobPositionDBParam int,		
 	IN IdCompany int,		
 	IN Description varchar(200)
 )
@@ -473,12 +525,10 @@ BEGIN
 	SET
 		IdCompany = IdCompany,
         Description = Description
-	WHERE IdJobPosition = IdJobPositionParam;
+	WHERE IdJobPositionDB = IdJobPositionParamDB;
 END //
 
 DELIMITER ;
-
-/*POSTULATION*/
 
 DROP PROCEDURE IF EXISTS DeletePostulation;
 
@@ -493,6 +543,7 @@ BEGIN
 END //
 
 DELIMITER ;
+
 DROP PROCEDURE IF EXISTS GetAllPostulations;
 
 DELIMITER //
@@ -503,6 +554,7 @@ BEGIN
 END //
 
 DELIMITER ;
+
 
 DROP PROCEDURE IF EXISTS  GetPostulationByJobOffer;
 
@@ -574,32 +626,17 @@ END //
 
 DELIMITER ;
 
-/*STUDENT*/
-
 DROP PROCEDURE IF EXISTS DeleteStudent;
 
 DELIMITER //
 
 CREATE PROCEDURE DeleteStudent
 (
-	IN IdStudentParam INT
+	IN IdStudentParamDB INT
 
 )
 BEGIN
-	DELETE FROM Student WHERE IdStudent = IdStudentParam;
-END //
-
-DELIMITER ;
-DROP PROCEDURE IF EXISTS DeleteStudentById;
-
-DELIMITER //
-
-CREATE PROCEDURE DeleteStudentById
-(
-	IN IdStudentParam INT
-)
-BEGIN
-	DELETE FROM Student WHERE IdStudent = IdStudentParam;
+	DELETE FROM Student WHERE IdStudentDB = IdStudentDBParam;
 END //
 
 DELIMITER ;
@@ -632,10 +669,10 @@ DELIMITER //
 
 CREATE PROCEDURE GetStudentById
 (
-	IN IdStudentParam INT
+	IN IdStudentDBParam INT
 )
 BEGIN
-	SELECT * FROM Student WHERE IdStudent = IdStudentParam;
+	SELECT * FROM Student WHERE IdStudentDB = IdStudentDBParam;
 END //
 
 DELIMITER ;
@@ -662,7 +699,23 @@ CREATE PROCEDURE InsertStudent
 
 )
 BEGIN
-	INSERT INTO Student VALUES
+	INSERT INTO Student 
+    (
+		IdStudent,
+		FirstName, 
+		LastName, 
+		Email, 
+		Password, 
+		Dni, 
+		Admin, 
+		IdCareer, 
+		FileNumber, 
+		Gender, 
+		BirthDate, 
+		PhoneNumber, 
+		Active
+    )
+    VALUES
     (
 		IdStudentParam,
 		FirstName, 
@@ -688,7 +741,7 @@ DELIMITER //
 
 CREATE PROCEDURE UpdateStudent
 (
-	IN IdStudentParam INT,
+	IN IdStudentDBParam INT,
 	IN FirstName varchar(200), 
 	IN LastName varchar(200), 
 	IN Email varchar(200), 
@@ -718,43 +771,11 @@ BEGIN
 		BirthDate = BirthDate, 
 		PhoneNumber = PhoneNumber, 
 		Active = Active
-	WHERE IdStudent = IdStudentParam;
+	WHERE IdStudentDB = IdStudentDBParam;
 END //
 
 DELIMITER ;
 
-CALL InsertCareer(1, 'Tecnico Universtiario en Programacion', True);
-CALL InsertCareer(2, 'Ingeniero en Sistemas', True);
-CALL InsertCareer(3, 'Arquitecto de Sistemas', True);
-
 CALL InsertStudent(1, 'Mauro', 'Porzio', 'mauro@gmail.com', 1234, 1231231, True, 1, null, 'M', '2021-12-02', 22323454, True);
 CALL InsertStudent(2, 'Matias', 'Menillo', 'matias@gmail.com', 1234, 1112231, True, 2, null, 'M', '2000-01-01', 22354363, True);
-CALL InsertStudent(3, 'Rodrigo', 'Moreno', 'rodrigo@gmail.com', 1234, 1234123, True, 2, null, 'M', '2000-01-01', 22354363, True);
-
-CALL InsertCompany(True, 'Software', 'EDSA', 'Empresa Tandilense', 1111111, 'WWW.EDSA.COM.AR', 'Estrategias Diferenciadas S.A');
-CALL InsertCompany(True, 'Software', 'Globant', 'Empresa Internacional', 2222222, 'WWW.Globant.COM.AR', 'Globant Company');
-CALL InsertCompany(True, 'Software', 'Accenture', 'Empresa Internacional 2', 333333, 'WWW.Accenture.COM.AR', 'Accenture Company');
-
-CALL InsertJobPosition(1, 1, 'Desarrollador JR Full-Time');
-CALL InsertJobPosition(2, 2, 'Desarrollador JR Part-Time');
-CALL InsertJobPosition(3, 3, 'Arquitecto Pasante');
-
-CALL InsertJobOffer(1, (SELECT IdCompany FROM Company WHERE Name = 'EDSA'));
-CALL InsertJobOffer(2, (SELECT IdCompany FROM Company WHERE Name = 'Globant'));
-CALL InsertJobOffer(3, (SELECT IdCompany FROM Company WHERE Name = 'Accenture'));
-
-CALL InsertPostulation(1, (SELECT IdJobOffer FROM JobOffer WHERE IdJobPosition = 1), CURDATE());
-CALL InsertPostulation(2, (SELECT IdJobOffer FROM JobOffer WHERE IdJobPosition = 3), CURDATE());
-
-
-
-
-
-
-
-
-
-
-
-
-
+CALL InsertStudent(3, 'Rodrigo', 'Moreno', 'rodrigo@gmail.com', 1234, 1234123, True, 2, null, 'M', '1997-01-10', 223560654, True);

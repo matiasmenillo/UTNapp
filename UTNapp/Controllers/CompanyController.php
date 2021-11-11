@@ -68,7 +68,7 @@
             }
             else
             {
-                echo "El Campo CUIT debe tener 10 Digitos Numericos";
+                echo "<script>alert('El Campo CUIT debe tener 10 Digitos Numericos')</script>";
                 $this->ShowAddView();
             }
         }
@@ -117,11 +117,11 @@
             }
             else
             {
-              $errorMsg = "COMPANY NOT FOUND";
-              echo $errorMsg;
+                echo "<script>alert('Compañía no encontrada')</script>";
               $this->ShowCompanyListView();
             }
         }
+        
     }
 
 ?>

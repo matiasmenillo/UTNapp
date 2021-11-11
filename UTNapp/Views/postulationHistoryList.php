@@ -9,7 +9,7 @@
     ?>
     <div>
         <table style="text-align:center;">
-        <caption style="text-align:center;color:white;padding-bottom:10px;">Postulacion Vigente</caption>
+        <h2 style="text-align:center; color:white"> Historial de Postulaciones </h2>
             <thead>
             <tr>
                 <th style="width: 15%;">DESCRIPCION</th>

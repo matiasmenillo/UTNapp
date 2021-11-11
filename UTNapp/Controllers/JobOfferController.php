@@ -157,8 +157,7 @@
             }
             else
             {
-              $errorMsg = "NO SE ENCONTRARON OFERTAS PARA EL FILTRO INGRESADO";
-              echo $errorMsg;
+              echo "<script>alert('No se encontraron ofertas para el filtro ingresado.')</script>";
               $this->ShowJobOfferListView();
             }
          }
@@ -190,8 +189,7 @@
             }
             else
             {
-              $errorMsg = "NO SE ENCONTRARON OFERTAS PARA EL FILTRO INGRESADO";
-              echo $errorMsg;
+            echo "<script>alert('No se encontraron ofertas para el filtro ingresado.')</script>";
               $this->ShowJobOfferListView();
             }
          }

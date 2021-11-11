@@ -12,12 +12,12 @@
     }
 ?>
 <br>
-<h2 style="text-align:center;">Empresas Cargadas</h2>
-
-    <form action="<?php echo FRONT_ROOT ?>Company/searchCompany" method="get">
+<h2 style="text-align:center;color:white">Empresas Cargadas</h2>
+<br>
+    <form style="margin:auto" action="<?php echo FRONT_ROOT ?>Company/searchCompany" method="get">
         <div style="display:flex; flex-direction: row;">
-            <label for="txtNombreEmpresaFiltro" style="color:white">Filtrar por Nombre</label>
-            <input type="text" name="txtNombreEmpresaFiltro" style="color:black" required>
+            <label style="color:white;" for="txtNombreEmpresaFiltro">Filtrar por Nombre</label>
+            <input type="text" name="txtNombreEmpresaFiltro" required>
             <button type="submit" style="color:black" >Buscar</button>
         </div>
     </form>
@@ -25,6 +25,8 @@
     <form action="<?php echo FRONT_ROOT ?>Company/ShowCompanyListView" method="get">
             <button type="submit" style="color:black" >Limpiar Filtros</button>
     </form>
+    <br>
+    <br>
 
     <table style="text-align:center;">
         <thead>

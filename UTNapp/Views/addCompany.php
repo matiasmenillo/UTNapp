@@ -1,5 +1,6 @@
 <?php
     require_once("nav-barAdmin.php");
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,8 +11,7 @@
     <title>Document</title>
 </head>
 <body>
-
-    <?php
+<?php
         if (isset($error))
         {
             echo $error;
@@ -19,37 +19,46 @@
         } 
     ?>
 
-    <?php echo "Bienvenido " . $_SESSION["loggedUser"]->getFirstName();?>
-    <h2>Ingrese los datos de la nueva empresa</h2>
+        <br>
+        <br>
+    <h2 style="text-align:center; color:white">Ingrese los datos de la nueva empresa</h2>
 
-    <form action="<?php echo FRONT_ROOT?> Company/Add" method="POST">
+    <form style="text-align:center;color:white" action="<?php echo FRONT_ROOT?> Company/Add" method="POST">
 
         <label for="company_name">Nombre</label>
-        <input type="text" name="company_name" required style="color:black">
+        <input style="margin:auto;color:black" type="text" name="company_name" required>
 
         <label for="company_cuit">Cuit</label>
-        <input type="number" name="company_cuit" required style="color:black">
+        <input style="margin:auto;color:black" type="number" name="company_cuit" required>
 
         <label for="company_AboutUs">About Us</label>
-        <input type="text" name="company_AboutUs" required style="color:black">
+        <input style="margin:auto;color:black" type="text" name="company_AboutUs" required>
 
         <label for="company_Link">Link</label>
-        <input type="text" name="company_Link" required style="color:black">
+        <input style="margin:auto;color:black" type="text" name="company_Link" required>
 
         <label for="company_descripcion">Descripcion</label>
-        <input type="text" name="company_descripcion" required style="color:black">
-
+        <textarea id="subject" name="company_descripcion" placeholder="Descripcion de su compañia..." style="height:100px;width:250px;margin:auto;color:black" required></textarea>
+        
         <label for="company_sector">Sector</label>
-        <input type="text" name="company_sector" required style="color:black">
+        <input style="margin:auto;color:black" type="text" name="company_sector" required>
 
         <label for="company_status">Estado</label>
-        <select name="company_status" style="color:black">
+        <select style="margin:auto;color:black" name="company_status">
             <option value="1" selected>Active</option>
             <option value="0">Inactive</option>
         </select>
-
-        <button type="submit" style="color:black">Agregar</button>
+        <br>
+        <button style="margin:auto;color:black" type="submit" style="color:black">Agregar</button>
     </form>
+    <br>
+    <br>
+    <br>
+    <br>
 
 </body>
 </html>
+
+<?php
+    require_once("footer.php");
+?>

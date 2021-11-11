@@ -78,18 +78,18 @@ class PostulationController{
                 
                     $this->PostulationDAO->Add($newPostulation);
     
-                    echo "Postulado correctamente!";
+                    echo "<script>alert('¡Postulado correctamente!')</script>";
                     $this->ShowPostulateView();
                 }
                 else
                 {
-                    echo "Usted no pertenece a la carrera requerida para postularse en la Oferta Laboral";
+                    echo "<script>alert('Usted no pertenece a la carrera requerida para postularse en la Oferta Laboral.')</script>";
                     $this->ShowPostulateView();
                 }
             }
             else
             {
-                echo "Usted ya esta postulado en una Oferta Laboral";
+                echo "<script>alert('Usted ya esta postulado en una Oferta Laboral')</script>";
                 $this->ShowPostulateView();
             }
             
