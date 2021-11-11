@@ -138,13 +138,7 @@ IdStudent INT NOT NULL,
 IdJobOffer INT NOT NULL,
 PostulationDate DATE,
 
-Primary Key (IdHPostulation),
-
-CONSTRAINT fk_Student_H_Postulation FOREIGN KEY (IdStudent)
-REFERENCES Student(IdStudent),
-
-CONSTRAINT fk_JobOffer_H_Postulation FOREIGN KEY (IdJobOffer)
-REFERENCES JobOffer(IdJobOffer)
+Primary Key (IdHPostulation)
 );
 
 USE UTNAppDB;
@@ -319,6 +313,30 @@ DELIMITER ;
 
 USE UTNAppDB;
 
+DROP PROCEDURE IF EXISTS  CompanyHasJobOffer;
+
+DELIMITER //
+
+CREATE PROCEDURE CompanyHasJobOffer
+(
+	IN IdCompanyParam INT
+)
+BEGIN
+	IF EXISTS (SELECT 1 FROM JobOffer WHERE IdCompany = IdCompanyParam) THEN
+		BEGIN
+			SELECT 1;
+		END;
+		ELSE
+		BEGIN 
+			SELECT 0;
+		END;
+	END IF;
+END //
+
+DELIMITER ;
+
+USE UTNAppDB;
+
 DROP PROCEDURE IF EXISTS  GetCompanyByName;
 
 DELIMITER //
@@ -468,6 +486,30 @@ CREATE PROCEDURE GetJobOfferById
 )
 BEGIN
 	SELECT * FROM JobOffer WHERE IdJobOffer = IdJobOfferParam;
+END //
+
+DELIMITER ;
+
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS  JobOfferHasPostulations;
+
+DELIMITER //
+
+CREATE PROCEDURE JobOfferHasPostulations
+(
+	IN IdJobOfferParam INT
+)
+BEGIN
+	IF EXISTS (SELECT 1 FROM postulation WHERE IdJobOffer = IdJobOfferParam) THEN
+		BEGIN
+			SELECT 1;
+		END;
+		ELSE
+		BEGIN 
+			SELECT 0;
+		END;
+	END IF;
 END //
 
 DELIMITER ;

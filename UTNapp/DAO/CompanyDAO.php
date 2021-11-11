@@ -2,6 +2,7 @@
     namespace DAO;
 
     use DAO\ICompanyDAO as ICompanyDAO;
+    use DAO\JobOfferDAO as JobOfferDAO;
     use Models\Company as Company;
     use \Exception as Exception;
     use DAO\Connection as Connection;
@@ -31,7 +32,34 @@
             }
             catch(Exception $ex)
             {
-                return "YA EXISTE UNA EMPRESA CON LOS DATOS INGRESADOS EN EL SISTEMA";
+                return "Ya existe una empresa con los datos ingresados en el sistema";
+            }
+        }
+
+        private function CompanyHasJobOffer(Company $company){
+
+            try
+            {
+                $query = "CALL CompanyHasJobOffer(:IdCompany);";
+                
+                $parameters["IdCompany"] = $company->getId();
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query, $parameters);
+
+                if (intval($resultSet[0][1]) == 1)
+                {
+                    return  true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
             }
         }
 
@@ -102,28 +130,35 @@
             }
         }
 
-        public function Update(Company $company){
-
-            try
+        public function Update(Company $company)
+        {
+            if (!$this->CompanyHasJobOffer($company))
             {
-                $query = "CALL UpdateCompany(:IdCompanyParam, :Status, :Sector, :Name, :Description, :Cuit, :CompanyLink, :AboutUs);";
+                try
+                {
+                    $query = "CALL UpdateCompany(:IdCompanyParam, :Status, :Sector, :Name, :Description, :Cuit, :CompanyLink, :AboutUs);";
 
-                $parameters["IdCompanyParam"] = intval($company->getId());
-                $parameters["Status"] = intval($company->getStatus());
-                $parameters["Sector"] = $company->getSector();
-                $parameters["Name"] = $company->getName();
-                $parameters["Description"] = $company->getDescription();
-                $parameters["Cuit"] = intval($company->getCuit());
-                $parameters["CompanyLink"] = $company->getCompanyLink();
-                $parameters["AboutUs"] = $company->getAboutUs();
+                    $parameters["IdCompanyParam"] = intval($company->getId());
+                    $parameters["Status"] = intval($company->getStatus());
+                    $parameters["Sector"] = $company->getSector();
+                    $parameters["Name"] = $company->getName();
+                    $parameters["Description"] = $company->getDescription();
+                    $parameters["Cuit"] = intval($company->getCuit());
+                    $parameters["CompanyLink"] = $company->getCompanyLink();
+                    $parameters["AboutUs"] = $company->getAboutUs();
 
-                $this->connection = Connection::GetInstance();
+                    $this->connection = Connection::GetInstance();
 
-                $this->connection->ExecuteNonQuery($query, $parameters);
+                    $this->connection->ExecuteNonQuery($query, $parameters);
+                }
+                catch(Exception $ex)
+                {
+                    throw $ex;
+                }
             }
-            catch(Exception $ex)
+            else
             {
-                throw $ex;
+                return "No se puede modifcar una empresa con ofertas laborales vigentes";
             }
         }
 

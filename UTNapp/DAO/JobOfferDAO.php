@@ -102,39 +102,74 @@
 
         public function Remove(JobOffer $JobOffer)
         {
-            try
-            {
-                $query = "CALL DeleteJobOffer(:IdJobOffer);";
+                try
+                {
+                    $query = "CALL DeleteJobOffer(:IdJobOffer);";
 
-                $parameters["IdJobOffer"] = $JobOffer->getJobOfferId();
+                    $parameters["IdJobOffer"] = $JobOffer->getJobOfferId();
 
-                $this->connection = Connection::GetInstance();
+                    $this->connection = Connection::GetInstance();
 
-                $this->connection->ExecuteNonQuery($query, $parameters);
-            }
-            catch(Exception $ex)
-            {
-                return "No puede borrar una Oferta Laboral si tiene estudiantes postulados";
-            }
+                    $this->connection->ExecuteNonQuery($query, $parameters);
+                }
+                catch(Exception $ex)
+                {
+                    return "No puede borrar una Oferta Laboral si tiene estudiantes postulados";
+                }
         }
 
-        public function Update(JobOffer $JobOffer){
+        private function JobOfferHasPostulations(JobOffer $jobOffer){
 
             try
             {
-                $query = "CALL UpdateJobOffer(:IdJobOffer, :IdJobPosition, :IdCompany);";
+                $query = "CALL JobOfferHasPostulations(:IdJobOffer);";
                 
-                $parameters["IdJobOffer"] = $JobOffer->getJobOfferId();
-                $parameters["IdJobPosition"] = $JobOffer->getJobPosition()->getJobPositionId();
-                $parameters["IdCompany"] = $JobOffer->getCompany()->getId();
+                $parameters["IdJobOffer"] = $jobOffer->getJobOfferId();
 
                 $this->connection = Connection::GetInstance();
 
-                $this->connection->ExecuteNonQuery($query, $parameters);
+                $resultSet = $this->connection->Execute($query, $parameters);
+
+                if (intval($resultSet[0][1]) == 1)
+                {
+                    return  true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch(Exception $ex)
             {
                 throw $ex;
+            }
+        }
+
+
+        public function Update(JobOffer $JobOffer)
+        {
+            if (!$this->JobOfferHasPostulations($JobOffer))
+            {
+                try
+                {
+                    $query = "CALL UpdateJobOffer(:IdJobOffer, :IdJobPosition, :IdCompany);";
+                    
+                    $parameters["IdJobOffer"] = $JobOffer->getJobOfferId();
+                    $parameters["IdJobPosition"] = $JobOffer->getJobPosition()->getJobPositionId();
+                    $parameters["IdCompany"] = $JobOffer->getCompany()->getId();
+
+                    $this->connection = Connection::GetInstance();
+
+                    $this->connection->ExecuteNonQuery($query, $parameters);
+                }
+                catch(Exception $ex)
+                {
+                    throw $ex;
+                }
+            }
+            else
+            {
+                return "No se puede modifcar una oferta laboral si tiene estudiantes postulados";
             }
         }
     }

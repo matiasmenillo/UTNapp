@@ -102,7 +102,12 @@
             $ModifJobOffer->setJobPosition($this->JobPositionDAO->GetById($jobPositionId));
             $ModifJobOffer->setCompany($this->CompanyDAO->GetById($companyId));
 
-            $this->JobOfferDAO->Update($ModifJobOffer);
+            $error = $this->JobOfferDAO->Update($ModifJobOffer);
+
+            if ($error != null)
+            {   
+                echo "<script>alert('". $error ."')</script>";
+            }
 
             $this->ShowJobOfferListView();
             

@@ -9,11 +9,5 @@ IdStudent INT NOT NULL,
 IdJobOffer INT NOT NULL,
 PostulationDate DATE,
 
-Primary Key (IdHPostulation),
-
-CONSTRAINT fk_Student_H_Postulation FOREIGN KEY (IdStudent)
-REFERENCES Student(IdStudent),
-
-CONSTRAINT fk_JobOffer_H_Postulation FOREIGN KEY (IdJobOffer)
-REFERENCES JobOffer(IdJobOffer)
+Primary Key (IdHPostulation)
 )

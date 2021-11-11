@@ -57,7 +57,7 @@
 
                 if (isset($error))
                 {
-                    echo $error;
+                    echo "<script>alert('". $error ."')</script>";
                     unset($error);
                     $this->ShowAddView();
                 }
@@ -86,7 +86,12 @@
             $newCompany->setId($id);
             $newCompany->setSector($sector);
 
-            $this->CompanyDAO->Update($newCompany);
+            $error = $this->CompanyDAO->Update($newCompany);
+
+            if ($error != null)
+            {   
+                echo "<script>alert('". $error ."')</script>";
+            }
 
             $this->ShowCompanyListView();
             
@@ -98,7 +103,7 @@
             $Company->setId(intval($CompanyId));
             $error = $this->CompanyDAO->Remove($Company);
 
-            if (isset($error))
+            if ($error != null)
             {
                 echo "<script>alert('". $error ."')</script>";
                 unset($error);
