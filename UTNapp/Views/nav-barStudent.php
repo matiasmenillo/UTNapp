@@ -16,7 +16,7 @@
         <ul class="clear">
             <li class="active"><a href="<?php echo FRONT_ROOT ?>">CERRAR SESION</a></li>
 
-            <li><a class="drop" href="#">Alumno</a>
+            <li><a class="drop" href="#" style="color:white">Alumno</a>
               <ul>
                 <li><a href="<?php echo FRONT_ROOT."Student/ShowStudentListView" ?>">Lista Alumnos</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Company/ShowCompanyListView" ?>">Lista de Empresas</a></li>
