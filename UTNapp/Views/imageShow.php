@@ -27,3 +27,6 @@ if(isset($_SESSION['loggedUser']))
 <?php
 }
 ?>
+<?php
+    require_once("footer.php");
+?>

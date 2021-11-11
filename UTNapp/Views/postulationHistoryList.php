@@ -9,7 +9,7 @@
     ?>
     <div>
         <table style="text-align:center;">
-        <h2 style="text-align:center; color:white"> Historial de Postulaciones </h2>
+        <h2 style="text-align:center; color:white"> Postulacion actual </h2>
             <thead>
             <tr>
                 <th style="width: 15%;">DESCRIPCION</th>
@@ -126,3 +126,6 @@
                     ?>
             </tbody>        
     </div>
+    <?php
+    require_once("footer.php");
+?>

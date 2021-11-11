@@ -26,3 +26,6 @@
   </tr>
   </tbody>
     </table>
+    <?php
+    require_once("footer.php");
+?>

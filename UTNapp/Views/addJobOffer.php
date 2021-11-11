@@ -20,7 +20,7 @@
     ?>
 
     <br>
-    <h2 style="color:white;text-align:center">Seleccione las opciones para crea la oferta laboral</h2>
+    <h2 style="color:white;text-align:center">Seleccione las opciones para crear la oferta laboral</h2>
 
     <form action="<?php echo FRONT_ROOT?> JobOffer/Add" method="POST">
     
