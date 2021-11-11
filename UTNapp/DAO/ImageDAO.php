@@ -125,8 +125,6 @@
 
                 $resultSet = $this->connection->Execute($query, $parameters);  
                 
-                var_dump($resultSet);
-                
                 foreach ($resultSet as $row)
                 {                
                     $image = new Image();

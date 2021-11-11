@@ -37,7 +37,7 @@ if(isset($_SESSION['loggedUser']))
                                              ?>
                                                   <tr>
                                                   <td><?php echo $image->getName() ?></td> 
-                                                  <td><a href="<?php echo FRONT_ROOT ?>Image/ShowImage/<?php echo $image->getIdStudent() ?>">Ver</a></td>
+                                                  <td><a href="<?php echo FRONT_ROOT ?>Image/ShowImage/<?php echo $image->getImageId() ?>">Ver</a></td>
                                                   </tr>
                                              <?php
                                              }
