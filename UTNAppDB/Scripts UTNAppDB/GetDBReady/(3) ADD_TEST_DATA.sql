@@ -7,4 +7,4 @@ CALL InsertJobOffer(6, (SELECT IdCompany FROM Company WHERE Name = 'Globant'));
 CALL InsertJobOffer(8, (SELECT IdCompany FROM Company WHERE Name = 'Accenture'));
 
 CALL InsertPostulation(1, (SELECT IdJobOffer FROM JobOffer WHERE IdJobPosition = 1), CURDATE());
-CALL InsertPostulation(2, (SELECT IdJobOffer FROM JobOffer WHERE IdJobPosition = 3), CURDATE());
+CALL InsertPostulation(2, (SELECT IdJobOffer FROM JobOffer WHERE IdJobPosition = 6), CURDATE());

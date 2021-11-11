@@ -25,6 +25,17 @@ Primary Key (IdCareer, IdCareerDB)
 
 USE UTNAppDB;
 
+/*DROP TABLE IF EXISTS Images;*/
+
+CREATE TABLE Images
+(
+	imageId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    idStudent int,
+    name VARCHAR(100) NOT NULL
+)Engine=InnoDB;
+
+USE UTNAppDB;
+
 /*DROP TABLE IF EXISTS Student;*/
 
 CREATE TABLE Student
@@ -45,8 +56,7 @@ PhoneNumber varchar(200) NULL,
 Active INT NOT NULL,
 
 Primary Key (IdStudent, Email, Dni, IdStudentDB),
-CONSTRAINT fk_Career_Student FOREIGN KEY (IdCareer)
-REFERENCES Career(IdCareer)
+CONSTRAINT fk_Career_Student FOREIGN KEY (IdCareer) REFERENCES Career(IdCareer)
 );
 
 USE UTNAppDB;
@@ -868,4 +878,26 @@ BEGIN
 	WHERE IdStudentDB = IdStudentDBParam;
 END //
 
-DELIMITER ;
+DROP PROCEDURE IF EXISTS Images_add;
+
+DELIMITER $$
+
+CREATE PROCEDURE Images_add(IN Name VARCHAR(100), IN idStudent int)
+BEGIN
+    INSERT INTO images
+    	(name, idStudent)
+	VALUES
+		(name, idStudent);
+END$$
+
+DROP PROCEDURE IF EXISTS DeleteImage;
+
+DELIMITER //
+
+CREATE PROCEDURE DeleteImage
+(
+	IN imageIdDBParam INT 
+)
+BEGIN
+	DELETE FROM Images WHERE imageId = imageIdDBParam;
+END //

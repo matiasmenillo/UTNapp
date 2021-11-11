@@ -20,8 +20,7 @@ PhoneNumber varchar(200) NULL,
 Active INT NOT NULL,
 
 Primary Key (IdStudent, Email, Dni, IdStudentDB),
-CONSTRAINT fk_Career_Student FOREIGN KEY (IdCareer)
-REFERENCES Career(IdCareer)
+CONSTRAINT fk_Career_Student FOREIGN KEY (IdCareer) REFERENCES Career(IdCareer)
 )
 
 
