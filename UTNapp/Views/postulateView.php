@@ -13,11 +13,12 @@
 ?>
 <br>
 <h2 style="text-align:center; color:white">Ofertas Laborales disponibles</h2>
+<br>
     <table style="text-align:center;">
     <form action="<?php echo FRONT_ROOT ?>JobOffer/FilterJobOffersByJobPosition" method="get">
-    <label for="user_CareerId" style="color:White">Filtrar por Puesto Laboral</label>
-    <div style="display:flex; flex-direction: row;">
-         <select name="filter_JobPostitionId" style="color:black">
+    <label for="user_CareerId" style="color:White;padding-right:10px;padding-left:10px;">Filtrar por Puesto Laboral</label>
+    <div style="display:flex; flex-direction: row;padding-right:10px;padding-left:10px;">
+         <select name="filter_JobPostitionId" style="color:black;width:500px;">
             <?php
                 foreach($JobPositionsList as $JobPosition)
                 {
@@ -30,9 +31,9 @@
     </div>
     <br>
     <form action="<?php echo FRONT_ROOT ?>JobOffer/FilterJobOffersByCareer" method="get">
-        <label for="filter_CareerId" style="color:White">Filtrar por Carrera</label>
-        <div style="display:flex; flex-direction: row;">
-        <select name="filter_CareerId" style="color:black">
+        <label for="filter_CareerId" style="color:White;padding-right:10px;padding-left:10px;">Filtrar por Carrera</label>
+        <div style="display:flex; flex-direction: row;padding-right:10px;padding-left:10px;">
+        <select name="filter_CareerId" style="color:black;width:500px;">
             <?php
                 foreach($CareersList as $Career)
                 {
@@ -44,9 +45,12 @@
     </form>
     </div>
     <br>
+    <div style="padding-left:10px;">
     <form action="<?php echo FRONT_ROOT ?>Postulation/ShowPostulateView" method="get">
-            <button type="submit" style="color:black" >Limpiar Filtros</button>
+            <button type="submit" style="color:white;" class="btn">Limpiar Filtros</button>
     </form>
+    </div>
+    <br>
         <thead>
         <tr>
             <th style="width: 15%;">DESCRIPCION</th>

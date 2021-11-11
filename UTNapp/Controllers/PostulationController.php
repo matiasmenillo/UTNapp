@@ -86,7 +86,8 @@ class PostulationController{
                 
                     $this->PostulationDAO->Add($newPostulation);
 
-                    $this->ShowUploadView();
+                    echo "<script>alert('¡Postulado correctamente!')</script>";
+                    $this->ShowPostulateView();
                 }
                 else
                 {

@@ -18,7 +18,7 @@
             require_once(VIEWS_PATH."addImage.php");
         }
 
-        public function ShowListView($message = "")
+        public function ShowListView()
         {
             $imageList = $this->imageDAO->GetAll();
 
@@ -71,9 +71,7 @@
                 $message = $ex->getMessage();
             }
 
-            echo "<script>alert('¡Postulado correctamente!')</script>";
-
-            $this->ShowListView($message);
+            $this->ShowListView();
         }    
     }
 ?>

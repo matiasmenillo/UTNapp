@@ -3,8 +3,8 @@
 ?>
 <main class="py-5">
      <section id="listado" class="mb-5">
-          <div class="container">
-               <h2 class="mb-4">Mostrando imagen</h2>
+          <div class="container" style="text-align:center;">
+               <h2 class="mb-4" style="color:white;">Imagen cargada</h2>
 
                <?php
                     if(isset($image))

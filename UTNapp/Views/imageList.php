@@ -8,6 +8,7 @@ if(isset($_SESSION['loggedUser'])){
 } else
      header("location: ".FRONT_ROOT."Home/index");
 ?>
+<br>
 <main>
      <section>
           <div>
@@ -15,7 +16,7 @@ if(isset($_SESSION['loggedUser'])){
                
                <table>
                     <thead>
-                         <th>CV Subido a Oferta Laboral</th>
+                         <th>CVs Subidos</th>
                          <th>Ver</th>
                     </thead>
                     <tbody>

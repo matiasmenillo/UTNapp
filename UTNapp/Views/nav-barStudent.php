@@ -22,7 +22,8 @@
                 <li><a href="<?php echo FRONT_ROOT."Company/ShowCompanyListView" ?>">Lista de Empresas</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Postulation/ShowPostulateView" ?>">Aplicar a propuesta</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Postulation/showPostulationHistoryView" ?>">Historial de propuestas</a></li>
-                <li><a href="<?php echo FRONT_ROOT."Image/ShowListView"?>">CV</a></li>
+                <li><a href="<?php echo FRONT_ROOT."Image/ShowUploadView"?>">Cargar CVs</a></li>
+                <li><a href="<?php echo FRONT_ROOT."Image/ShowListView"?>">Ver CVs</a></li>
               </ul>
             </li>
         </ul>
