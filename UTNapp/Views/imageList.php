@@ -16,6 +16,8 @@ if(isset($_SESSION['loggedUser']))
           if ($_SESSION['loggedUser']->getAdmin() == 0)
           {
      ?>
+          <h2 class="mb-4;" style="color:white;text-align:center;">Mis CVs</h2>
+          <br>
                               <section>
                     <div>
                          <?php if(isset($student)){ ?>
@@ -56,6 +58,8 @@ if(isset($_SESSION['loggedUser']))
           else
           {
                          ?>
+                              <h2 class="mb-4;" style="color:white;text-align:center;">CVs Cargados</h2>
+                              <br>
                               <section>
                     <div>
                          <table>
