@@ -28,7 +28,7 @@
             $newStudent->setBirthDate($user_BirthDate);
             $newStudent->setPhoneNumber($user_PhoneNumber);
             $newStudent->setFileNumber($user_FileNumber);
-            $newStudent->setCareerId($user_CareerId);
+            $newStudent->setCareer($this->CareerDAO->GetById($user_CareerId));
             $newStudent->setAdmin(intval($user_rol));
             $newStudent->setActive(intval($user_Active));
             $newStudent->setPassword($user_password);
@@ -74,7 +74,6 @@
         public function ShowViewStudentDetails($studentId)
         {
             $student = $this->StudentDAO->GetById($studentId);
-            $career = $this->CareerDAO->GetById($student->getCareerId());
 
             require_once(VIEWS_PATH . "studentDetails.php");
         }

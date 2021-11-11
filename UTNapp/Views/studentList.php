@@ -54,17 +54,7 @@
                     <td style="color:black"><?php echo $student->getDNI() ?></td>
                     <td style="color:black"><?php echo $student->getGender() ?></td>
                     <td style="color:black"><?php echo $student->getEmail() ?></td>
-
-                    <?php
-                        foreach ($careerList as $career)
-                        {
-                            if ($career->getCareerId() == $student->getCareerId())
-                            {
-                                echo "<td style=".'"color:black"'.">" . $career->getDescription() . "</td>";
-                            }
-                        }
-                    ?>
-                
+                    <td style="color:black"><?php echo $student->getCareer()->getDescription() ?></td>
                 </td>
                     <?php $date=date_create($student->getBirthDate())?>
                     <td style="color:black"><?php echo date_format($date, "Y/m/d") ?></td>

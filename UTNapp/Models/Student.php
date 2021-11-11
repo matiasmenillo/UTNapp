@@ -4,7 +4,7 @@
     class Student extends User
     {
         private $studentId;
-        private $careerId;
+        private $career;
         private $fileNumber;
         private $gender;
         private $birthDate;
@@ -21,14 +21,14 @@
             return $this->studentId;
         }
 
-        public function setCareerId($careerId)
+        public function setCareer(Career $career)
         {
-            $this->careerId = $careerId;
+            $this->career = $career;
         }
 
-        public function getCareerId()
+        public function getCareer()
         {
-            return $this->careerId;
+            return $this->career;
         }
 
         public function setFileNumber($fileNumber)

@@ -68,11 +68,11 @@
                 ?>
                 <tr>
                     <td style="color:black"><?php echo $student->getLastName() ?>, <?php echo $student->getFirstName() ?></td>
-                    <td style="color:black"><?php echo  $student->getStudentId()?></td>
+                    <td style="color:black"><?php echo $student->getStudentId()?></td>
                     <td style="color:black"><?php echo $student->getDNI() ?></td>
                     <td style="color:black"><?php echo $student->getGender() ?></td>
                     <td style="color:black"><?php echo $student->getEmail() ?></td>
-                    <td style="color:black"><?php echo $student->getCareerId() ?></td>
+                    <td style="color:black"><?php echo $student->getCareer()->getDescription() ?></td>
                 </td>
                     <?php $date=date_create($student->getBirthDate())?>
                     <td style="color:black"><?php echo date_format($date, "Y/m/d") ?></td>

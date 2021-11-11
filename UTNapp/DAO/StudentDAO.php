@@ -2,6 +2,8 @@
     namespace DAO;
 
     use Models\Student as Student;
+    use Models\Career as Career;
+    use DAO\CareerDAO as CareerDAO;
     use DAO\IStudentDAO as IStudentDAO;
     use \Exception as Exception;
     use DAO\Connection as Connection;
@@ -30,9 +32,10 @@
                 foreach($toJson as $eachStudent)
                 {
                     $newStudent = new Student;
+                    $CareerDAO = new CareerDAO;
 
                     $newStudent->setStudentId($eachStudent->studentId);
-                    $newStudent->setCareerId($eachStudent->careerId);
+                    $newStudent->setCareer($CareerDAO->GetById($eachStudent->careerId));
                     $newStudent->setFirstName($eachStudent->firstName);
                     $newStudent->setLastName($eachStudent->lastName);
                     $newStudent->setDni($eachStudent->dni);
@@ -71,7 +74,7 @@
                 $parameters["Password"] = $student->getPassword();
                 $parameters["Dni"] = $student->getDni();
                 $parameters["Admin"] = $student->getAdmin();
-                $parameters["IdCareer"] = $student->getCareerId();
+                $parameters["IdCareer"] = $student->getCareer()->getCareerId();
                 $parameters["FileNumber"] = $student->getFileNumber();
                 $parameters["Gender"] = $student->getGender();
                 $parameters["BirthDate"] = $student->getBirthDate();
@@ -104,6 +107,8 @@
                 foreach ($resultSet as $row)
                 {                
                     $student = new Student();
+                    $CareerDAO = new CareerDAO;
+
                     $student->setStudentId($row["IdStudentDB"]);
                     $student->setFirstName($row["FirstName"]);
                     $student->setLastName($row["LastName"]);
@@ -111,7 +116,7 @@
                     $student->setPassword($row["Password"]);
                     $student->setDni($row["Dni"]);
                     $student->setAdmin($row["Admin"]);
-                    $student->setCareerId($row["IdCareer"]);
+                    $student->setCareer($CareerDAO->GetById($row["IdCareer"]));
                     $student->setFileNumber($row["FileNumber"]);
                     $student->setGender($row["Gender"]);
                     $student->setBirthDate($row["BirthDate"]);
@@ -145,11 +150,11 @@
 
                 $row = array_pop($resultSet);
 
-                //var_dump($row);
-
                 if($row != null)
                 {                    
                     $student = new Student();
+                    $CareerDAO = new CareerDAO;
+                    
                     $student->setStudentId($row["IdStudentDB"]);
                     $student->setFirstName($row["FirstName"]);
                     $student->setLastName($row["LastName"]);
@@ -157,7 +162,7 @@
                     $student->setPassword($row["Password"]);
                     $student->setDni($row["Dni"]);
                     $student->setAdmin($row["Admin"]);
-                    $student->setCareerId($row["IdCareer"]);
+                    $student->setCareer($CareerDAO->GetById($row["IdCareer"]));
                     $student->setFileNumber($row["FileNumber"]);
                     $student->setGender($row["Gender"]);
                     $student->setBirthDate($row["BirthDate"]);
@@ -189,7 +194,7 @@
                 $parameters["Password"] = $student->getPassword();
                 $parameters["Dni"] = $student->getDni();
                 $parameters["Admin"] = $student->getAdmin();
-                $parameters["IdCareer"] = $student->getCareerId();
+                $parameters["IdCareer"] = $student->getCareer()->getCareerId();
                 $parameters["FileNumber"] = $student->getFileNumber();
                 $parameters["Gender"] = $student->getGender();
                 $parameters["BirthDate"] = $student->getBirthDate();

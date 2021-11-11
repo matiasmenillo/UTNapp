@@ -18,7 +18,7 @@
   <tbody>
   <tr>
       <td style="color:black"><?php echo $student->getFileNumber(); ?></td>
-      <td style="color:black"><?php echo $career->getDescription(); ?></td>
+      <td style="color:black"><?php echo $student->getCareer()->getDescription() ?></td>
       <td style="color:black"><?php echo $student->getGender(); ?></td>
       <td style="color:black"><?php echo $student->getBirthDate(); ?></td>
       <td style="color:black"><?php echo $student->getEmail(); ?></td>

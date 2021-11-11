@@ -76,7 +76,7 @@ class PostulationController{
 
             if ($result == null)
             {
-                if ($careerId == $student->GetCareerID())
+                if ($careerId == $student->GetCareer()->getCareerId())
                 {
                     $newPostulation = new Postulation;
             

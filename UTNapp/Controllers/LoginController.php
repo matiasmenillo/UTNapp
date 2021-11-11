@@ -29,7 +29,7 @@
                         
                         $careerController = new CareerController;
                         $_SESSION["loggedUser"] = $student;
-                        $_SESSION["loggedUserCareer"] = $careerController->GetById($_SESSION["loggedUser"]->getCareerId());
+                        $_SESSION["loggedUserCareer"] = $careerController->GetById($_SESSION["loggedUser"]->getCareer()->getCareerId());
                         require(VIEWS_PATH . "home.php");
 
                     }else{
