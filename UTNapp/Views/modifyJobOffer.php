@@ -16,7 +16,7 @@
             <?php
                 foreach($jobPositionList as $jobPosition)
                 {
-                    if ($jobPosition->getJobPositionId() == $ModifJobOffer->getJobPositionId())
+                    if ($jobPosition->getJobPositionId() == $ModifJobOffer->getJobPosition()->getJobPositionId())
                     {
                         echo "<option value='".$jobPosition->getJobPositionId()."' selected>".$jobPosition->getDescription()."</option>";
                     }
@@ -33,7 +33,7 @@
             <?php
                 foreach($companyList as $company)
                 {
-                    if ($company->getId() == $ModifJobOffer->getCompanyId())
+                    if ($company->getId() == $ModifJobOffer->getCompany()->getId())
                     {
                         echo "<option value='".$company->getId()."' selected>".$company->getName()."</option>";
                     }

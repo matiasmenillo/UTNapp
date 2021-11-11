@@ -80,38 +80,13 @@
             <?php
                 foreach($JobOffersList as $JobOffer)
                 {
-                    foreach($JobPositionsList as $JobPosition)
-                    {
-                        if ($JobOffer->getJobPositionId() == $JobPosition->getJobPositionId())
-                        {
-                            $JobPositionDescription = $JobPosition->getDescription();
-                            $JobPositionCareerId = $JobPosition->getCareerId();
-                        }
-                    }
-
-                    foreach($CareersList as $Career)
-                    {
-                        if ($JobPositionCareerId == $Career->getCareerId())
-                        {
-                            $CarrerDescription = $Career->getDescription();
-                        }
-                    }
-
-                    foreach($CompanyList as $Company)
-                    {
-                        if ($JobOffer->getCompanyId() == $Company->getId())
-                        {
-                            $CompanyName = $Company->getName();
-                        }
-                    }
-
                     if($rol == 'student')
                     {
                         ?>
                                 <tr>
-                                <td style="color:black"><?php echo $JobPositionDescription ?></td>
-                                <td style="color:black"><?php echo $CarrerDescription ?></td>
-                                <td style="color:black"><?php echo $CompanyName ?></td>
+                                <td style="color:black"><?php echo $JobOffer->getJobPosition()->getDescription()?></td>
+                                <td style="color:black"><?php echo $JobOffer->getJobPosition()->getCareer()->getDescription() ?></td>
+                                <td style="color:black"><?php echo $JobOffer->getCompany()->getName() ?></td>
                                 <td>
                                     <form action="<?php echo FRONT_ROOT ?>Postulation/Add" method="POST">
                                     <input type="hidden" name="studentId" value="<?php echo  $_SESSION["loggedUser"]->getStudentId();?>">
@@ -120,8 +95,7 @@
                                         <button type="submit" class="btn" name="Apply" value="<?php ?>"> Aplicar </button>
                                     </form>
                                 </td>
-                        <?php
-                        
+                        <?php   
                     }
                     ?>
 
@@ -130,9 +104,9 @@
                         {       
                     ?>
                         </tr>
-                            <td style="color:black"><?php echo $JobPositionDescription ?></td>
-                            <td style="color:black"><?php echo $CarrerDescription ?></td>
-                            <td style="color:black"><?php echo $CompanyName ?></td>
+                                <td style="color:black"><?php echo $JobOffer->getJobPosition()->getDescription()?></td>
+                                <td style="color:black"><?php echo $JobOffer->getJobPosition()->getCareer()->getDescription() ?></td>
+                                <td style="color:black"><?php echo $JobOffer->getCompany()->getName() ?></td>
                             <td>
                                 <form action="<?php echo FRONT_ROOT ?>JobOffer/Remove" method="POST">
                                     <button type="submit" class="btn" name="remove" value="<?php echo  $JobOffer->getJobOfferId();?>"> Remove </button>
@@ -141,8 +115,8 @@
                             <td style="color:black">
                                 <form action="<?php echo FRONT_ROOT ?>JobOffer/ShowModifView" method="POST">
                                     <input type="hidden" name="JobOfferId" value="<?php echo $JobOffer->getJobOfferId(); ?>">
-                                    <input type="hidden" name="JobPositionId" value="<?php echo $JobOffer->getJobPositionId(); ?>">
-                                    <input type="hidden" name="CompanyId" value="<?php echo $JobOffer->getCompanyId(); ?>">
+                                    <input type="hidden" name="JobPositionId" value="<?php echo $JobOffer->getJobPosition()->getJobPositionId(); ?>">
+                                    <input type="hidden" name="CompanyId" value="<?php echo $JobOffer->getCompany()->getId(); ?>">
                                     <button type="submit" class="btn" name="modify"> Modify </button>
                                 </form>
                             </td>
@@ -150,9 +124,9 @@
                             <td style="color:black">
                                 <form action="<?php echo FRONT_ROOT ?>JobOffer/ShowPostulatedStudents" method="POST">
                                     <input type="hidden" name="JobOfferId" value="<?php echo $JobOffer->getJobOfferId(); ?>">
-                                    <input type="hidden" name="CompanyId" value="<?php echo $JobOffer->getCompanyId(); ?>">
-                                    <input type="hidden" name="JobPositionId" value="<?php echo $JobOffer->getJobPositionId(); ?>">
-                                    <button type="submit" class="btn" name="modify"> Ver Postulados </button>
+                                    <input type="hidden" name="CompanyId" value="<?php echo $JobOffer->getCompany()->getId(); ?>">
+                                    <input type="hidden" name="JobPositionId" value="<?php echo $JobOffer->getJobPosition()->getJobPositionId(); ?>">
+                                    <button type="submit" class="btn" name="ViewPostulated"> Ver Postulados </button>
                                 </form>
                             </td>
                             </tr>

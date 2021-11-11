@@ -6,6 +6,8 @@
     use Models\Student as Student;
     use \Exception as Exception;
     use DAO\Connection as Connection;
+    use DAO\StudentDAO as StudentDAO;
+    use DAO\JobOfferDAO as JobOfferDAO;
 
     class PostulationDAO implements IPostulationDAO{
 
@@ -18,8 +20,8 @@
             {
                 $query = "CALL InsertPostulation(:IdStudent, :IdJobOffer, :PostulationDate);";
                 
-                $parameters["IdStudent"] = $Postulation->getStudentId();
-                $parameters["IdJobOffer"] = $Postulation->getJobOfferId();
+                $parameters["IdStudent"] = $Postulation->getStudent()->getStudentId();
+                $parameters["IdJobOffer"] = $Postulation->getJobOffer()->getJobOfferId();
                 $parameters["PostulationDate"] = $Postulation->getPostulationDate();
 
                 $this->connection = Connection::GetInstance();
@@ -47,8 +49,11 @@
                 foreach ($resultSet as $row)
                 {                
                     $Postulation = new Postulation();
-                    $Postulation->setStudentId($row["IdStudent"]);
-                    $Postulation->setJobOfferId($row["IdJobOffer"]);
+                    $studentDAO = new studentDAO();
+                    $jobOfferDAO = new JobOfferDAO();
+
+                    $Postulation->setStudent($studentDAO->GetById($row["IdStudent"]));
+                    $Postulation->setJobOffer($jobOfferDAO->GetById($row["IdJobOffer"]));
                     $Postulation->setPostulationDate($row["PostulationDate"]);
 
                     array_push($PostulationList, $Postulation);
@@ -81,8 +86,11 @@
                 if($row != null)
                 {                        
                     $Postulation = new Postulation();
-                    $Postulation->setStudentId($row["IdStudent"]);
-                    $Postulation->setJobOfferId($row["IdJobOffer"]);
+                    $studentDAO = new studentDAO();
+                    $jobOfferDAO = new JobOfferDAO();
+
+                    $Postulation->setStudent($studentDAO->GetById($row["IdStudent"]));
+                    $Postulation->setJobOffer($jobOfferDAO->GetById($row["IdJobOffer"]));
                     $Postulation->setPostulationDate($row["PostulationDate"]);
 
                     return $Postulation;
@@ -116,8 +124,11 @@
                 foreach ($resultSet as $row)
                 {                    
                     $Postulation = new Postulation();
-                    $Postulation->setStudentId($row["IdStudent"]);
-                    $Postulation->setJobOfferId($row["IdJobOffer"]);
+                    $studentDAO = new studentDAO();
+                    $jobOfferDAO = new JobOfferDAO();
+
+                    $Postulation->setStudent($studentDAO->GetById($row["IdStudent"]));
+                    $Postulation->setJobOffer($jobOfferDAO->GetById($row["IdJobOffer"]));
                     $Postulation->setPostulationDate($row["PostulationDate"]);
 
                    array_push($returnArray, $Postulation);
@@ -138,7 +149,7 @@
             {
                 $query = "CALL DeletePostulation(:IdStudent);";
 
-                $parameters["IdStudent"] = $Postulation->getStudentId();
+                $parameters["IdStudent"] = $Postulation->getStudent()->getStudentId();
 
                 $this->connection = Connection::GetInstance();
 
@@ -165,8 +176,11 @@
                 foreach ($resultSet as $row)
                 {                
                     $Postulation = new Postulation();
-                    $Postulation->setStudentId($row["IdStudent"]);
-                    $Postulation->setJobOfferId($row["IdJobOffer"]);
+                    $studentDAO = new studentDAO();
+                    $jobOfferDAO = new JobOfferDAO();
+
+                    $Postulation->setStudent($studentDAO->GetById($row["IdStudent"]));
+                    $Postulation->setJobOffer($jobOfferDAO->GetById($row["IdJobOffer"]));
                     $Postulation->setPostulationDate($row["PostulationDate"]);
 
                     array_push($PostulationList, $Postulation);
@@ -197,8 +211,11 @@
                 foreach ($resultSet as $row)
                 {                
                     $Postulation = new Postulation();
-                    $Postulation->setStudentId($row["IdStudent"]);
-                    $Postulation->setJobOfferId($row["IdJobOffer"]);
+                    $studentDAO = new studentDAO();
+                    $jobOfferDAO = new JobOfferDAO();
+
+                    $Postulation->setStudent($studentDAO->GetById($row["IdStudent"]));
+                    $Postulation->setJobOffer($jobOfferDAO->GetById($row["IdJobOffer"]));
                     $Postulation->setPostulationDate($row["PostulationDate"]);
 
                     array_push($PostulationList, $Postulation);

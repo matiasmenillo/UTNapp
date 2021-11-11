@@ -4,8 +4,8 @@
     class JobOffer
     {
         private $jobOfferId;
-        private $jobPositionId;
-        private $companyId;
+        private $jobPosition;
+        private $company;
 
         public function getjobOfferId()
         {
@@ -17,24 +17,24 @@
             $this->jobOfferId = $jobOfferId;
         }
 
-        public function getJobPositionId()
+        public function getJobPosition()
         {
-            return $this->jobPositionId;
+            return $this->jobPosition;
         }
 
-        public function setJobPositionId($jobPositionId)
+        public function setJobPosition(JobPosition $jobPosition)
         {
-            $this->jobPositionId = $jobPositionId;
+            $this->jobPosition = $jobPosition;
         }
 
-        public function getCompanyId()
+        public function getCompany()
         {
-            return $this->companyId;
+            return $this->company;
         }
 
-        public function setCompanyId($companyId)
+        public function setCompany(Company $company)
         {
-            $this->companyId = $companyId;
+            $this->company = $company;
         }
 
     }

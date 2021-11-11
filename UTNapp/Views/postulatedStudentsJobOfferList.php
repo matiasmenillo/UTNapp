@@ -13,38 +13,12 @@
         </tr>
         </thead>
         <tbody>
-            <?php
-
-                if ($JobOffer->getJobPositionId() == $jobPosition->getJobPositionId())
-                {
-                    $JobPositionDescription = $jobPosition->getDescription();
-                    $JobPositionCareerId = $jobPosition->getCareerId();
-
-                    foreach($careerList as $Career)
-                    {
-                        if ($JobPositionCareerId == $Career->getCareerId())
-                        {
-                            $CarrerDescription = $Career->getDescription();
-                        }
-                    }
-
-                    foreach($companyList as $Company)
-                    {
-                        if ($JobOffer->getCompanyId() == $Company->getId())
-                        {
-                            $CompanyName = $Company->getName();
-                        }
-                    }
-
-                    ?>
                         <tr>
-                        <td style="color:black"><?php echo $JobPositionDescription ?></td>
-                        <td style="color:black"><?php echo $CarrerDescription ?></td>
-                        <td style="color:black"><?php echo $CompanyName ?></td>
+                        <td style="color:black"><?php echo $JobOffer->getJobPosition()->getDescription() ?></td>
+                        <td style="color:black"><?php echo $JobOffer->getJobPosition()->getCareer()->getDescription() ?></td>
+                        <td style="color:black"><?php echo $JobOffer->getCompany()->getName() ?></td>
                         </tr>
-                    <?php
-                }
-            ?>
+        </tbody>
 <table style="text-align:center;">
 <caption style="text-align:center;color:white;padding-bottom:20px;padding-top:10px;">Estudiantes Postulados</caption>
 <thead>

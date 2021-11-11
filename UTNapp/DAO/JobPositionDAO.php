@@ -5,6 +5,7 @@
     use Models\JobPosition as JobPosition;
     use \Exception as Exception;
     use DAO\Connection as Connection;
+    use DAO\CareerDAO as CareerDAO;
 
     class JobPositionDAO implements IJobPositionDAO{
 
@@ -30,9 +31,10 @@
                 foreach($toJson as $eachJobPosition)
                 {
                     $newJobPosition = new JobPosition;
+                    $careerDAO = new CareerDAO;
 
                     $newJobPosition->setJobPositionId($eachJobPosition->jobPositionId);
-                    $newJobPosition->setCareerId($eachJobPosition->careerId);
+                    $newJobPosition->setCareer($careerDAO->GetById($eachJobPosition->careerId));
                     $newJobPosition->setDescription($eachJobPosition->description);
 
                     $result = $this->GetById($newJobPosition->getJobPositionId());
@@ -55,7 +57,7 @@
                 $query = "CALL InsertJobPosition(:IdJobPosition, :IdCareer, :Description);";
                 
                 $parameters["IdJobPosition"] = $JobPosition->getJobPositionId();
-                $parameters["IdCareer"] = $JobPosition->getCareerId();
+                $parameters["IdCareer"] = $JobPosition->getCareer()->getCareerId();
                 $parameters["Description"] = $JobPosition->getDescription();
 
                 $this->connection = Connection::GetInstance();
@@ -83,9 +85,11 @@
                 foreach ($resultSet as $row)
                 {                
                     $JobPosition = new JobPosition();
+                    $careerDAO = new CareerDAO;
+
                     $JobPosition->setJobPositionId($row["IdJobPositionDB"]);
                     $JobPosition->setDescription($row["Description"]);
-                    $JobPosition->setCareerId($row["IdCareer"]);
+                    $JobPosition->setCareer($careerDAO->GetById($row["IdCareer"]));
 
                     array_push($JobPositionList, $JobPosition);
                 }
@@ -115,12 +119,13 @@
                 $row = array_pop($resultSet);
 
                 if($row != null)
-                {                      
+                {  
+                    $careerDAO = new CareerDAO;                    
 
                     $JobPosition = new JobPosition();
                     $JobPosition->setJobPositionId($row["IdJobPositionDB"]);
                     $JobPosition->setDescription($row["Description"]);
-                    $JobPosition->setCareerId($row["IdCareer"]);
+                    $JobPosition->setCareer($careerDAO->GetById($row["IdCareer"]));
 
                     return $JobPosition;
                 }

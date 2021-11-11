@@ -70,6 +70,38 @@
             }
         }
 
+        public function GetById($companyId){
+
+            try
+            {
+                $query = "CALL GetCompanyById(:IdCompany);";
+
+                $parameters["IdCompany"] = intval($companyId);
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query, $parameters);
+
+                $row = array_pop($resultSet);
+
+                $company = new Company();
+                $company->setId($row["IdCompany"]);
+                $company->setStatus($row["Status"]);
+                $company->setSector($row["Sector"]);
+                $company->setName($row["Name"]);
+                $company->setDescription($row["Description"]);
+                $company->setCuit($row["Cuit"]);
+                $company->setCompanyLink($row["CompanyLink"]);
+                $company->setAboutUs($row["AboutUs"]);
+
+                return $company;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
         public function Update(Company $company){
 
             try

@@ -23,46 +23,26 @@
                 <?php
                     foreach($JobOffersList as $JobOffer)
                     {
-                        if ($JobOffer->GetJobOfferId() == $PostulacionVigente->GetJobOfferId())
+                        if ($JobOffer->GetJobOfferId() == $PostulacionVigente->GetJobOffer()->GetJobOfferId())
                         {
-                            foreach($JobPositionsList as $JobPosition)
-                            {
-                                if ($JobOffer->getJobPositionId() == $JobPosition->getJobPositionId())
-                                {
-                                    $JobPositionDescription = $JobPosition->getDescription();
-                                    $JobPositionCareerId = $JobPosition->getCareerId();
-                                }
-                            }
+                            ?>
 
-                            foreach($CareersList as $Career)
-                            {
-                                if ($JobPositionCareerId == $Career->getCareerId())
-                                {
-                                    $CarrerDescription = $Career->getDescription();
-                                }
-                            }
+                                <tr>
+                                <td style="color:black"><?php echo $JobOffer->getJobPosition()->getDescription()?></td>
+                                <td style="color:black"><?php echo $JobOffer->getJobPosition()->getCareer()->getDescription() ?></td>
+                                <td style="color:black"><?php echo $JobOffer->getCompany()->GetName() ?></td>
+                                <td style="color:black"><?php echo $PostulacionVigente->getPostulationDate() ?></td>
+                                <td>
+                                    <form action="<?php echo FRONT_ROOT ?>Postulation/Remove" method="POST">
+                                    <input type="hidden" name="studentId" value="<?php echo  $_SESSION["loggedUser"]->getStudentId();?>">
+                                    <button type="submit" class="btn" >Dar de Baja</button>
+                                    </form>
+                                </tr>
 
-                            foreach($CompanyList as $Company)
-                            {
-                                if ($JobOffer->getCompanyId() == $Company->getId())
-                                {
-                                    $CompanyName = $Company->getName();
-                                }
-                            }
+                            <?php
                         }
                     }
                 ?>
-                        <tr>
-                            <td style="color:black"><?php echo $JobPositionDescription ?></td>
-                            <td style="color:black"><?php echo $CarrerDescription ?></td>
-                            <td style="color:black"><?php echo $CompanyName ?></td>
-                            <td style="color:black"><?php echo $PostulacionVigente->getPostulationDate() ?></td>
-                            <td>
-                                <form action="<?php echo FRONT_ROOT ?>Postulation/Remove" method="POST">
-                                <input type="hidden" name="studentId" value="<?php echo  $_SESSION["loggedUser"]->getStudentId();?>">
-                                <button type="submit" class="btn" >Dar de Baja</button>
-                                </form>
-                        </tr>
             </tbody>
     </div>
     <?php
@@ -84,41 +64,11 @@
                 <?php
                     foreach($PostulationHistory as $Postulation)
                     {
-                        foreach($JobOffersList as $JobOffer)
-                        {
-                            if ($JobOffer->GetJobOfferId() == $Postulation->GetJobOfferId())
-                            {
-                                foreach($JobPositionsList as $JobPosition)
-                                {
-                                    if ($JobOffer->getJobPositionId() == $JobPosition->getJobPositionId())
-                                    {
-                                        $JobPositionDescription = $JobPosition->getDescription();
-                                        $JobPositionCareerId = $JobPosition->getCareerId();
-                                    }
-                                }
-
-                                foreach($CareersList as $Career)
-                                {
-                                    if ($JobPositionCareerId == $Career->getCareerId())
-                                    {
-                                        $CarrerDescription = $Career->getDescription();
-                                    }
-                                }
-
-                                foreach($CompanyList as $Company)
-                                {
-                                    if ($JobOffer->getCompanyId() == $Company->getId())
-                                    {
-                                        $CompanyName = $Company->getName();
-                                    }
-                                }
-                            }
-                        }
                         ?>
                 <tr>
-                            <td style="color:black"><?php echo $JobPositionDescription ?></td>
-                            <td style="color:black"><?php echo $CarrerDescription ?></td>
-                            <td style="color:black"><?php echo $CompanyName ?></td>
+                            <td style="color:black"><?php echo $Postulation->getJobOffer()->getJobPosition()->getDescription()?></td>
+                            <td style="color:black"><?php echo $Postulation->getJobOffer()->getJobPosition()->getCareer()->getDescription() ?></td>
+                            <td style="color:black"><?php echo $Postulation->getJobOffer()->getCompany()->getName() ?></td>
                             <td style="color:black"><?php echo $Postulation->getPostulationDate() ?></td>
                 </tbody> 
                     <?php

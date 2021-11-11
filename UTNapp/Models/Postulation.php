@@ -3,28 +3,28 @@
 
     class Postulation
     {
-        private $studentId;
-        private $jobOfferId;
+        private $student;
+        private $jobOffer;
         private $postulationDate;
 
-        public function getStudentId()
+        public function getStudent()
         {
-            return $this->studentId;
+            return $this->student;
         }
 
-        public function setStudentId($studentId)
+        public function setStudent(Student $student)
         {
-            $this->studentId = $studentId;
+            $this->student = $student;
         }
 
-        public function getJobOfferId()
+        public function getJobOffer()
         {
-            return $this->jobOfferId;
+            return $this->jobOffer;
         }
 
-        public function setJobOfferId($jobOfferId)
+        public function setJobOffer(JobOffer $jobOffer)
         {
-            $this->jobOfferId = $jobOfferId;
+            $this->jobOffer = $jobOffer;
         }
 
         public function getPostulationDate()

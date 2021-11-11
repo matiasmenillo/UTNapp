@@ -17,8 +17,8 @@
             {
                 $query = "CALL InsertJobOffer(:IdJobPosition, :IdCompany);";
                 
-                $parameters["IdJobPosition"] = $JobOffer->getJobPositionId();
-                $parameters["IdCompany"] = $JobOffer->getCompanyId();
+                $parameters["IdJobPosition"] = $JobOffer->getJobPosition()->getJobPositionId();
+                $parameters["IdCompany"] = $JobOffer->getCompany()->getId();
 
                 $this->connection = Connection::GetInstance();
 
@@ -45,13 +45,15 @@
                 foreach ($resultSet as $row)
                 {   
                     $JobOffer = new JobOffer();
+                    $CompanyDAO = new CompanyDAO;
+                    $JobPositionDAO = new JobPositionDAO;
+
                     $JobOffer->setJobOfferId($row["IdJobOffer"]);
-                    $JobOffer->setJobPositionId($row["IdJobPosition"]);
-                    $JobOffer->setCompanyId($row["IdCompany"]);
+                    $JobOffer->setJobPosition($JobPositionDAO->GetById($row["IdJobPosition"]));
+                    $JobOffer->setCompany($CompanyDAO->GetById($row["IdCompany"]));
 
                     array_push($JobOfferList, $JobOffer);
                 }
-
                 return $JobOfferList;
             }
             catch(Exception $ex)
@@ -79,9 +81,12 @@
                 if($row != null)
                 {     
                     $JobOffer = new JobOffer();
+                    $CompanyDAO = new CompanyDAO;
+                    $JobPositionDAO = new JobPositionDAO;
+
                     $JobOffer->setJobOfferId($row["IdJobOffer"]);
-                    $JobOffer->setJobPositionId($row["IdJobPosition"]);
-                    $JobOffer->setCompanyId($row["IdCompany"]);
+                    $JobOffer->setJobPosition($JobPositionDAO->GetById($row["IdJobPosition"]));
+                    $JobOffer->setCompany($CompanyDAO->GetById($row["IdCompany"]));
 
                     return $JobOffer;
                 }
@@ -109,7 +114,7 @@
             }
             catch(Exception $ex)
             {
-                throw $ex;
+                return "No puede borrar una Oferta Laboral si tiene estudiantes postulados";
             }
         }
 
@@ -120,8 +125,8 @@
                 $query = "CALL UpdateJobOffer(:IdJobOffer, :IdJobPosition, :IdCompany);";
                 
                 $parameters["IdJobOffer"] = $JobOffer->getJobOfferId();
-                $parameters["IdJobPosition"] = $JobOffer->getJobPositionId();
-                $parameters["IdCompany"] = $JobOffer->getCompanyId();
+                $parameters["IdJobPosition"] = $JobOffer->getJobPosition()->getJobPositionId();
+                $parameters["IdCompany"] = $JobOffer->getCompany()->getId();
 
                 $this->connection = Connection::GetInstance();
 

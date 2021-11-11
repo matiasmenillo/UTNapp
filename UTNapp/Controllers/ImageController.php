@@ -25,9 +25,10 @@
             require_once(VIEWS_PATH."imageList.php");
         }
 
-        public function ShowImage($idStudent)
+        public function ShowImage($idImage)
         {
-            $image = $this->imageDAO->GetByIdStudent($idStudent);
+
+            $image = $this->imageDAO->GetByIdImage(intval($idImage));
 
             require_once(VIEWS_PATH."imageShow.php");
         }

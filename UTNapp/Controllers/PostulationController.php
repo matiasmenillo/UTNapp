@@ -23,7 +23,7 @@ class PostulationController{
          public function __construct(){
  
              $this->PostulationDAO = new PostulationDAO;
-             $this-> JobOfferDAO = new JobOfferDAO;
+             $this->JobOfferDAO = new JobOfferDAO;
              $this->CareerDAO = new CareerDAO;
              $this->JobPositionDAO = new JobPositionDAO;
              $this->CompanyDAO = new CompanyDAO;
@@ -48,8 +48,8 @@ class PostulationController{
 
          public function ShowModifView($studentId,  $JobOfferId, $postulationDate){ // NO ESTA IMPLEMENTADO PORQUE NO ES PARTE DE LOS REQUERIMIENTOS.
             $ModifPostulation = new Postulation();
-            $ModifPostulation->setStudentId($studentId);
-            $ModifPostulation->setJobOfferId($JobOfferId);
+            $ModifPostulation->setStudent($this->StudentDAO->GetById($studentId));
+            $ModifPostulation->setJobOffer($this->JobOfferDAO->GetById($JobOfferId));
             $ModifPostulation->setPostulationDate($postulationDate);
 
             require_once(VIEWS_PATH . "");
@@ -68,9 +68,9 @@ class PostulationController{
 
             foreach($this->JobPositionDAO->GetAll() as $JobPosition)
             {
-                if ($JobPosition->getJobPositionId() == $JobOffer->getJobPositionId())
+                if ($JobPosition->getJobPositionId() == $JobOffer->getJobPosition()->getJobPositionId())
                 {
-                    $careerId = $JobPosition->getCareerId();
+                    $careerId = $JobPosition->getCareer()->getCareerId();
                 }
             }
 
@@ -80,8 +80,8 @@ class PostulationController{
                 {
                     $newPostulation = new Postulation;
             
-                    $newPostulation->setStudentId($studentId);
-                    $newPostulation->setJobOfferId($JobOfferId);
+                    $newPostulation->setStudent($this->StudentDAO->GetById($studentId));
+                    $newPostulation->setJobOffer($this->JobOfferDAO->GetById($JobOfferId));
                     $newPostulation->setPostulationDate($postulationDate);
                 
                     $this->PostulationDAO->Add($newPostulation);
@@ -132,7 +132,7 @@ class PostulationController{
         public function Remove($StudentId)
         {
             $RemovePostulation = new Postulation();
-            $RemovePostulation->setStudentId($StudentId);
+            $RemovePostulation->setStudent($this->StudentDAO->GetById($StudentId));
             $this->PostulationDAO->Remove($RemovePostulation);
 
             $this->showPostulationHistoryView();

@@ -85,7 +85,6 @@
         {
             try
             {
-                echo "id student: " . $idStudent;
                 $image = null;
 
                 $query = "SELECT * FROM ".$this->tableName." WHERE idStudent = :idStudent";
@@ -95,6 +94,38 @@
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query, $parameters);   
+                
+                foreach ($resultSet as $row)
+                {                
+                    $image = new Image();
+                    $image->setImageId($row["imageId"]);
+                    $image->setName($row["name"]);
+                    $image->setIdStudent($row["idStudent"]);
+                }
+
+                return $image;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        function GetByIdImage($idImage)
+        {
+            try
+            {
+                $image = null;
+
+                $query = "SELECT * FROM ".$this->tableName." WHERE imageId = :imageId";
+
+                $parameters["imageId"] = $idImage;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query, $parameters);  
+                
+                var_dump($resultSet);
                 
                 foreach ($resultSet as $row)
                 {                
