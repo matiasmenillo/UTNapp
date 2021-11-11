@@ -16,16 +16,17 @@
 <br>
     <form style="margin:auto" action="<?php echo FRONT_ROOT ?>Company/searchCompany" method="get">
         <div style="display:flex; flex-direction: row;">
-            <label style="color:white;" for="txtNombreEmpresaFiltro">Filtrar por Nombre</label>
+            <label style="color:white;padding-right:10px;padding-left:10px;" for="txtNombreEmpresaFiltro">Filtrar por Nombre</label>
             <input type="text" name="txtNombreEmpresaFiltro" required>
             <button type="submit" style="color:black" >Buscar</button>
         </div>
     </form>
 
+    <div style="padding-left:10px;">
     <form action="<?php echo FRONT_ROOT ?>Company/ShowCompanyListView" method="get">
             <button type="submit" style="color:black" >Limpiar Filtros</button>
     </form>
-    <br>
+    </div>
     <br>
 
     <table style="text-align:center;">
