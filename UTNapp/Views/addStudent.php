@@ -52,7 +52,7 @@
             <option value="0">Estudiante</option>
         </select>
 
-        <label for="user_Active" style="color:White;text-align:center">Seleccione un Estado</label>
+        <label for="user_Active" style="color:White;text-align:center">Seleccione un estado</label>
         <select style="margin:auto" name="user_Active" style="color:black" required>
             <option value="1">Activo</option>
             <option value="0">Inactivo</option>

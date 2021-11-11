@@ -11,7 +11,7 @@
 </head>
 <body>  <br>
 
-    <h2 style="text-align:center; color:white">Ingrese los datos de la nueva empresa</h2>
+    <h2 style="text-align:center; color:white">Modificar empresa</h2>
     <form style="text-align:center;color:white" action="<?php echo FRONT_ROOT?> Company/Modify" method="POST">
 
         <label for="company_id">ID</label>

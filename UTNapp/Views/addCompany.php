@@ -38,7 +38,7 @@
         <input style="margin:auto;color:black" type="text" name="company_Link" required>
 
         <label for="company_descripcion">Descripcion</label>
-        <textarea id="subject" name="company_descripcion" placeholder="Descripcion de su compañia..." style="height:100px;width:250px;margin:auto;color:black" required></textarea>
+        <textarea id="subject" name="company_descripcion" placeholder="Descripción de su compañia..." style="height:100px;width:250px;margin:auto;color:black" required></textarea>
         
         <label for="company_sector">Sector</label>
         <input style="margin:auto;color:black" type="text" name="company_sector" required>

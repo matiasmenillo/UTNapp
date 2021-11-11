@@ -14,7 +14,7 @@
     <article class="center">
     <h3>Bienvenido, <?php echo $_SESSION["loggedUser"]->GetFirstName() . ' ' . $_SESSION["loggedUser"]->GetLastName() ?>!</h3>
       <h3 class="heading underline">UTN</h3>
-      <p>Gestor de Pasantias</p>
+      <p>Gestor de Pasantías</p>
       <footer></footer>
 
     

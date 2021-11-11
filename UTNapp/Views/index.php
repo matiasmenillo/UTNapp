@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH . "style.css" ?>">    
 </head>    
 <body>    
-    <h2>Iniciar sesion</h2><br>    
+    <h2>Iniciar sesión</h2><br>    
     <div class="login">    
     <form action="<?php echo FRONT_ROOT?>Login/Login" method="POST" > 
         <label><b>E-Mail   
