@@ -5,6 +5,11 @@
 <main class="py-5">
      <section id="listado" class="mb-5">
          <h1></h1>
+         <div style="margin:left;padding-left:100px">
+          <form action="<?php echo FRONT_ROOT?> Home/Home" method="POST">
+               <button type="submit" class='btn'>Volver</button>
+          </form>
+          </div>
           <div class="container" style="text-align:center;">
                <h2 class="mb-4" style="color:white">Ingrese su Cv</h2>
                <form action="<?php echo FRONT_ROOT ?>Image/Upload" method="POST" enctype="multipart/form-data" class="bg-light-alpha p-5">

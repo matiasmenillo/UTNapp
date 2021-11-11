@@ -10,7 +10,11 @@
     <title>Document</title>
 </head>
 <body>  <br>
-
+<div style="margin:left;padding-left:100px">
+               <form action="<?php echo FRONT_ROOT?> Home/Home" method="POST">
+                    <button type="submit" class='btn'>Volver</button>
+               </form>
+               </div>
     <h2 style="text-align:center; color:white">Modificar empresa</h2>
     <form style="text-align:center;color:white" action="<?php echo FRONT_ROOT?> Company/Modify" method="POST">
 

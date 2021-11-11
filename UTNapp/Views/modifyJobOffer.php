@@ -8,6 +8,11 @@
     } 
 ?>
 <br>
+<div style="margin:left;padding-left:100px">
+               <form action="<?php echo FRONT_ROOT?> Home/Home" method="POST">
+                    <button type="submit" class='btn'>Volver</button>
+               </form>
+               </div>
     <h2 style="text-align:center;color:White">Seleccione las opciones para modificar la oferta laboral</h2>
 
     <form style="text-align:center;color:white" action="<?php echo FRONT_ROOT?> JobOffer/Modify" method="POST">
@@ -17,7 +22,7 @@
             <?php
                 foreach($jobPositionList as $jobPosition)
                 {
-                    if ($jobPosition->getJobPositionId() == $ModifJobOffer->getJobPositionId())
+                    if ($jobPosition->getJobPositionId() == $ModifJobOffer->getJobPosition()->getJobPositionId())
                     {
                         echo "<option value='".$jobPosition->getJobPositionId()."' selected>".$jobPosition->getDescription()."</option>";
                     }
@@ -34,7 +39,7 @@
             <?php
                 foreach($companyList as $company)
                 {
-                    if ($company->getId() == $ModifJobOffer->getCompanyId())
+                    if ($company->getId() == $ModifJobOffer->getCompany()->getId())
                     {
                         echo "<option value='".$company->getId()."' selected>".$company->getName()."</option>";
                     }

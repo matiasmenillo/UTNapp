@@ -2,7 +2,11 @@
 
         require_once("nav-barAdmin.php");
 ?>
-
+<div style="margin:left;padding-left:10px">
+               <form action="<?php echo FRONT_ROOT?> Home/Home" method="POST">
+                    <button type="submit" class='btn'>Volver</button>
+               </form>
+               </div>
 <table style="text-align:center;">
 <caption style="text-align:center;color:white;padding-bottom:20px;padding-top:10px;">Oferta laboral</caption>
 <thead>

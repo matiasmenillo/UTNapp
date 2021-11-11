@@ -2,6 +2,11 @@
         require_once("nav-barStudent.php");
 ?>
 <br>
+<div style="margin:left;padding-left:10px">
+               <form action="<?php echo FRONT_ROOT?> Home/Home" method="POST">
+                    <button type="submit" class='btn'>Volver</button>
+               </form>
+               </div>
 <div>
     <?php
         if ($PostulacionVigente != null)

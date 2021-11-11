@@ -9,6 +9,11 @@
 </head> 
 <body>
     <br>
+    <div style="margin:left;padding-left:100px">
+    <form action="<?php echo FRONT_ROOT?> Home/Home" method="POST">
+        <button type="submit" class='btn'>Volver</button>
+    </form>
+    </div>
 <h2 style="text-align:center; color:white">Cargar Usuario</h2>
     <form action="<?php echo FRONT_ROOT ?> Student/Add" method="POST">
 

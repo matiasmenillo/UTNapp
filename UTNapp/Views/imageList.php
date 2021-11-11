@@ -16,6 +16,11 @@ if(isset($_SESSION['loggedUser']))
           if ($_SESSION['loggedUser']->getAdmin() == 0)
           {
      ?>
+              <div style="margin:left;padding-left:100px">
+               <form action="<?php echo FRONT_ROOT?> Home/Home" method="POST">
+                    <button type="submit" class='btn'>Volver</button>
+               </form>
+               </div>
           <h2 class="mb-4;" style="color:white;text-align:center;">Mis CVs</h2>
           <br>
                               <section>

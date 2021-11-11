@@ -20,8 +20,13 @@
     ?>
 
     <br>
+    <div style="margin:left;padding-left:100px">
+    <form action="<?php echo FRONT_ROOT?> Home/Home" method="POST">
+        <button type="submit" class='btn'>Volver</button>
+    </form>
+    </div>
     <h2 style="color:white;text-align:center">Seleccione las opciones para crear la oferta laboral</h2>
-
+    <br>
     <form action="<?php echo FRONT_ROOT?> JobOffer/Add" method="POST">
     
     <label for="jobPositionId" style="color:White;text-align:center">Seleccione la Posicion</label>

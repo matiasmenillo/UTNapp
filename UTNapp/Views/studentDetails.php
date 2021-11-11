@@ -2,6 +2,11 @@
         require_once("nav-barAdmin.php");
 ?>
 <br>
+<div style="margin:left;padding-left:10px">
+               <form action="<?php echo FRONT_ROOT?> Home/Home" method="POST">
+                    <button type="submit" class='btn'>Volver</button>
+               </form>
+               </div>
 <h3 style="text-align:center; color:white">Detalles de <?php echo $student->GetFirstName() . ' ' . $student->GetLastName() ?></h3>
 
 <table style="text-align:center; color:orange">

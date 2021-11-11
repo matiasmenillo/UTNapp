@@ -21,6 +21,13 @@
 
         <br>
         <br>
+
+    <div style="margin:left;padding-left:100px">
+    <form action="<?php echo FRONT_ROOT?> Home/Home" method="POST">
+        <button type="submit" class='btn'>Volver</button>
+    </form>
+    </div>
+
     <h2 style="text-align:center; color:white">Ingrese los datos de la nueva empresa</h2>
 
     <form style="text-align:center;color:white" action="<?php echo FRONT_ROOT?> Company/Add" method="POST">
@@ -49,7 +56,7 @@
             <option value="0">Inactive</option>
         </select>
         <br>
-        <button style="margin:auto;color:black" type="submit" style="color:black">Agregar</button>
+        <button style="margin:auto;color:black" type="submit" style="color:black" class='btn'>Agregar</button>
     </form>
     <br>
     <br>

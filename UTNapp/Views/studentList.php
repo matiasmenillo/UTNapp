@@ -11,6 +11,11 @@
     }
 ?>
 <br>
+<div style="margin:left;padding-left:10px">
+               <form action="<?php echo FRONT_ROOT?> Home/Home" method="POST">
+                    <button type="submit" class='btn'>Volver</button>
+               </form>
+               </div>
 <h2 style="text-align:center; color: white">Estudiantes</h2>
 
     <table style="text-align:center;">
