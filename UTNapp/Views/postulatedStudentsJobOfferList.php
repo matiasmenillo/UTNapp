@@ -4,10 +4,10 @@
 ?>
 
 <table style="text-align:center;">
-<caption style="text-align:center;color:white;padding-bottom:20px;padding-top:10px;">Oferta Laboral</caption>
+<caption style="text-align:center;color:white;padding-bottom:20px;padding-top:10px;">Oferta laboral</caption>
 <thead>
         <tr>
-            <th style="width: 15%;">DESCRIPCION</th>
+            <th style="width: 15%;">DESCRIPCIÓN</th>
             <th style="width: 15%;">CARRERA</th>
             <th style="width: 15%;">EMPRESA</th>
         </tr>
@@ -46,7 +46,7 @@
                 }
             ?>
 <table style="text-align:center;">
-<caption style="text-align:center;color:white;padding-bottom:20px;padding-top:10px;">Estudiantes Postulados</caption>
+<caption style="text-align:center;color:white;padding-bottom:20px;padding-top:10px;">Estudiantes postulados</caption>
 <thead>
         <tr>
             <th style="width: 3%;">Nombre y apellido</th>
@@ -56,7 +56,7 @@
             <th style="width: 1%;">Email</th>
             <th style="width: 1%;">Carrera</th>
             <th style="width: 10%;">Fecha de Nacimiento</th>
-            <th style="width: 10%;">Numero de telefono</th>
+            <th style="width: 10%;">Número de telefono</th>
             <th style="width: 1%;">Activo</th>
             <th style="width: 1%;">Rol</th>
         </tr>

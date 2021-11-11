@@ -12,10 +12,10 @@
     }
 ?>
 <br>
-<h2 style="text-align:center; color:white">Ofertas Laborales disponibles</h2>
+<h2 style="text-align:center; color:white">Ofertas laborales disponibles</h2>
     <table style="text-align:center;">
     <form action="<?php echo FRONT_ROOT ?>JobOffer/FilterJobOffersByJobPosition" method="get">
-    <label for="user_CareerId" style="color:White">Filtrar por Puesto Laboral</label>
+    <label for="user_CareerId" style="color:White">Filtrar por puesto laboral</label>
     <div style="display:flex; flex-direction: row;">
          <select name="filter_JobPostitionId" style="color:black">
             <?php
@@ -49,7 +49,7 @@
     </form>
         <thead>
         <tr>
-            <th style="width: 15%;">DESCRIPCION</th>
+            <th style="width: 15%;">DESCRIPCIÓN</th>
             <th style="width: 30%;">CARRERA</th>
             <th style="width: 30%;">EMPRESA</th>
 
@@ -131,7 +131,7 @@
                             <td style="color:black"><?php echo $CompanyName ?></td>
                             <td>
                                 <form action="<?php echo FRONT_ROOT ?>JobOffer/Remove" method="POST">
-                                    <button type="submit" class="btn" name="remove" value="<?php echo  $JobOffer->getJobOfferId();?>"> Remove </button>
+                                    <button type="submit" class="btn" name="remove" value="<?php echo  $JobOffer->getJobOfferId();?>"> Borrar </button>
                                 </form>
                             </td>
                             <td style="color:black">
@@ -139,7 +139,7 @@
                                     <input type="hidden" name="JobOfferId" value="<?php echo $JobOffer->getJobOfferId(); ?>">
                                     <input type="hidden" name="JobPositionId" value="<?php echo $JobOffer->getJobPositionId(); ?>">
                                     <input type="hidden" name="CompanyId" value="<?php echo $JobOffer->getCompanyId(); ?>">
-                                    <button type="submit" class="btn" name="modify"> Modify </button>
+                                    <button type="submit" class="btn" name="modify"> Modificar </button>
                                 </form>
                             </td>
 

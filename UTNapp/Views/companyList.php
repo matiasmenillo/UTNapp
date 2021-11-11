@@ -23,7 +23,7 @@
     </form>
 
     <form action="<?php echo FRONT_ROOT ?>Company/ShowCompanyListView" method="get">
-            <button type="submit" style="color:black" >Limpiar Filtros</button>
+            <button type="submit" style="color:black" >Limpiar filtros</button>
     </form>
     <br>
     <br>
@@ -85,7 +85,7 @@
                             <td style="color:black"><?php echo $company->getId() ?></td>
                             <td>
                                 <form action="<?php echo FRONT_ROOT ?>Company/Remove" method="POST">
-                                    <button type="submit" class="btn" name="remove" value="<?php echo $company->getId() ?>"> Remove </button>
+                                    <button type="submit" class="btn" name="remove" value="<?php echo $company->getId() ?>"> Borrar </button>
                                 </form>
                             </td>
                             <td style="color:black">
@@ -98,7 +98,7 @@
                                     <input type="hidden" name="CompanyLink" value="<?php echo $company->getCompanyLink() ?>">
                                     <input type="hidden" name="Descripcion" value="<?php echo $company->getDescription() ?>">
                                     <input type="hidden" name="Sector" value="<?php echo $company->getSector() ?>">
-                                    <button type="submit" class="btn" name="modify"> Modify </button>
+                                    <button type="submit" class="btn" name="modify"> Modificar</button>
                                 </form>
 
                             </td>
