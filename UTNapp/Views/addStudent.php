@@ -9,7 +9,7 @@
 </head> 
 <body>
     <br>
-<h2 style="text-align:center; color:white">Cargar estudiante</h2>
+<h2 style="text-align:center; color:white">Cargar Usuario</h2>
     <form action="<?php echo FRONT_ROOT ?> Student/Add" method="POST">
 
         <label for="user_firstName" style="color:White;text-align:center">Nombre</label>

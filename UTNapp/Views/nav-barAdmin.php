@@ -28,7 +28,7 @@
                 <li><a href="<?php echo FRONT_ROOT."Company/ShowAddView" ?>">Añadir Empresa</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Company/ShowCompanyListView" ?>">Gestionar Empresas</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Postulation/ShowPostulateView" ?>">Gestionar Ofertas Laborales</a></li>
-                <li><a href="<?php echo FRONT_ROOT."Student/ShowAddStudentView" ?>">Agregar Estudiante</a></li>
+                <li><a href="<?php echo FRONT_ROOT."Student/ShowAddStudentView" ?>">Agregar Usuario</a></li>
                 <li><a href="<?php echo FRONT_ROOT."JobOffer/ShowAddView" ?>">Cargar propuesta</a></li>
               </ul>
             </li>
