@@ -3,7 +3,7 @@
         require_once("nav-barAdmin.php");
 ?>
 <div style="margin:left;padding-left:10px">
-               <form action="<?php echo FRONT_ROOT?> Home/Home" method="POST">
+               <form action="<?php echo FRONT_ROOT?> Postulation/ShowPostulateView" method="POST">
                     <button type="submit" class='btn'>Volver</button>
                </form>
                </div>

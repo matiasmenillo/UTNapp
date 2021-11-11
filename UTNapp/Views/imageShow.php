@@ -12,7 +12,7 @@ if(isset($_SESSION['loggedUser']))
      <section id="listado" class="mb-5">
           <br>
      <div style="margin:left;padding-left:100px;">
-    <form action="<?php echo FRONT_ROOT?> Home/Home" method="POST">
+    <form action="<?php echo FRONT_ROOT?> Image/ShowListView" method="POST">
         <button type="submit" class='btn'>Volver</button>
     </form>
     </div>
