@@ -14,7 +14,7 @@
       <!-- Add path routes below -->
       <nav id="mainav" class="fl_right">
         <ul class="clear">
-            <li class="active"><a href="<?php echo FRONT_ROOT ?>">CERRAR SESION</a></li>
+            <li class="active"><a href="<?php echo FRONT_ROOT. "Login/Logout" ?>">CERRAR SESION</a></li>
 
             <li><a class="drop" href="#" style="color:white">Alumno</a>
               <ul>
@@ -22,6 +22,7 @@
                 <li><a href="<?php echo FRONT_ROOT."Company/ShowCompanyListView" ?>">Lista de Empresas</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Postulation/ShowPostulateView" ?>">Aplicar a propuesta</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Postulation/showPostulationHistoryView" ?>">Historial de propuestas</a></li>
+                <li><a href="<?php echo FRONT_ROOT."Image/ShowListView"?>">CV</a></li>
               </ul>
             </li>
         </ul>

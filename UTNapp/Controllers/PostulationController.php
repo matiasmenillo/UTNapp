@@ -8,6 +8,7 @@
      use DAO\CompanyDAO as CompanyDAO;
      use DAO\JobPositionDAO as JobPositionDAO;
      use DAO\StudentDAO as StudentDAO;
+     use DAO\ImageDAO as ImageDAO;
 
 class PostulationController{
  
@@ -17,6 +18,7 @@ class PostulationController{
          private $JobPositionDAO;
          private $CompanyDAO;
          private $StudentDAO;
+         private $ImageDAO;
  
          public function __construct(){
  
@@ -26,6 +28,7 @@ class PostulationController{
              $this->JobPositionDAO = new JobPositionDAO;
              $this->CompanyDAO = new CompanyDAO;
              $this->StudentDAO = new StudentDAO;
+             $this->ImageDAO = new ImageDAO;
          }
 
          public function ShowPostulateView()
@@ -38,18 +41,23 @@ class PostulationController{
              require_once(VIEWS_PATH . "postulateView.php");
          }
 
-         public function ShowAddView(){
+         public function ShowAddView(){ // NO ESTA IMPLEMENTADO PORQUE NO ES PARTE DE LOS REQUERIMIENTOS.
 
             require_once(VIEWS_PATH . "");
          }
 
-         public function ShowModifView($studentId,  $JobOfferId, $postulationDate){
+         public function ShowModifView($studentId,  $JobOfferId, $postulationDate){ // NO ESTA IMPLEMENTADO PORQUE NO ES PARTE DE LOS REQUERIMIENTOS.
             $ModifPostulation = new Postulation();
             $ModifPostulation->setStudentId($studentId);
             $ModifPostulation->setJobOfferId($JobOfferId);
             $ModifPostulation->setPostulationDate($postulationDate);
 
             require_once(VIEWS_PATH . "");
+        }
+
+        public function ShowUploadView(){
+            
+            require_once(VIEWS_PATH."addImage.php");
         }
 
         public function Add($studentId,  $JobOfferId, $postulationDate)
@@ -77,9 +85,8 @@ class PostulationController{
                     $newPostulation->setPostulationDate($postulationDate);
                 
                     $this->PostulationDAO->Add($newPostulation);
-    
-                    echo "<script>alert('¡Postulado correctamente!')</script>";
-                    $this->ShowPostulateView();
+
+                    $this->ShowUploadView();
                 }
                 else
                 {

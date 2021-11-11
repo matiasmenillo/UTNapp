@@ -46,5 +46,13 @@
                 require_once(VIEWS_PATH . "index.php");
         }
       }
+
+      public function Logout()
+      {
+          session_destroy();
+          session_start();
+          $_SESSION['successMessage']="LogOut Exitoso, vuelva pronto";
+          header("location: ".FRONT_ROOT."Home/index");
+      }
     }
 ?>

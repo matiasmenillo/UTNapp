@@ -14,7 +14,7 @@
       <!-- Add path routes below -->
       <nav id="mainav" class="fl_right">
         <ul class="clear">
-            <li class="active"><a href="<?php echo FRONT_ROOT."Home/Index" ?>">CERRAR SESION</a></li>
+            <li class="active"><a href="<?php echo FRONT_ROOT."Login/Logout" ?>">CERRAR SESION</a></li>
 
             <li><a class="drop" href="#" style="color:white">Alumnos</a>
               <ul>
