@@ -38,7 +38,6 @@
                 if ($rol == 'admin')
                 { 
                     echo "<th style=".'"width: 1%;"'.">Activo</th>";
-                    echo "<th style=".'"width: 1%;".'.">Rol</th>";
                 }
             ?>
         </tr>
@@ -75,14 +74,6 @@
                             {
                                 echo "No </td>";
                             }  
-                        echo "<td style=".'"color:black"'.">";
-                            if($student->getAdmin())
-                            {
-                                echo "Administrador</td>";
-                            }else 
-                            {
-                                echo "Estudiante</td>";
-                            }
                     ?>
                     </tr>
                 <?php

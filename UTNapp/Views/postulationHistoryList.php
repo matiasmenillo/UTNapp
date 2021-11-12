@@ -39,7 +39,7 @@
                                 <td style="color:black"><?php echo $PostulacionVigente->getPostulationDate() ?></td>
                                 <td>
                                     <form action="<?php echo FRONT_ROOT ?>Postulation/Remove" method="POST">
-                                    <input type="hidden" name="studentId" value="<?php echo  $_SESSION["loggedUser"]->getStudentId();?>">
+                                    <input type="hidden" name="studentId" value="<?php echo  $_SESSION["loggedStudent"]->getStudentId();?>">
                                     <button type="submit" class="btn" >Dar de Baja</button>
                                     </form>
                                 </tr>

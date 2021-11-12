@@ -62,6 +62,21 @@
         }
 
         
+        public function GetById($studentId)
+        {
+            $arrayStudents = $this->GetAll();
+
+            foreach($arrayStudents as $student)
+            {
+                if ($student->GetStudentId() == $studentId)
+                {
+                    return $student;
+                }
+            }
+
+            return null;
+        }
+
         public function GetByEmail($email)
         {
             $arrayStudents = $this->GetAll();

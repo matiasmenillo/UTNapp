@@ -6,6 +6,7 @@
     interface IStudentDAO
     {
         function GetAll();
-        function GetByEmail($studentId);
+        function GetById($studentId);
+        function GetByEmail($email);
     }
 ?>

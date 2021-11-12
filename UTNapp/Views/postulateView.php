@@ -94,7 +94,7 @@
                                 <td style="color:black"><?php echo $JobOffer->getCompany()->getName() ?></td>
                                 <td>
                                     <form action="<?php echo FRONT_ROOT ?>Postulation/Add" method="POST">
-                                    <input type="hidden" name="studentId" value="<?php echo  $_SESSION["loggedUser"]->getStudentId();?>">
+                                    <input type="hidden" name="studentId" value="<?php echo  $_SESSION["loggedStudent"]->getStudentId();?>">
                                     <input type="hidden" name="JobOfferId" value="<?php echo $JobOffer->getJobOfferId(); ?>">
                                     <input type="hidden" name="postulationDate" value="<?php echo date('y-m-d'); ?>">
                                         <button type="submit" class="btn" name="Apply" value="<?php ?>"> Aplicar </button>

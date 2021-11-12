@@ -21,6 +21,11 @@
              return $this->StudentDAO->GetAll();
          }
 
+         public function GetById($studentId)
+         {
+            return $this->StudentDAO->GetById($studentId);
+         }
+
          public function GetByEmail($email)
          {
             return $this->StudentDAO->GetByEmail($email);
@@ -28,7 +33,6 @@
 
          public function ShowStudentListView(){
             $studentList = $this->StudentDAO->GetAll();
-            $careerList = $this->CareerDAO->GetAll();
 
             require_once(VIEWS_PATH . "studentList.php"); 
         }
@@ -39,17 +43,13 @@
             $careerList = $careerController->GetAll();
             require_once(VIEWS_PATH . "addStudent.php"); 
         }
-
-        /*
-
+        
         public function ShowViewStudentDetails($studentId)
         {
             $student = $this->StudentDAO->GetById($studentId);
 
             require_once(VIEWS_PATH . "studentDetails.php");
         }
-
-        */
      }
 
 

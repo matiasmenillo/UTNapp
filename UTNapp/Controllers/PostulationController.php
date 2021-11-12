@@ -41,20 +41,6 @@ class PostulationController{
              require_once(VIEWS_PATH . "postulateView.php");
          }
 
-         public function ShowAddView(){ // NO ESTA IMPLEMENTADO PORQUE NO ES PARTE DE LOS REQUERIMIENTOS.
-
-            require_once(VIEWS_PATH . "");
-         }
-
-         public function ShowModifView($studentId,  $JobOfferId, $postulationDate){ // NO ESTA IMPLEMENTADO PORQUE NO ES PARTE DE LOS REQUERIMIENTOS.
-            $ModifPostulation = new Postulation();
-            $ModifPostulation->setStudent($this->StudentDAO->GetById($studentId));
-            $ModifPostulation->setJobOffer($this->JobOfferDAO->GetById($JobOfferId));
-            $ModifPostulation->setPostulationDate($postulationDate);
-
-            require_once(VIEWS_PATH . "");
-        }
-
         public function ShowUploadView(){
             
             require_once(VIEWS_PATH."addImage.php");
@@ -113,9 +99,9 @@ class PostulationController{
 
              if ($_SESSION["loggedUser"]->getAdmin() == 0)
              {
-                $PostulationHistory = $this->PostulationDAO->GetAllHistoryByStudent($_SESSION["loggedUser"]);
+                $PostulationHistory = $this->PostulationDAO->GetAllHistoryByStudent($_SESSION["loggedStudent"]);
 
-                $PostulacionVigente = $this->PostulationDAO->GetByStudent($_SESSION["loggedUser"]->getStudentId());
+                $PostulacionVigente = $this->PostulationDAO->GetByStudent($_SESSION["loggedStudent"]->getStudentId());
 
                 require_once(VIEWS_PATH . "postulationHistoryList.php");
              }
