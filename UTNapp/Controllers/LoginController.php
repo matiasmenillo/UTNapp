@@ -32,11 +32,6 @@
                                 $_SESSION["loggedStudent"] = $student;
                                 require(VIEWS_PATH . "home.php");
                             }
-                            else
-                            {
-                                    echo "<script>alert('E-Mail invalido')</script>";
-                                    require_once(VIEWS_PATH . "index.php");
-                            }
                     }
                     else
                     {
@@ -46,14 +41,9 @@
                 }
                 else
                 {
-                    echo "<script>alert('Contraseña invalida.')</script>";
+                    echo "<script>alert('Contraseña o E-Mail invalido/a.')</script>";
                     require_once(VIEWS_PATH . "index.php");
                 }
-           }
-           else
-           {
-                echo "<script>alert('E-Mail invalido')</script>";
-                require_once(VIEWS_PATH . "index.php");
            }
         }
 
