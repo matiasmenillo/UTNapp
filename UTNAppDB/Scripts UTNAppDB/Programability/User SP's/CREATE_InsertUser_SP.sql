@@ -13,7 +13,7 @@ CREATE PROCEDURE InsertUser
 	IN Admin INT
 )
 BEGIN
-	INSERT INTO User 
+	INSERT INTO Users
     (
 		FirstName, 
 		LastName, 

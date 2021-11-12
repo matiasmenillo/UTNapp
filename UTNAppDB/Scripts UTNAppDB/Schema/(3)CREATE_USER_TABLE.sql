@@ -1,8 +1,8 @@
 USE UTNAppDB;
 
-/*DROP TABLE IF EXISTS User;*/
+/*DROP TABLE IF EXISTS Users;*/
 
-CREATE TABLE User
+CREATE TABLE Users
 (
 IdUser INT unique auto_increment NOT NULL,
 FirstName VARCHAR(200) NOT NULL,

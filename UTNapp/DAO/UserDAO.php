@@ -108,7 +108,6 @@
 
             try
             {
-              
                 $query = "CALL GetUserByEmail(:email)";
 
                 $parameters["email"] = $userEmail;

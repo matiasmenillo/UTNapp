@@ -9,7 +9,7 @@ CREATE PROCEDURE GetUserById
 	IN IdUserDBParam INT
 )
 BEGIN
-	SELECT * FROM User WHERE IdUser = IdUserDBParam;
+	SELECT * FROM Users WHERE IdUser = IdUserDBParam;
 END //
 
 DELIMITER ;

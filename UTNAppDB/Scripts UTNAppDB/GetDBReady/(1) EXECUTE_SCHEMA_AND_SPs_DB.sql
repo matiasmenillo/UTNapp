@@ -36,9 +36,9 @@ CREATE TABLE Images
 
 USE UTNAppDB;
 
-/*DROP TABLE IF EXISTS User;*/
+/*DROP TABLE IF EXISTS Users;*/
 
-CREATE TABLE User
+CREATE TABLE Users
 (
 IdUser INT unique auto_increment NOT NULL,
 FirstName VARCHAR(200) NOT NULL,
@@ -809,7 +809,7 @@ CREATE PROCEDURE GetUserById
 	IN IdUserDBParam INT
 )
 BEGIN
-	SELECT * FROM User WHERE IdUser = IdUserDBParam;
+	SELECT * FROM Users WHERE IdUser = IdUserDBParam;
 END //
 
 USE UTNAppDB;
@@ -823,10 +823,8 @@ CREATE PROCEDURE GetUserByEmail
 	IN Email VARCHAR(200)
 )
 BEGIN
-	SELECT * FROM User WHERE Email = Email;
+	SELECT * FROM Users WHERE Email = Email;
 END //
-
-USE UTNAppDB;
 
 USE UTNAppDB;
 
@@ -843,7 +841,7 @@ CREATE PROCEDURE InsertUser
 	IN Admin INT
 )
 BEGIN
-	INSERT INTO User 
+	INSERT INTO Users
     (
 		FirstName, 
 		LastName, 

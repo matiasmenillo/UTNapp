@@ -57,8 +57,7 @@
       public function Logout()
       {
           session_destroy();
-          session_start();
-          $_SESSION['successMessage']="LogOut Exitoso, vuelva pronto";
+          echo "<script>alert('LogOut Exitoso, vuelva pronto')</script>";
           header("location: ".FRONT_ROOT."Home/index");
       }
     }
