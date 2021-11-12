@@ -69,6 +69,12 @@ if(isset($_SESSION['loggedUser']))
                     <div>
                          <table>
                               <thead>
+                                   <?php
+                                   if ($_SESSION['loggedUser']->getAdmin() == 1) 
+                                   {
+                                        ?> <th>Estudiante</th> <?php
+                                   }
+                                   ?>
                                    <th>CVs Subidos</th>
                                    <th>Ver</th>
                               </thead>
@@ -80,7 +86,13 @@ if(isset($_SESSION['loggedUser']))
                                         {
                                              ?>
                                                   <tr>
-                                                  <td><?php echo $image->getName() ?></td> 
+                                                  <?php
+                                                  if ($_SESSION['loggedUser']->getAdmin() == 1) 
+                                                  {
+                                                      ?> <td><?php echo $image->getStudent()->getFirstName() . " " . $image->getStudent()->getLastName() ?></td> <?php
+                                                  }
+                                                  ?>
+                                                  <td><?php echo $image->getName() ?></td>
                                                   <td><a href="<?php echo FRONT_ROOT ?>Image/ShowImage/<?php echo $image->getImageId() ?>">Ver</a></td>
                                                   </tr>
                                              <?php

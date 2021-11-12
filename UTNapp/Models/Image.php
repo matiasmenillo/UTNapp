@@ -4,7 +4,7 @@
     class Image
     {
         private $imageId;
-        private $idStudent;
+        private $student;
         private $name;
 
         public function getImageId()
@@ -27,25 +27,14 @@
             $this->name = $name;
         }        
 
-
-        /**
-         * Get the value of idStudent
-         */ 
-        public function getIdStudent()
+        public function getStudent()
         {
-                return $this->idStudent;
+                return $this->student;
         }
 
-        /**
-         * Set the value of idStudent
-         *
-         * @return  self
-         */ 
-        public function setIdStudent($idStudent)
+        public function setStudent(Student $Student)
         {
-                $this->idStudent = $idStudent;
-
-                return $this;
+                $this->student = $Student;
         }
     }
 ?>

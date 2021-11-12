@@ -3,6 +3,7 @@
 
     use DAO\IImageDAO as IImageDAO;
     use DAO\QueryType as QueryType;
+    use DAO\StudentDAO as StudentDAO;
     use Models\Image as Image;
 
     class ImageDao implements \DAO\IImageDao
@@ -17,7 +18,7 @@
                 $query = "CALL Images_add(:name, :idStudent);";
                 
                 $parameters["name"] = $image->getName();
-                $parameters["idStudent"] = $image->getIdStudent();
+                $parameters["idStudent"] = $image->getStudent()->getStudentId();
 
                 $this->connection = Connection::GetInstance();
 
@@ -44,8 +45,9 @@
                 foreach ($resultSet as $row)
                 {                
                     $image = new Image();
+                    $StudentDAO = new StudentDAO;
+                    $image->setStudent($StudentDAO->GetById($row["idStudent"]));
                     $image->setImageId($row["imageId"]);
-                    $image->setIdStudent($row["idStudent"]);
                     $image->setName($row["name"]);
 
                     array_push($imageList, $image);
@@ -76,9 +78,10 @@
                 foreach ($resultSet as $row)
                 {                
                     $image = new Image();
+                    $StudentDAO = new StudentDAO;
+                    $image->setStudent($StudentDAO->GetById($row["idStudent"]));
                     $image->setImageId($row["imageId"]);
                     $image->setName($row["name"]);
-                    $image->setIdStudent($row["idStudent"]);
                 }
 
                 return $image;
@@ -106,9 +109,10 @@
                 foreach ($resultSet as $row)
                 {                
                     $image = new Image();
+                    $StudentDAO = new StudentDAO;
+                    $image->setStudent($StudentDAO->GetById($row["idStudent"]));
                     $image->setImageId($row["imageId"]);
                     $image->setName($row["name"]);
-                    $image->setIdStudent($row["idStudent"]);
                 }
 
                 return $image;

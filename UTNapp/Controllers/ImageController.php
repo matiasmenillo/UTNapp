@@ -2,6 +2,7 @@
     namespace Controllers;
 
     use DAO\ImageDAO as ImageDAO;
+    use DAO\StudentDAO as StudentDAO;
     use Models\Image as Image;
 
     class ImageController
@@ -54,8 +55,9 @@
                     {
 
                         $image = new Image();
+                        $StudentDAO = new StudentDAO;
+                        $image->setStudent($StudentDAO->GetById($idStudent));
                         $image->setName($fileName);
-                        $image->setIdStudent($idStudent);
                         
                         $this->imageDAO->Add($image);
 
