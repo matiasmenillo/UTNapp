@@ -1,2 +1,2 @@
-/* RUN TO ADD ADMINS (CORRER LUEGO DE LEVANTAR LA API DESDE LOGIN EN APP) */
+/* RUN TO ADD ADMINS */
 CALL InsertUser('Admin', 'Admin', 'admin@admin.com', 1234, 1);

@@ -36,7 +36,6 @@
             <th style="width: 10%;">Fecha de Nacimiento</th>
             <th style="width: 10%;">Número de telefono</th>
             <th style="width: 1%;">Activo</th>
-            <th style="width: 1%;">Rol</th>
         </tr>
         </thead>
         <tbody>
@@ -63,16 +62,6 @@
                             }else 
                             {
                                 echo "No";
-                            }
-                ?></td>
-                    <td style="color:black">
-                <?php 
-                            if($student->getAdmin())
-                            {
-                                echo "Administrador";
-                            }else 
-                            {
-                                echo "Estudiante";
                             }
                 ?></td>
                 </tr>
