@@ -9,7 +9,6 @@
 
         public function Login($user_email, $user_password)
         {
-
            $CareerController = new CareerController;
            $JobPositionController = new JobPositionController;
            $StudentController = new StudentController;
@@ -26,13 +25,17 @@
                 {
                     if ($LoggedUser->getAdmin() == 0)
                     {
-                        $student = $StudentController->GetByEmail($LoggedUser->getEmail());
+                            $student = $StudentController->GetByEmail($LoggedUser->getEmail());
                             if($student != null)
                             {
-                                $careerController = new CareerController;
                                 $_SESSION["loggedUser"] = $LoggedUser;
                                 $_SESSION["loggedStudent"] = $student;
                                 require(VIEWS_PATH . "home.php");
+                            }
+                            else
+                            {
+                                    echo "<script>alert('E-Mail invalido')</script>";
+                                    require_once(VIEWS_PATH . "index.php");
                             }
                     }
                     else
