@@ -1,0 +1,15 @@
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS  GetUserByEmail;
+
+DELIMITER //
+
+CREATE PROCEDURE GetUserByEmail
+(
+	IN Email VARCHAR(200)
+)
+BEGIN
+	SELECT * FROM User WHERE Email = Email;
+END //
+
+USE UTNAppDB;

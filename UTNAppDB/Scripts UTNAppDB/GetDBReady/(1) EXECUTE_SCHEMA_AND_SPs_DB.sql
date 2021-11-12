@@ -45,10 +45,9 @@ FirstName VARCHAR(200) NOT NULL,
 LastName VARCHAR(200) NOT NULL,
 Email VARCHAR(200) unique NOT NULL,
 Password VARCHAR(200) NOT NULL,
-Dni varchar(200) unique NOT NULL,
 Admin INT NOT NULL,
 
-Primary Key (IdUser, Email, Dni)
+Primary Key (IdUser, Email)
 );
 
 CREATE TABLE Company
@@ -815,6 +814,22 @@ END //
 
 USE UTNAppDB;
 
+DROP PROCEDURE IF EXISTS  GetUserByEmail;
+
+DELIMITER //
+
+CREATE PROCEDURE GetUserByEmail
+(
+	IN Email VARCHAR(200)
+)
+BEGIN
+	SELECT * FROM User WHERE Email = Email;
+END //
+
+USE UTNAppDB;
+
+USE UTNAppDB;
+
 DROP PROCEDURE IF EXISTS InsertUser;
 
 DELIMITER //
@@ -825,7 +840,6 @@ CREATE PROCEDURE InsertUser
 	IN LastName varchar(200), 
 	IN Email varchar(200), 
 	IN Password varchar(200), 
-	IN Dni VARCHAR(200), 
 	IN Admin INT
 )
 BEGIN
@@ -834,8 +848,7 @@ BEGIN
 		FirstName, 
 		LastName, 
 		Email, 
-		Password, 
-		Dni, 
+		Password,  
 		Admin
     )
     VALUES
@@ -844,7 +857,6 @@ BEGIN
 		LastName, 
 		Email, 
 		Password, 
-		Dni, 
 		Admin
     );
 END //
@@ -862,7 +874,6 @@ CREATE PROCEDURE UpdateUser
 	IN LastName varchar(200), 
 	IN Email varchar(200), 
 	IN Password varchar(200), 
-	IN Dni varchar(200), 
 	IN Admin INT
 
 )
@@ -873,7 +884,6 @@ BEGIN
 		LastName = LastName, 
 		Email = Email, 
 		Password = Password, 
-		Dni = Dni, 
 		Admin = Admin
 	WHERE IdUser = IdUser;
 END //

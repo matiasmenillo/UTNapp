@@ -9,10 +9,9 @@ FirstName VARCHAR(200) NOT NULL,
 LastName VARCHAR(200) NOT NULL,
 Email VARCHAR(200) unique NOT NULL,
 Password VARCHAR(200) NOT NULL,
-Dni varchar(200) unique NOT NULL,
 Admin INT NOT NULL,
 
-Primary Key (IdUser, Email, Dni)
+Primary Key (IdUser, Email)
 )
 
 

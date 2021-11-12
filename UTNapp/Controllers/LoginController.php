@@ -2,48 +2,57 @@
     namespace Controllers;
 
     use Controllers\StudentController as StudentController;
+    use Controllers\UserController as UserController;
 
-    class LoginController{
+    class LoginController
+    {
 
-        public function Login($user_email, $user_password){
+        public function Login($user_email, $user_password)
+        {
 
            $CareerController = new CareerController;
            $JobPositionController = new JobPositionController;
            $StudentController = new StudentController;
-           
+           $UserController = new UserController;
+
            $CareerController->CheckApi();
            $JobPositionController->CheckApi();
-           $StudentController->CheckApi();
         
-           $studentList = $StudentController->GetAll();
+           $LoggedUser = $UserController->GetByEmail($user_email);
 
-           $found = false;
-
-           foreach($studentList as $student){
-
-                if($user_email == $student->getEmail()){
-
-                    $found = true;
-                        
-                    if($user_password == $student->getPassword()){
-                        
-                        $careerController = new CareerController;
-                        $_SESSION["loggedUser"] = $student;
-                        $_SESSION["loggedUserCareer"] = $careerController->GetById($_SESSION["loggedUser"]->getCareer()->getCareerId());
-                        require(VIEWS_PATH . "home.php");
-
-                    }else{
-                        echo "<script>alert('Contraseña invalida.')</script>";
-                        require_once(VIEWS_PATH . "index.php");
+           if ($LoggedUser != null)
+           {
+                if ($LoggedUser->getPassword() == $user_password)
+                {
+                    if ($LoggedUser->getAdmin() == 0)
+                    {
+                        $student = $StudentController->GetByEmail($LoggedUser->getEmail());
+                            if($student != null)
+                            {
+                                $careerController = new CareerController;
+                                $_SESSION["loggedUser"] = $LoggedUser;
+                                $_SESSION["loggedStudent"] = $student;
+                                require(VIEWS_PATH . "home.php");
+                            }
                     }
-                
-              }
-            }
-            if($found == false){
+                    else
+                    {
+                        $_SESSION["loggedUser"] = $LoggedUser;
+                        require(VIEWS_PATH . "home.php");
+                    }
+                }
+                else
+                {
+                    echo "<script>alert('Contraseña invalida.')</script>";
+                    require_once(VIEWS_PATH . "index.php");
+                }
+           }
+           else
+           {
                 echo "<script>alert('E-Mail invalido')</script>";
                 require_once(VIEWS_PATH . "index.php");
+           }
         }
-      }
 
       public function Logout()
       {

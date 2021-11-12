@@ -22,7 +22,10 @@
         <button type="submit" style="color:black">Ingresar</button>      
         <br><br>    
 
-    </form>     
+    </form> 
+    <form action="<?php echo FRONT_ROOT?>User/AddUserView" method="POST" > 
+        <button type="submit" style="color:black">Registrarse</button>   
+    </form>   
 </div>    
 </body>    
 </html>

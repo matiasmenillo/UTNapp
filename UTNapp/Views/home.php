@@ -21,22 +21,32 @@
     <table style="text-align:center; color:orange">
     <thead>
         <tr>
-            <?php if ($_SESSION["loggedUser"]->getAdmin() == 0) {?><th style="width: 3%;">Legajo</th><?php }?>
-            <?php if ($_SESSION["loggedUser"]->getAdmin() == 0) {?><th style="width: 1%;">Carrera</th><?php }?>
-            <th style="width: 1%;">Sexo</th>
-            <th style="width: 1%;">Fecha de Nacimiento</th>
-            <th style="width: 1%;">Email</th>
-            <th style="width: 1%;">Telefono</th>
+            <?php if ($_SESSION["loggedUser"]->getAdmin() == 0)
+                  {
+                    ?><th style="width: 3%;">Legajo</th>
+                    <th style="width: 1%;">Carrera</th>
+                    <th style="width: 1%;">Sexo</th>
+                    <th style="width: 1%;">Fecha de Nacimiento</th>
+                    <th style="width: 1%;">Telefono</th>
+                  <?php 
+                  }
+                  ?>
+                    <th style="width: 1%;">Email</th>
         </tr>
   </thead>
   <tbody>
   <tr>
-      <?php if ($_SESSION["loggedUser"]->getAdmin() == 0) {?><td style="color:black"><?php echo $_SESSION["loggedUser"]->getFileNumber(); ?></td><?php }?>
-      <?php if ($_SESSION["loggedUser"]->getAdmin() == 0) {?><td style="color:black"><?php echo $_SESSION["loggedUserCareer"]->getDescription(); ?></td><?php }?>
-      <td style="color:black"><?php echo $_SESSION["loggedUser"]->getGender(); ?></td>
-      <td style="color:black"><?php echo $_SESSION["loggedUser"]->getBirthDate(); ?></td>
-      <td style="color:black"><?php echo $_SESSION["loggedUser"]->getEmail(); ?></td>
-      <td style="color:black"><?php echo $_SESSION["loggedUser"]->getPhoneNumber(); ?></td>
+      <?php if ($_SESSION["loggedUser"]->getAdmin() == 0) 
+      {
+        ?><td style="color:black"><?php echo $_SESSION["loggedStudent"]->getFileNumber(); ?></td>
+        <td style="color:black"><?php echo $_SESSION["loggedStudent"]->getCareer()->getDescription(); ?></td>
+        <td style="color:black"><?php echo $_SESSION["loggedStudent"]->getGender(); ?></td>
+        <td style="color:black"><?php echo $_SESSION["loggedStudent"]->getBirthDate(); ?></td>
+        <td style="color:black"><?php echo $_SESSION["loggedStudent"]->getPhoneNumber(); ?></td>
+      <?php
+      }
+      ?>
+        <td style="color:black"><?php echo $_SESSION["loggedUser"]->getEmail(); ?></td>
   </tr>
   </tbody>
     </table>

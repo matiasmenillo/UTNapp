@@ -8,7 +8,6 @@
         private $lastName;
         private $email;
         private $password;
-        private $dni;
         private $Admin;
 
         /**
@@ -107,26 +106,6 @@
         public function setPassword($password)
         {
                 $this->password = $password;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of dni
-         */ 
-        public function getDni()
-        {
-                return $this->dni;
-        }
-
-        /**
-         * Set the value of dni
-         *
-         * @return  self
-         */ 
-        public function setDni($dni)
-        {
-                $this->dni = $dni;
 
                 return $this;
         }

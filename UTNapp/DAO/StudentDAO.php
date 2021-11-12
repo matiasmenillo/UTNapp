@@ -13,7 +13,7 @@
         private $connection;
         private $tableName = "Student";
 
-        public function getStudentsFromAPI()
+        public function GetAll()
         {
             //CURL
             $url = curl_init();
@@ -29,6 +29,8 @@
 
             if ($toJson != null)
             {
+                $arrayStudents = array();
+
                 foreach($toJson as $eachStudent)
                 {
                     $newStudent = new Student;
@@ -45,206 +47,34 @@
                     $newStudent->setEmail($eachStudent->email);
                     $newStudent->setPhoneNumber($eachStudent->phoneNumber);
                     $newStudent->setActive(intval($eachStudent->active));
-                    $newStudent->setAdmin(0); //SON ESTUDIANTES, VA ADMIN EN 0.
-                    $newStudent->setPassword(1234); // Como la API NO LO TRAE PONGO 1234 DE DAFAULT.
 
-                    $result = $this->GetById($newStudent->getStudentId());
-
-                    if ($result == null) // SI NO LO TENGO EN LA BASE, LO AGREGO.
-                    {
-                        $this->Add($newStudent);
-                    }
+                    array_push($arrayStudents, $newStudent);
                 }
-                
+
+                return $arrayStudents;
+            }
+            else
+            {
+                return null;
             }
 
             curl_close($url);   
         }
 
-        public function Add(Student $student){
+        
+        public function GetByEmail($email)
+        {
+            $arrayStudents = $this->GetAll();
 
-            try
+            foreach($arrayStudents as $student)
             {
-                $query = "CALL InsertStudent(:IdStudent, :FirstName, :LastName, :Email, :Password, :Dni, :Admin, :IdCareer, :FileNumber, :Gender, :BirthDate, :PhoneNumber, :Active);";
-                
-                $parameters["IdStudent"] = $student->getStudentId();
-                $parameters["FirstName"] = $student->getFirstName();
-                $parameters["LastName"] = $student->getLastName();
-                $parameters["Email"] = $student->getEmail();
-                $parameters["Password"] = $student->getPassword();
-                $parameters["Dni"] = $student->getDni();
-                $parameters["Admin"] = $student->getAdmin();
-                $parameters["IdCareer"] = $student->getCareer()->getCareerId();
-                $parameters["FileNumber"] = $student->getFileNumber();
-                $parameters["Gender"] = $student->getGender();
-                $parameters["BirthDate"] = $student->getBirthDate();
-                $parameters["PhoneNumber"] = $student->getPhoneNumber();
-                $parameters["Active"] = $student->getActive();
-
-                $this->connection = Connection::GetInstance();
-
-                $this->connection->ExecuteNonQuery($query, $parameters);
-            }
-            catch(Exception $ex)
-            {
-                return "El Estudiante que esta intentando cargar ya existe en el sistema.";
-            }
-        }
-
-
-        public function GetAll(){
-
-            try
-            {
-                $studentList = array();
-
-                $query = "CALL GetAllStudents();";
-
-                $this->connection = Connection::GetInstance();
-
-                $resultSet = $this->connection->Execute($query);
-                
-                foreach ($resultSet as $row)
-                {                
-                    $student = new Student();
-                    $CareerDAO = new CareerDAO;
-
-                    $student->setStudentId($row["IdStudentDB"]);
-                    $student->setFirstName($row["FirstName"]);
-                    $student->setLastName($row["LastName"]);
-                    $student->setEmail($row["Email"]);
-                    $student->setPassword($row["Password"]);
-                    $student->setDni($row["Dni"]);
-                    $student->setAdmin($row["Admin"]);
-                    $student->setCareer($CareerDAO->GetById($row["IdCareer"]));
-                    $student->setFileNumber($row["FileNumber"]);
-                    $student->setGender($row["Gender"]);
-                    $student->setBirthDate($row["BirthDate"]);
-                    $student->setPhoneNumber($row["PhoneNumber"]);
-                    $student->setActive($row["Active"]);
-
-                    array_push($studentList, $student);
-                }
-
-                return $studentList;
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-        }
-
-        public function GetById($studentId){
-
-            try
-            {
-                $student= new Student;
-
-                $query = "CALL GetStudentById(:IdStudent);";
-
-                $parameters["IdStudent"] = $studentId;
-
-                $this->connection = Connection::GetInstance();
-
-                $resultSet = $this->connection->Execute($query , $parameters);
-
-                $row = array_pop($resultSet);
-
-                if($row != null)
-                {                    
-                    $student = new Student();
-                    $CareerDAO = new CareerDAO;
-                    
-                    $student->setStudentId($row["IdStudentDB"]);
-                    $student->setFirstName($row["FirstName"]);
-                    $student->setLastName($row["LastName"]);
-                    $student->setEmail($row["Email"]);
-                    $student->setPassword($row["Password"]);
-                    $student->setDni($row["Dni"]);
-                    $student->setAdmin($row["Admin"]);
-                    $student->setCareer($CareerDAO->GetById($row["IdCareer"]));
-                    $student->setFileNumber($row["FileNumber"]);
-                    $student->setGender($row["Gender"]);
-                    $student->setBirthDate($row["BirthDate"]);
-                    $student->setPhoneNumber($row["PhoneNumber"]);
-                    $student->setActive($row["Active"]);
-
+                if ($student->GetEmail() == $email)
+                {
                     return $student;
                 }
-
-                return null;             
-               
             }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-        }
 
-        public function Update(Student $student){
-
-            try
-            {
-                $query = "CALL UpdateStudent(:IdStudent, :FirstName, :LastName, :Email, :Password, :Dni, :Admin, :IdCareer, :FileNumber, :Gender, :BirthDate, :PhoneNumber, :Active);";
-                
-                $parameters["IdStudent"] = $student->getStudentId();
-                $parameters["FirstName"] = $student->getFirstName();
-                $parameters["LastName"] = $student->getLastName();
-                $parameters["Email"] = $student->getEmail();
-                $parameters["Password"] = $student->getPassword();
-                $parameters["Dni"] = $student->getDni();
-                $parameters["Admin"] = $student->getAdmin();
-                $parameters["IdCareer"] = $student->getCareer()->getCareerId();
-                $parameters["FileNumber"] = $student->getFileNumber();
-                $parameters["Gender"] = $student->getGender();
-                $parameters["BirthDate"] = $student->getBirthDate();
-                $parameters["PhoneNumber"] = $student->getPhoneNumber();
-                $parameters["Active"] = $student->getActive();
-
-                $this->connection = Connection::GetInstance();
-
-                $this->connection->ExecuteNonQuery($query, $parameters);
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-        }
-
-        public function Delete($studentId){
-
-            try
-            {
-                $query = "CALL DeleteStudent(:IdStudent);";
-
-                $parameters["IdStudent"] = $studentId;
-
-                $this->connection = Connection::GetInstance();
-
-                $this->connection->ExecuteNonQuery($query, $parameters);
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-        }
-
-        public function GetMaxId(){
-
-            try
-            {
-                $query = "SELECT MAX(IdStudentDB) AS MaxId FROM ". $this->tableName .";";
-
-                $this->connection = Connection::GetInstance();
-
-                $result = $this->connection->Execute($query);
-
-                return $result[0][0];
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
+            return null;
         }
     }
 
