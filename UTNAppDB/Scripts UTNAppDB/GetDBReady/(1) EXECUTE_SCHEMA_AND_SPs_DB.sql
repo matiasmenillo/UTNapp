@@ -775,20 +775,6 @@ DROP PROCEDURE IF EXISTS Images_add;
 
 USE UTNAppDB;
 
-DROP PROCEDURE IF EXISTS DeleteUser;
-
-DELIMITER //
-
-CREATE PROCEDURE DeleteUser
-(
-	IN IdStudentParamDB INT
-)
-BEGIN
-	DELETE FROM User WHERE IdUser = IdStudentParamDB;
-END //
-
-USE UTNAppDB;
-
 DROP PROCEDURE IF EXISTS GetAllUsers;
 
 DELIMITER //
@@ -820,10 +806,10 @@ DELIMITER //
 
 CREATE PROCEDURE GetUserByEmail
 (
-	IN Email VARCHAR(200)
+	IN EmailParam VARCHAR(200)
 )
 BEGIN
-	SELECT * FROM Users WHERE Email = Email;
+	SELECT * FROM Users WHERE Email = EmailParam;
 END //
 
 USE UTNAppDB;
@@ -857,33 +843,6 @@ BEGIN
 		Password, 
 		Admin
     );
-END //
-
-USE UTNAppDB;
-
-DROP PROCEDURE IF EXISTS UpdateUser;
-
-DELIMITER //
-
-CREATE PROCEDURE UpdateUser
-(
-	IN IdUser INT,
-	IN FirstName varchar(200), 
-	IN LastName varchar(200), 
-	IN Email varchar(200), 
-	IN Password varchar(200), 
-	IN Admin INT
-
-)
-BEGIN
-	UPDATE User
-    SET
-		FirstName = FirstName, 
-		LastName = LastName, 
-		Email = Email, 
-		Password = Password, 
-		Admin = Admin
-	WHERE IdUser = IdUser;
 END //
 
 CREATE PROCEDURE Images_add(IN Name VARCHAR(100), IN idStudent int)

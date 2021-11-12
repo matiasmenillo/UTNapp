@@ -6,8 +6,8 @@ DELIMITER //
 
 CREATE PROCEDURE GetUserByEmail
 (
-	IN Email VARCHAR(200)
+	IN EmailParam VARCHAR(200)
 )
 BEGIN
-	SELECT * FROM Users WHERE Email = Email;
+	SELECT * FROM Users WHERE Email = EmailParam;
 END //
