@@ -36,13 +36,6 @@
 
             require_once(VIEWS_PATH . "studentList.php"); 
         }
-
-        public function ShowAddStudentView()
-        {
-            $careerController = new CareerController;
-            $careerList = $careerController->GetAll();
-            require_once(VIEWS_PATH . "addStudent.php"); 
-        }
         
         public function ShowViewStudentDetails($studentId)
         {

@@ -9,11 +9,11 @@
     class UserDAO implements IUserDAO{
 
         private $connection;
-        private $tableName = "User";
+        private $tableName = "Users";
 
         public function Add(User $user)
-        {
-            if ($this->checkApi($user))
+        {   
+            if ($this->checkApi($user) || $user->getAdmin() == 1)
             {
                 try
                 {
@@ -37,7 +37,7 @@
             }
             else
             {
-                return "Datos incorrectos";
+                return "Datos incorrectos o Estudiante inactivo";
             }
         }
 

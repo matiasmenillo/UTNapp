@@ -5,6 +5,7 @@
      use DAO\StudentDAO as StudentDAO;
      use DAO\CareerDAO as CareerDAO;
      use DAO\UserDAO as UserDAO;
+     use Controllers\HomeController as HomeController;
  
      class UserController{
  
@@ -19,14 +20,14 @@
              $this->UserDAO = new UserDAO;
          }
 
-         public function Add($user_FirstName, $user_LastName, $user_email, $user_password){
-           
+         public function Add($user_FirstName, $user_LastName, $user_email, $user_password, $user_rol){
+
             $newUser = new User;
             $newUser->setFirstName($user_FirstName);
             $newUser->setLastName($user_LastName);
             $newUser->setEmail($user_email);
             $newUser->setPassword($user_password);
-            $newUser->setAdmin(0);
+            $newUser->setAdmin(intval($user_rol));
         
             $error = $this->UserDAO->Add($newUser);
 
@@ -39,7 +40,15 @@
             else
             {
                 echo "<script>alert('Registrado correctamente!')</script>";
-                $this->LoginView();
+
+                if ($newUser->getAdmin() == 0)
+                {
+                    $this->LoginView();
+                }
+                else
+                {
+                    $this->HomeView();
+                }
             } 
         }
          public function GetAll(){
@@ -57,9 +66,20 @@
             require_once(VIEWS_PATH . "userRegister.php"); 
          }
 
+         public function ShowAddAdminView()
+         {
+            require_once(VIEWS_PATH . "addAdmin.php"); 
+         }
+
          private function LoginView()
          {
             require_once(VIEWS_PATH . "index.php"); 
+         }
+
+         private function HomeView()
+         {
+             $homeController = new HomeController;
+             $homeController->Home();
          }
      }
 ?>
