@@ -1,7 +1,7 @@
 <?php
     namespace Models;
 
-    class Student extends User
+    class Student
     {
         private $studentId;
         private $career;
@@ -10,6 +10,10 @@
         private $birthDate;
         private $phoneNumber;
         private $active;
+        private $firstName;
+        private $lastName;
+        private $email;
+        private $dni;
 
         public function setStudentId($id)
         {
@@ -79,6 +83,46 @@
         public function getActive()
         {
             return $this->active;
+        }
+
+        public function getFirstName()
+        {
+                return $this->firstName;
+        }
+
+        public function setFirstName($firstName)
+        {
+                $this->firstName = $firstName;
+        }
+
+        public function getLastName()
+        {
+                return $this->lastName;
+        }
+
+        public function setLastName($lastName)
+        {
+                $this->lastName = $lastName;
+        }
+
+        public function getEmail()
+        {
+                return $this->email;
+        }
+
+        public function setEmail($email)
+        {
+                $this->email = $email;
+        }
+
+        public function getDni()
+        {
+                return $this->dni;
+        }
+
+        public function setDni($dni)
+        {
+                $this->dni = $dni;
         }
     }
 ?>

@@ -36,30 +36,20 @@ CREATE TABLE Images
 
 USE UTNAppDB;
 
-/*DROP TABLE IF EXISTS Student;*/
+/*DROP TABLE IF EXISTS User;*/
 
-CREATE TABLE Student
+CREATE TABLE User
 (
-IdStudent INT Unique NOT NULL,
-IdStudentDB INT Unique auto_increment NOT NULL,
+IdUser INT unique auto_increment NOT NULL,
 FirstName VARCHAR(200) NOT NULL,
 LastName VARCHAR(200) NOT NULL,
-Email VARCHAR(200) NOT NULL,
+Email VARCHAR(200) unique NOT NULL,
 Password VARCHAR(200) NOT NULL,
-Dni varchar(200) NOT NULL,
+Dni varchar(200) unique NOT NULL,
 Admin INT NOT NULL,
-IdCareer INT NOT NULL,
-FileNumber VARCHAR(200) NULL,
-Gender varchar(200) NULL,
-BirthDate DATE NOT NULL,
-PhoneNumber varchar(200) NULL,
-Active INT NOT NULL,
 
-Primary Key (IdStudent, Email, Dni, IdStudentDB),
-CONSTRAINT fk_Career_Student FOREIGN KEY (IdCareer) REFERENCES Career(IdCareer)
+Primary Key (IdUser, Email, Dni)
 );
-
-USE UTNAppDB;
 
 CREATE TABLE Company
 (
@@ -116,12 +106,9 @@ USE UTNAppDB;
 
 CREATE TABLE Postulation
 (
-IdStudent INT NOT NULL,
+IdStudent INT unique NOT NULL,
 IdJobOffer INT NOT NULL,
 PostulationDate DATE,
-
-CONSTRAINT fk_Student_Postulation FOREIGN KEY (IdStudent)
-REFERENCES Student(IdStudent),
 
 CONSTRAINT fk_JobOffer_Postulation FOREIGN KEY (IdJobOffer)
 REFERENCES JobOffer(IdJobOffer)
@@ -785,169 +772,111 @@ END //
 
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS Images_add;
+
 USE UTNAppDB;
 
-DROP PROCEDURE IF EXISTS DeleteStudent;
+DROP PROCEDURE IF EXISTS DeleteUser;
 
 DELIMITER //
 
-CREATE PROCEDURE DeleteStudent
+CREATE PROCEDURE DeleteUser
 (
 	IN IdStudentParamDB INT
-
 )
 BEGIN
-	DELETE FROM Student WHERE IdStudentDB = IdStudentDBParam;
+	DELETE FROM User WHERE IdUser = IdStudentParamDB;
 END //
-
-DELIMITER ;
 
 USE UTNAppDB;
 
-DROP PROCEDURE IF EXISTS GetAllActiveStudents;
+DROP PROCEDURE IF EXISTS GetAllUsers;
 
 DELIMITER //
 
-CREATE PROCEDURE GetAllActiveStudents()
+CREATE PROCEDURE GetAllUsers()
 BEGIN
-	SELECT * FROM Student WHERE Active = 1;
+	SELECT * FROM Users;
 END //
-
-DELIMITER ;
 
 USE UTNAppDB;
 
-DROP PROCEDURE IF EXISTS GetAllStudents;
+DROP PROCEDURE IF EXISTS  GetUserById;
 
 DELIMITER //
 
-CREATE PROCEDURE GetAllStudents()
-BEGIN
-	SELECT * FROM Student;
-END //
-
-DELIMITER ;
-
-USE UTNAppDB;
-
-DROP PROCEDURE IF EXISTS  GetStudentById;
-
-DELIMITER //
-
-CREATE PROCEDURE GetStudentById
+CREATE PROCEDURE GetUserById
 (
-	IN IdStudentDBParam INT
+	IN IdUserDBParam INT
 )
 BEGIN
-	SELECT * FROM Student WHERE IdStudentDB = IdStudentDBParam;
+	SELECT * FROM User WHERE IdUser = IdUserDBParam;
 END //
-
-DELIMITER ;
 
 USE UTNAppDB;
 
-DROP PROCEDURE IF EXISTS InsertStudent;
+DROP PROCEDURE IF EXISTS InsertUser;
 
 DELIMITER //
 
-CREATE PROCEDURE InsertStudent
+CREATE PROCEDURE InsertUser
 (
-	IN IdStudentParam INT,
 	IN FirstName varchar(200), 
 	IN LastName varchar(200), 
 	IN Email varchar(200), 
 	IN Password varchar(200), 
 	IN Dni VARCHAR(200), 
-	IN Admin INT,
-	IN IdCareer int, 
-	IN FileNumber varchar(200), 
-	IN Gender VARCHAR(200), 
-	IN BirthDate date, 
-	IN PhoneNumber VARCHAR(200), 
-	IN Active INT
-
+	IN Admin INT
 )
 BEGIN
-	INSERT INTO Student 
+	INSERT INTO User 
     (
-		IdStudent,
 		FirstName, 
 		LastName, 
 		Email, 
 		Password, 
 		Dni, 
-		Admin, 
-		IdCareer, 
-		FileNumber, 
-		Gender, 
-		BirthDate, 
-		PhoneNumber, 
-		Active
+		Admin
     )
     VALUES
     (
-		IdStudentParam,
 		FirstName, 
 		LastName, 
 		Email, 
 		Password, 
 		Dni, 
-		Admin, 
-		IdCareer, 
-		FileNumber, 
-		Gender, 
-		BirthDate, 
-		PhoneNumber, 
-		Active
+		Admin
     );
 END //
 
-DELIMITER ;
-
 USE UTNAppDB;
 
-DROP PROCEDURE IF EXISTS UpdateStudent;
+DROP PROCEDURE IF EXISTS UpdateUser;
 
 DELIMITER //
 
-CREATE PROCEDURE UpdateStudent
+CREATE PROCEDURE UpdateUser
 (
-	IN IdStudentDBParam INT,
+	IN IdUser INT,
 	IN FirstName varchar(200), 
 	IN LastName varchar(200), 
 	IN Email varchar(200), 
 	IN Password varchar(200), 
 	IN Dni varchar(200), 
-	IN Admin INT, 
-	IN IdCareer int, 
-	IN FileNumber varchar(200), 
-	IN Gender varchar(200), 
-	IN BirthDate date, 
-	IN PhoneNumber varchar(200), 
-	IN Active INT 
+	IN Admin INT
 
 )
 BEGIN
-	UPDATE Student
+	UPDATE User
     SET
 		FirstName = FirstName, 
 		LastName = LastName, 
 		Email = Email, 
 		Password = Password, 
 		Dni = Dni, 
-		Admin = Admin, 
-		IdCareer = IdCareer, 
-		FileNumber = FileNumber, 
-		Gender = Gender, 
-		BirthDate = BirthDate, 
-		PhoneNumber = PhoneNumber, 
-		Active = Active
-	WHERE IdStudentDB = IdStudentDBParam;
+		Admin = Admin
+	WHERE IdUser = IdUser;
 END //
-
-DROP PROCEDURE IF EXISTS Images_add;
-
-DELIMITER $$
 
 CREATE PROCEDURE Images_add(IN Name VARCHAR(100), IN idStudent int)
 BEGIN

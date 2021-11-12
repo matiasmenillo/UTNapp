@@ -1,13 +1,35 @@
 <?php
     namespace Models;
 
-    abstract class  User{
+  class User
+  {
+        private $userId;
         private $firstName;
         private $lastName;
         private $email;
         private $password;
         private $dni;
         private $Admin;
+
+        /**
+         * Get the value of firstName
+         */ 
+        public function getUserId()
+        {
+                return $this->userId;
+        }
+
+        /**
+         * Set the value of firstName
+         *
+         * @return  self
+         */ 
+        public function setUserId($userId)
+        {
+                $this->userId = $userId;
+
+                return $this;
+        }
 
         /**
          * Get the value of firstName
