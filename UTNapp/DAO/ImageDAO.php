@@ -12,7 +12,6 @@
 
         public function Add(Image $image)
         {
-            
             try
             {
                 $query = "CALL Images_add(:name, :idStudent);";
@@ -29,27 +28,6 @@
                 throw $ex;
             }
         }
-
-
-        public function RemoveImage(Image $image)
-        {
-            try
-            {
-                $query = "CALL DeleteImage(:imageId);";
-
-                $parameters["imageId"] = $image->getImageId();
-                var_dump($parameters);
-                $this->connection = Connection::GetInstance();
-               
-                $this->connection->ExecuteNonQuery($query, $parameters);
-                var_dump($parameters);
-            }
-            catch(Exception $ex)
-            {
-                return "NO SE PUDO BORRAR EL CV";
-            }
-        }
-
 
         public function GetAll()
         {

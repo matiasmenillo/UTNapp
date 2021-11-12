@@ -38,7 +38,7 @@ if(isset($_SESSION['loggedUser']))
                                    {
                                         foreach($imageList as $image)
                                         {
-                                             if($student->getStudentId() == $image->getIdStudent()){
+                                             if($_SESSION["loggedStudent"]->getStudentId() == $image->getIdStudent()){
                                              ?>
                                                   <tr>
                                                   <td><?php echo $image->getName() ?></td> 

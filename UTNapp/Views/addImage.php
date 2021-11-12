@@ -15,7 +15,7 @@
                <form action="<?php echo FRONT_ROOT ?>Image/Upload" method="POST" enctype="multipart/form-data" class="bg-light-alpha p-5">
                               <label for="file" style="color:white">Imagen:</label>
                               <input type="file" name="file" class="form-control-file" style="display:inline-block;width:500px;color:white" required> 
-                              <input type="hidden" name="idStudent" value="<?php echo $student->getStudentId();?>">                                              
+                              <input type="hidden" name="idStudent" value="<?php echo $_SESSION["loggedStudent"]->getStudentId();?>">                                              
                     <button type="submit" name="button" class="btn btn-dark ml-auto d-block">Cargar</button>
                </form>
           </div>
