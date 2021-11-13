@@ -19,24 +19,6 @@ UpdateCompany(IdComapny, Status, Sector, Name, Description, Cuit, CompanyLink, A
 DeleteCompany(IdCompany)
 
 ==========================================================================================================================================
-Career (PK -> IdCareer) =================================================================================================================
-
-GetAllCareers()
-GetCareerById(IdCareer)
-InsertCareer(IdCareer, Description, Active)
-UpdateCareer(IdCareer, Description, Active)
-DeleteCareer(IdCareer)
-
-==========================================================================================================================================
-JobPosition (PK -> IdJobPosition) ===========================================================================================================
-
-GetAllJobPosition()
-GetJobPositionById(IdJobPosition)
-InsertJobPosition(IdJobPosition, IdCareer, Description)
-UpdateJobPosition(IdJobPosition, IdCareer, Description)
-DeleteJobPosition(IdJobPosition)
-
-==========================================================================================================================================
 JobOffer (PK -> IdJobOffer) ==============================================================================================================
 
 GetAllJobOffers()
