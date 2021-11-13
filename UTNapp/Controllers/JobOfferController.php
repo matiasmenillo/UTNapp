@@ -94,13 +94,22 @@
             $JobOffer->setjobOfferId($JobOfferId);
             $JobOffer->setCompany($this->CompanyDAO->GetById($CompanyId));
 
+            $carrerList = $this->CareerDAO->GetAll();
+
             $postulationList = $this->PostulationDAO->GetByJobOffer($JobOffer->getjobOfferId());
 
             foreach($this->JobPositionDAO->GetAll() as $JobPosition)
             {
                 if ($JobPosition->getJobPositionId() == $JobPositionId)
                 {
-                    $JobOffer->setJobPosition($JobPosition);
+                    foreach($carrerList as $career)
+                    {
+                        if ($career->getCareerId() == $JobPosition->getCareer()->getCareerId())
+                        {
+                            $JobPosition->setCareer($career);
+                            $JobOffer->setJobPosition($JobPosition);
+                        }
+                    }
                 }
             }
 
@@ -115,7 +124,14 @@
                     {
                         if ($student->getStudentId() == $postulation->getStudent()->getStudentId())
                         {
-                            array_push($studentList, $student);
+                            foreach($carrerList as $career)
+                            {
+                                if ($career->getCareerId() == $student->getCareer()->getCareerId())
+                                {
+                                    $student->setCareer($career);
+                                    array_push($studentList, $student);
+                                }
+                            }
                         }
                     }
                 }

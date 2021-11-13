@@ -40,7 +40,16 @@
         
         public function ShowViewStudentDetails($studentId)
         {
+            $carrerList = $this->CareerDAO->GetAll();
             $student = $this->StudentDAO->GetById($studentId);
+
+            foreach($carrerList as $career)
+            {
+                if ($career->getCareerId() == $student->getCareer()->getCareerId())
+                {
+                    $student->setCareer($career);
+                }
+            }
 
             require_once(VIEWS_PATH . "studentDetails.php");
         }
