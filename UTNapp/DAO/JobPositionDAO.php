@@ -3,7 +3,7 @@
 
     use DAO\IJobPositionDAO as IJobPositionDAO;
     use Models\JobPosition as JobPosition;
-    use DAO\CareerDAO as CareerDAO;
+    use Models\Career as Career;
 
     class JobPositionDAO implements IJobPositionDAO
     {
@@ -28,10 +28,11 @@
                 foreach($toJson as $eachJobPosition)
                 {
                     $newJobPosition = new JobPosition;
-                    $careerDAO = new CareerDAO;
+                    $career = new Career;
+                    $career->setCareerId($eachJobPosition->careerId);
 
                     $newJobPosition->setJobPositionId($eachJobPosition->jobPositionId);
-                    $newJobPosition->setCareer($careerDAO->GetById($eachJobPosition->careerId));
+                    $newJobPosition->setCareer($career);
                     $newJobPosition->setDescription($eachJobPosition->description);
 
                     array_push($arrayJobPositions, $newJobPosition);
