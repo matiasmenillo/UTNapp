@@ -35,6 +35,8 @@ class PostulationController{
             $JobOfferDAO = new JobOfferDAO;
             $JobPositionDAO = new JobPositionDAO;
 
+            $CareersList = $this->CareerDAO->GetAll();
+
             $JobPositionsList = $JobPositionDAO->GetAll();
             $JobOffersList = array();
 
@@ -44,8 +46,15 @@ class PostulationController{
                 {
                     if ($JobPosition->GetJobPositionId() == $JobOffer->GetJobPosition()->GetJobPositionId())
                     {
-                        $JobOffer->setJobPosition($JobPosition);
-                        array_push($JobOffersList, $JobOffer);
+                        foreach($CareersList as $career)
+                        {
+                            if ($career->getCareerId() == $JobPosition->getCareer()->getCareerId())
+                            {
+                                $JobPosition->setCareer($career);
+                                $JobOffer->setJobPosition($JobPosition);
+                                array_push($JobOffersList, $JobOffer);
+                            }
+                        }
                     }
                 }
             }
@@ -104,6 +113,8 @@ class PostulationController{
             $JobOfferDAO = new JobOfferDAO;
             $JobPositionDAO = new JobPositionDAO;
 
+            $CareersList =  $this->CareerDAO->GetALL();
+
             $JobPositionsList = $JobPositionDAO->GetAll();
             $JobOffersList = array();
 
@@ -113,12 +124,19 @@ class PostulationController{
                 {
                     if ($JobPosition->GetJobPositionId() == $JobOffer->GetJobPosition()->GetJobPositionId())
                     {
-                        $JobOffer->setJobPosition($JobPosition);
-                        array_push($JobOffersList, $JobOffer);
+                        foreach($CareersList as $career)
+                        {
+                            if ($career->getCareerId() == $JobPosition->getCareer()->getCareerId())
+                            {
+                                $JobPosition->setCareer($career);
+                                $JobOffer->setJobPosition($JobPosition);
+                                array_push($JobOffersList, $JobOffer);
+                            }
+                        }
                     }
                 }
             }
-             $CareersList =  $this->CareerDAO->GetALL();
+
              $CompanyList =  $this->CompanyDAO->GetAll();
 
              if ($_SESSION["loggedUser"]->getAdmin() == 0)
@@ -145,7 +163,20 @@ class PostulationController{
              else
              {
 
-                $PostulationHistory = $this->PostulationDAO->GetAllHistory();
+                $PostulationHistory = array();
+                $Postulations = $this->PostulationDAO->GetAllHistory();
+
+                foreach($Postulations as $Postulation)
+                {
+                    foreach($JobOffersList as $JobOffer)
+                    {
+                        if ($Postulation->getJobOffer()->getJobOfferId() == $JobOffer->getJobOfferId())
+                        {
+                            $Postulation->setJobOffer($JobOffer);
+                            array_push($PostulationHistory, $Postulation);
+                        }
+                    }
+                }
 
                 require_once(VIEWS_PATH . "postulationHistoryListAdmin.php");
              }
