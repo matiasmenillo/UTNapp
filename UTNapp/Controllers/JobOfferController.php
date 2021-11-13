@@ -133,16 +133,46 @@
             $this->ShowJobOfferListView();
         }
 
-         public function GetAll(){
- 
-             return $this->JobOfferDAO->GetAll();
+         public function GetAll()
+         {
+            $JobOfferDAO = new JobOfferDAO;
+            $JobPositionDAO = new JobPositionDAO;
+
+            $JobPositionsList = $JobPositionDAO->GetAll();
+            $JobOffersList = array();
+
+            foreach($JobOfferDAO->GetAll() as $JobOffer)
+            {
+                foreach($JobPositionsList as $JobPosition)
+                {
+                    if ($JobPosition->GetJobPositionId() == $JobOffer->GetJobPosition()->GetJobPositionId())
+                    {
+                        array_push($JobOffersList, $JobOffer);
+                    }
+                }
+            }
+
+            return $JobOffersList;
          }
 
          public function FilterJobOffersByCareer($CareerId)
          {
             $JobOfferDAO = new JobOfferDAO;
             $JobPositionDAO = new JobPositionDAO;
-            $JobOffersList = $JobOfferDAO->GetAll();
+
+            $JobPositionsList = $JobPositionDAO->GetAll();
+            $JobOffersList = array();
+
+            foreach($JobOfferDAO->GetAll() as $JobOffer)
+            {
+                foreach($JobPositionsList as $JobPosition)
+                {
+                    if ($JobPosition->GetJobPositionId() == $JobOffer->GetJobPosition()->GetJobPositionId())
+                    {
+                        array_push($JobOffersList, $JobOffer);
+                    }
+                }
+            }
 
             foreach ($JobOffersList as $JobOffer => $val)
             {
@@ -172,7 +202,21 @@
          public function FilterJobOffersByJobPosition($jobPositionId)
          {
             $JobOfferDAO = new JobOfferDAO;
-            $JobOffersList = $JobOfferDAO->GetAll();
+            $JobPositionDAO = new JobPositionDAO;
+
+            $JobPositionsList = $JobPositionDAO->GetAll();
+            $JobOffersList = array();
+
+            foreach($JobOfferDAO->GetAll() as $JobOffer)
+            {
+                foreach($JobPositionsList as $JobPosition)
+                {
+                    if ($JobPosition->GetJobPositionId() == $JobOffer->GetJobPosition()->GetJobPositionId())
+                    {
+                        array_push($JobOffersList, $JobOffer);
+                    }
+                }
+            }
 
             foreach ($JobOffersList as $JobOffer => $val)
             {

@@ -3,19 +3,15 @@
 
     use Controllers\StudentController as StudentController;
     use Controllers\UserController as UserController;
+    use DAO\CareerDAO as CareerDAO;
 
     class LoginController
     {
 
         public function Login($user_email, $user_password)
         {
-           $CareerController = new CareerController;
-           $JobPositionController = new JobPositionController;
            $StudentController = new StudentController;
            $UserController = new UserController;
-
-           $CareerController->CheckApi();
-           $JobPositionController->CheckApi();
         
            $LoggedUser = $UserController->GetByEmail($user_email);
 
@@ -28,6 +24,9 @@
                             $student = $StudentController->GetByEmail($LoggedUser->getEmail());
                             if($student != null)
                             {
+                                $CareerDAO = new CareerDAO;
+
+                                $student->setCareer($CareerDAO->GetById($student->getCareer()->getCareerId()));
                                 $_SESSION["loggedUser"] = $LoggedUser;
                                 $_SESSION["loggedStudent"] = $student;
                                 require(VIEWS_PATH . "home.php");

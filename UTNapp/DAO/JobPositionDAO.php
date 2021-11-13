@@ -3,16 +3,11 @@
 
     use DAO\IJobPositionDAO as IJobPositionDAO;
     use Models\JobPosition as JobPosition;
-    use \Exception as Exception;
-    use DAO\Connection as Connection;
     use DAO\CareerDAO as CareerDAO;
 
-    class JobPositionDAO implements IJobPositionDAO{
-
-        private $connection;
-        private $tableName = "JobPosition";
-
-        public function getJobPositionsFromAPI()
+    class JobPositionDAO implements IJobPositionDAO
+    {
+        public function GetAll()
         {
             //CURL
             $url = curl_init();
@@ -28,6 +23,8 @@
 
             if ($toJson != null)
             {
+                $arrayJobPositions = array();
+
                 foreach($toJson as $eachJobPosition)
                 {
                     $newJobPosition = new JobPosition;
@@ -37,128 +34,33 @@
                     $newJobPosition->setCareer($careerDAO->GetById($eachJobPosition->careerId));
                     $newJobPosition->setDescription($eachJobPosition->description);
 
-                    $result = $this->GetById($newJobPosition->getJobPositionId());
-
-                    if ($result == null) // SI NO LO TENGO EN LA BASE, LO AGREGO.
-                    {
-                        $this->Add($newJobPosition);
-                    }
-                }
-                
-            }
-
-            curl_close($url);   
-        }
-
-        public function Add(JobPosition $JobPosition){
-
-            try
-            {
-                $query = "CALL InsertJobPosition(:IdJobPosition, :IdCareer, :Description);";
-                
-                $parameters["IdJobPosition"] = $JobPosition->getJobPositionId();
-                $parameters["IdCareer"] = $JobPosition->getCareer()->getCareerId();
-                $parameters["Description"] = $JobPosition->getDescription();
-
-                $this->connection = Connection::GetInstance();
-
-                $this->connection->ExecuteNonQuery($query, $parameters);
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-        }
-
-        public function GetAll(){
-
-            try
-            {
-                $JobPositionList = array();
-
-                $query = "CALL GetAllJobPositions();";
-
-                $this->connection = Connection::GetInstance();
-
-                $resultSet = $this->connection->Execute($query);
-                
-                foreach ($resultSet as $row)
-                {                
-                    $JobPosition = new JobPosition();
-                    $careerDAO = new CareerDAO;
-
-                    $JobPosition->setJobPositionId($row["IdJobPositionDB"]);
-                    $JobPosition->setDescription($row["Description"]);
-                    $JobPosition->setCareer($careerDAO->GetById($row["IdCareer"]));
-
-                    array_push($JobPositionList, $JobPosition);
+                    array_push($arrayJobPositions, $newJobPosition);
+                    
                 }
 
-                return $JobPositionList;
+                curl_close($url);
+                return $arrayJobPositions;
             }
-            catch(Exception $ex)
+            else
             {
-                throw $ex;
-            }
+                curl_close($url);
+                return null;
+            }   
         }
 
-        public function GetById($JobPositionId){
-
-            try
-            {
-                $JobPosition= new JobPosition;
-
-                $query = "CALL GetJobPositionById(:IdJobPosition);";
-
-                $parameters["IdJobPosition"] = $JobPositionId;
-
-                $this->connection = Connection::GetInstance();
-
-                $resultSet = $this->connection->Execute($query , $parameters);
-
-                $row = array_pop($resultSet);
-
-                if($row != null)
-                {  
-                    $careerDAO = new CareerDAO;                    
-
-                    $JobPosition = new JobPosition();
-                    $JobPosition->setJobPositionId($row["IdJobPositionDB"]);
-                    $JobPosition->setDescription($row["Description"]);
-                    $JobPosition->setCareer($careerDAO->GetById($row["IdCareer"]));
-
-                    return $JobPosition;
-                }
-
-                return null;             
-               
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-        }
-
-        public function Remove(JobPosition $JobPosition)
+        public function GetById($JobPositionId)
         {
-            try
+            $arrayJobPositions = $this->GetAll();
+
+            foreach($arrayJobPositions as $jobPosition)
             {
-                $query = "CALL DeleteJobPosition(:IdJobPosition);";
-
-                $parameters["IdJobPosition"] = $JobPosition->getJobPositionId();
-
-                $this->connection = Connection::GetInstance();
-
-                $this->connection->ExecuteNonQuery($query, $parameters);
+                if ($jobPosition->getJobPositionId() == $JobPositionId)
+                {
+                    return $jobPosition;
+                }
             }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
+
+            return null;
         }
-
-       
     }
-
-
 ?>

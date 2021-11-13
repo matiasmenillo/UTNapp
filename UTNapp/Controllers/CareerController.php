@@ -18,11 +18,6 @@
              return $this->CareerDAO->GetAll();
          }
 
-         public function CheckApi()
-         {
-            $this->CareerDAO->getCareersFromAPI();
-         }
-
          public function GetById($careerId)
          {
             return $this->CareerDAO->GetById($careerId);

@@ -31,7 +31,6 @@
                         if ($JobOffer->GetJobOfferId() == $PostulacionVigente->GetJobOffer()->GetJobOfferId())
                         {
                             ?>
-
                                 <tr>
                                 <td style="color:black"><?php echo $JobOffer->getJobPosition()->getDescription()?></td>
                                 <td style="color:black"><?php echo $JobOffer->getJobPosition()->getCareer()->getDescription() ?></td>

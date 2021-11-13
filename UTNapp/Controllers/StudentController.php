@@ -33,6 +33,7 @@
 
          public function ShowStudentListView(){
             $studentList = $this->StudentDAO->GetAll();
+            $careerList = $this->CareerDAO->GetAll();
 
             require_once(VIEWS_PATH . "studentList.php"); 
         }

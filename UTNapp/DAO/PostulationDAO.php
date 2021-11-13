@@ -8,6 +8,7 @@
     use DAO\Connection as Connection;
     use DAO\StudentDAO as StudentDAO;
     use DAO\JobOfferDAO as JobOfferDAO;
+    use Models\JobOffer as JobOffer;
 
     class PostulationDAO implements IPostulationDAO{
 
@@ -50,10 +51,12 @@
                 {                
                     $Postulation = new Postulation();
                     $studentDAO = new studentDAO();
-                    $jobOfferDAO = new JobOfferDAO();
+                    $jobOffer = new JobOffer;
+                    $jobOffer->setjobOfferId($row["IdJobOffer"]);
+
+                    $Postulation->setJobOffer($jobOffer);
 
                     $Postulation->setStudent($studentDAO->GetById($row["IdStudent"]));
-                    $Postulation->setJobOffer($jobOfferDAO->GetById($row["IdJobOffer"]));
                     $Postulation->setPostulationDate($row["PostulationDate"]);
 
                     array_push($PostulationList, $Postulation);
@@ -87,10 +90,12 @@
                 {                        
                     $Postulation = new Postulation();
                     $studentDAO = new studentDAO();
-                    $jobOfferDAO = new JobOfferDAO();
 
+                    $jobOffer = new JobOffer;
+                    $jobOffer->setjobOfferId($row["IdJobOffer"]);
+
+                    $Postulation->setJobOffer($jobOffer);
                     $Postulation->setStudent($studentDAO->GetById($row["IdStudent"]));
-                    $Postulation->setJobOffer($jobOfferDAO->GetById($row["IdJobOffer"]));
                     $Postulation->setPostulationDate($row["PostulationDate"]);
 
                     return $Postulation;
@@ -125,10 +130,12 @@
                 {                    
                     $Postulation = new Postulation();
                     $studentDAO = new studentDAO();
-                    $jobOfferDAO = new JobOfferDAO();
+                    $jobOffer = new JobOffer;
+                    $jobOffer->setjobOfferId($row["IdJobOffer"]);
+
+                    $Postulation->setJobOffer($jobOffer);;
 
                     $Postulation->setStudent($studentDAO->GetById($row["IdStudent"]));
-                    $Postulation->setJobOffer($jobOfferDAO->GetById($row["IdJobOffer"]));
                     $Postulation->setPostulationDate($row["PostulationDate"]);
 
                    array_push($returnArray, $Postulation);
@@ -177,10 +184,11 @@
                 {                
                     $Postulation = new Postulation();
                     $studentDAO = new studentDAO();
-                    $jobOfferDAO = new JobOfferDAO();
+                    $jobOffer = new JobOffer;
+                    $jobOffer->setjobOfferId($row["IdJobOffer"]);
 
+                    $Postulation->setJobOffer($jobOffer);
                     $Postulation->setStudent($studentDAO->GetById($row["IdStudent"]));
-                    $Postulation->setJobOffer($jobOfferDAO->GetById($row["IdJobOffer"]));
                     $Postulation->setPostulationDate($row["PostulationDate"]);
 
                     array_push($PostulationList, $Postulation);
@@ -212,10 +220,11 @@
                 {                
                     $Postulation = new Postulation();
                     $studentDAO = new studentDAO();
-                    $jobOfferDAO = new JobOfferDAO();
+                    $jobOffer = new JobOffer;
+                    $jobOffer->setjobOfferId($row["IdJobOffer"]);
 
+                    $Postulation->setJobOffer($jobOffer);
                     $Postulation->setStudent($studentDAO->GetById($row["IdStudent"]));
-                    $Postulation->setJobOffer($jobOfferDAO->GetById($row["IdJobOffer"]));
                     $Postulation->setPostulationDate($row["PostulationDate"]);
 
                     array_push($PostulationList, $Postulation);

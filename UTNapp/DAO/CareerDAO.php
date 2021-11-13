@@ -6,12 +6,9 @@
     use \Exception as Exception;
     use DAO\Connection as Connection;
 
-    class CareerDAO implements ICareerDAO{
-
-        private $connection;
-        private $tableName = "Career";
-
-        public function getCareersFromAPI()
+    class CareerDAO implements ICareerDAO
+    {
+        public function GetAll()
         {
             //CURL
             $url = curl_init();
@@ -27,6 +24,8 @@
 
             if ($toJson != null)
             {
+                $arrayCareers = array();
+
                 foreach($toJson as $eachCareer)
                 {
                     $newCareer = new Career;
@@ -35,124 +34,33 @@
                     $newCareer->setDescription($eachCareer->description);
                     $newCareer->setActive(intval($eachCareer->active));
 
-                    $result = $this->GetById($newCareer->getCareerId());
-
-                    if ($result == null) // SI NO LO TENGO EN LA BASE, LO AGREGO.
-                    {
-                        $this->Add($newCareer);
-                    }
-                }
-                
-            }
-
-            curl_close($url);   
-        }
-
-        public function Add(Career $career){
-
-            try
-            {
-                $query = "CALL InsertCareer(:IdCareer, :Description, :Active);";
-                
-                $parameters["IdCareer"] = $career->getCareerId();
-                $parameters["Description"] = $career->getDescription();
-                $parameters["Active"] = $career->getActive();
-
-                $this->connection = Connection::GetInstance();
-
-                $this->connection->ExecuteNonQuery($query, $parameters);
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-        }
-
-        public function GetAll(){
-
-            try
-            {
-                $careerList = array();
-
-                $query = "CALL GetAllCareers();";
-
-                $this->connection = Connection::GetInstance();
-
-                $resultSet = $this->connection->Execute($query);
-                
-                foreach ($resultSet as $row)
-                {                
-                    $career = new Career();
-                    $career->setCareerId($row["IdCareerDB"]);
-                    $career->setDescription($row["Description"]);
-                    $career->setActive($row["Active"]);
-
-                    array_push($careerList, $career);
+                    array_push($arrayCareers, $newCareer);
                 }
 
-                return $careerList;
+                curl_close($url); 
+                return $arrayCareers;
+                
             }
-            catch(Exception $ex)
+            else
             {
-                throw $ex;
-            }
+                curl_close($url); 
+                return null;
+            }  
         }
 
         public function GetById($careerId){
 
-            try
+            $arrayCareers = $this->GetAll();
+
+            foreach($arrayCareers as $career)
             {
-                $career= new Career;
-
-                $query = "CALL GetCareerById(:Idcareer);";
-
-                $parameters["Idcareer"] = $careerId;
-
-                $this->connection = Connection::GetInstance();
-
-                $resultSet = $this->connection->Execute($query , $parameters);
-
-                $row = array_pop($resultSet);
-
-                if($row != null)
-                {                
-                    $career = new Career();
-                    $career->setCareerId($row["IdCareerDB"]);
-                    $career->setDescription($row["Description"]);
-                    $career->setActive($row["Active"]);
-
+                if ($career->GetCareerId() == $careerId)
+                {
                     return $career;
                 }
-
-                return null;             
-               
             }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-        }
 
-        public function Remove(career $career)
-        {
-            try
-            {
-                $query = "CALL Deletecareer(:Idcareer);";
-
-                $parameters["Idcareer"] = $career->getCareerId();
-
-                $this->connection = Connection::GetInstance();
-
-                $this->connection->ExecuteNonQuery($query, $parameters);
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-        }
-
-       
+            return null;
+        }   
     }
-
-
 ?>

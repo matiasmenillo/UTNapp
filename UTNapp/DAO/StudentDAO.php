@@ -8,11 +8,8 @@
     use \Exception as Exception;
     use DAO\Connection as Connection;
 
-    class StudentDAO implements IStudentDAO{
-
-        private $connection;
-        private $tableName = "Student";
-
+    class StudentDAO implements IStudentDAO
+    {
         public function GetAll()
         {
             //CURL
@@ -34,10 +31,11 @@
                 foreach($toJson as $eachStudent)
                 {
                     $newStudent = new Student;
-                    $CareerDAO = new CareerDAO;
+                    $career = new Career;
+                    $career->setCareerId($eachStudent->careerId);
 
                     $newStudent->setStudentId($eachStudent->studentId);
-                    $newStudent->setCareer($CareerDAO->GetById($eachStudent->careerId));
+                    $newStudent->setCareer($career);
                     $newStudent->setFirstName($eachStudent->firstName);
                     $newStudent->setLastName($eachStudent->lastName);
                     $newStudent->setDni($eachStudent->dni);
@@ -51,14 +49,14 @@
                     array_push($arrayStudents, $newStudent);
                 }
 
+                curl_close($url); 
                 return $arrayStudents;
             }
             else
             {
+                curl_close($url); 
                 return null;
-            }
-
-            curl_close($url);   
+            }   
         }
 
         

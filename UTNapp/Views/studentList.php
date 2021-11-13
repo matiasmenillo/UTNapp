@@ -46,37 +46,44 @@
             <?php
                 foreach($studentList as $student)
                 {
-                ?>
-                    <tr>
-                    <td style="color:black"><?php echo $student->getLastName() ?>, <?php echo $student->getFirstName() ?></td>
-                <?php
-                    if ($rol == 'admin')
-                    {   
-                        echo "<td style=".'"color:black">'. $student->getStudentId() . "</td>";
-                    }
-                ?>
-                    <td style="color:black"><?php echo $student->getDNI() ?></td>
-                    <td style="color:black"><?php echo $student->getGender() ?></td>
-                    <td style="color:black"><?php echo $student->getEmail() ?></td>
-                    <td style="color:black"><?php echo $student->getCareer()->getDescription() ?></td>
-                </td>
-                    <?php $date=date_create($student->getBirthDate())?>
-                    <td style="color:black"><?php echo date_format($date, "Y/m/d") ?></td>
-                    <td style="color:black"><?php echo $student->getPhoneNumber() ?></td>
-                <?php  
-                    if ($rol == 'admin')
+                    foreach($careerList as $career)
                     {
-                        echo "<td style=".'"color:black"'.">";
-                            if($student->getActive())
-                            {
-                                echo "Si </td>";
-                            }else 
-                            {
-                                echo "No </td>";
-                            }  
-                    ?>
-                    </tr>
-                <?php
+                        if ($career->getCareerId() == $student->getCareer()->getCareerId())
+                        {
+                            
+                            ?>
+                                <tr>
+                                <td style="color:black"><?php echo $student->getLastName() ?>, <?php echo $student->getFirstName() ?></td>
+                            <?php
+                                if ($rol == 'admin')
+                                {   
+                                    echo "<td style=".'"color:black">'. $student->getStudentId() . "</td>";
+                                }
+                            ?>
+                                <td style="color:black"><?php echo $student->getDNI() ?></td>
+                                <td style="color:black"><?php echo $student->getGender() ?></td>
+                                <td style="color:black"><?php echo $student->getEmail() ?></td>
+                                <td style="color:black"><?php echo $career->getDescription() ?></td>
+                            </td>
+                                <?php $date=date_create($student->getBirthDate())?>
+                                <td style="color:black"><?php echo date_format($date, "Y/m/d") ?></td>
+                                <td style="color:black"><?php echo $student->getPhoneNumber() ?></td>
+                            <?php  
+                                if ($rol == 'admin')
+                                {
+                                    echo "<td style=".'"color:black"'.">";
+                                        if($student->getActive())
+                                        {
+                                            echo "Si </td>";
+                                        }else 
+                                        {
+                                            echo "No </td>";
+                                        }  
+                                ?>
+                                </tr>
+                            <?php
+                            }
+                        }
                     }
                 }
                 ?>

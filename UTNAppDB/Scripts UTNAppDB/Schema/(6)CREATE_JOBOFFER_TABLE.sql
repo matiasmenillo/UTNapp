@@ -10,9 +10,6 @@ IdCompany INT NOT NULL,
 
 Primary Key (IdJobOffer),
 
-CONSTRAINT fk_JobPosition_JobOffer FOREIGN KEY (IdJobPosition)
-REFERENCES JobPosition(IdJobPosition),
-
 CONSTRAINT fk_Company_JobOffer FOREIGN KEY (IdCompany)
 REFERENCES Company(IdCompany)
 )

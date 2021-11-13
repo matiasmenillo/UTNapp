@@ -18,7 +18,6 @@ class PostulationController{
          private $JobPositionDAO;
          private $CompanyDAO;
          private $StudentDAO;
-         private $ImageDAO;
  
          public function __construct(){
  
@@ -33,18 +32,27 @@ class PostulationController{
 
          public function ShowPostulateView()
          {
-             $JobOffersList =  $this->JobOfferDAO->GetAll();
+            $JobOfferDAO = new JobOfferDAO;
+            $JobPositionDAO = new JobPositionDAO;
+
+            $JobPositionsList = $JobPositionDAO->GetAll();
+            $JobOffersList = array();
+
+            foreach($JobOfferDAO->GetAll() as $JobOffer)
+            {
+                foreach($JobPositionsList as $JobPosition)
+                {
+                    if ($JobPosition->GetJobPositionId() == $JobOffer->GetJobPosition()->GetJobPositionId())
+                    {
+                        array_push($JobOffersList, $JobOffer);
+                    }
+                }
+            }
              $CareersList =  $this->CareerDAO->GetALL();
-             $JobPositionsList =  $this->JobPositionDAO->GetAll();
              $CompanyList =  $this->CompanyDAO->GetAll();
  
              require_once(VIEWS_PATH . "postulateView.php");
          }
-
-        public function ShowUploadView(){
-            
-            require_once(VIEWS_PATH."addImage.php");
-        }
 
         public function Add($studentId,  $JobOfferId, $postulationDate)
         {
@@ -92,9 +100,23 @@ class PostulationController{
 
         public function showPostulationHistoryView()
         {
-             $JobOffersList =  $this->JobOfferDAO->GetAll();
+            $JobOfferDAO = new JobOfferDAO;
+            $JobPositionDAO = new JobPositionDAO;
+
+            $JobPositionsList = $JobPositionDAO->GetAll();
+            $JobOffersList = array();
+
+            foreach($JobOfferDAO->GetAll() as $JobOffer)
+            {
+                foreach($JobPositionsList as $JobPosition)
+                {
+                    if ($JobPosition->GetJobPositionId() == $JobOffer->GetJobPosition()->GetJobPositionId())
+                    {
+                        array_push($JobOffersList, $JobOffer);
+                    }
+                }
+            }
              $CareersList =  $this->CareerDAO->GetALL();
-             $JobPositionsList =  $this->JobPositionDAO->GetAll();
              $CompanyList =  $this->CompanyDAO->GetAll();
 
              if ($_SESSION["loggedUser"]->getAdmin() == 0)

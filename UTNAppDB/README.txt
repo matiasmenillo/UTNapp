@@ -3,21 +3,10 @@
 ==========================================================================================================================================
 EN LA RUTA: \UTNapp\UTNAppDB\Scripts UTNAppDB\GetDBReady
 1-) EJECUTAR "(1) EXECUTE_SCHEMA_AND_SPs_DB".
-2-) LEVANTAR WEB Y INTENTAR LOGIN CON CUALQUIER COSA PARA QUE LEVANTE DATOS DE API.
 3-) EJECUTAR "(2) ADD_ADMINS".
-4-) EJECUTAR "(3) ADD_TEST_DATA".
+4-) EJECUTAR "(3) ADD_TEST_DATA". --> EXEC Luego de logearse en la app.
 ==========================================================================================================================================
 							   <-- GUIA SPs -->
-==========================================================================================================================================
-Student (PK -> IdStudent, Email, Dni) ====================================================================================================
-
-GetAllStudents()
-GetAllActiveStudents()
-GetStudentById(IdStudent)
-InsertStudent(IdStudent, FirstName, LastName, Email, Password, Dni, Admin, IdCareer, FileNumber, Gender, BirthDate, PhoneNumber, Active)
-UpdateStudent(IdStudent, FirstName, LastName, Email, Password, Dni, Admin, IdCareer, FileNumber, Gender, BirthDate, PhoneNumber, Active)
-DeleteStudent(IdStudent)
-
 ==========================================================================================================================================
 Company (PK -> IdCompany, Name, Cuit) ====================================================================================================
 
@@ -58,6 +47,18 @@ DeleteJobOffer(IdJobOffer)
 
 ==========================================================================================================================================
 Postulation (PK -> IdStudent, IdJobOffer) ================================================================================================
+
+GetAllPostulations()
+GetPostulationByStudent(IdStudent)
+GetPostulationByJobOffer(IdJobOffer)
+InsertPostulation(IdStudent, IdJobOffer, PostulationDate)
+UpdatePostulation(IdStudent, IdJobOffer, PostulationDate)
+DeletePostulation(IdStudent)
+
+==========================================================================================================================================
+
+==========================================================================================================================================
+H_Postulation (PK -> IdStudent, IdJobOffer) ================================================================================================
 
 GetAllPostulations()
 GetPostulationByStudent(IdStudent)

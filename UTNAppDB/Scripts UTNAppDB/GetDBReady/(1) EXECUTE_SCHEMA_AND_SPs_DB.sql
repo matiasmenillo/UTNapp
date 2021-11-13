@@ -11,20 +11,6 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '1234';
 
 USE UTNAppDB;
 
-/*DROP TABLE IF EXISTS Career;*/
-
-CREATE TABLE Career
-(
-IdCareer INT Unique NOT NULL,
-IdCareerDB INT Unique auto_increment NOT NULL,
-Description VARCHAR(200) NOT NULL,
-Active INT NOT NULL,
-
-Primary Key (IdCareer, IdCareerDB)
-);
-
-USE UTNAppDB;
-
 /*DROP TABLE IF EXISTS Images;*/
 
 CREATE TABLE Images
@@ -66,22 +52,6 @@ Primary Key (Name, Cuit)
 
 USE UTNAppDB;
 
-/*DROP TABLE IF EXISTS JobPosition;*/
-
-CREATE TABLE JobPosition
-(
-IdJobPosition INT Unique NOT NULL,
-IdJobPositionDB INT Unique auto_increment NOT NULL,
-IdCareer INT NOT NULL,
-Description VARCHAR(200) NOT NULL,
-
-Primary Key (IdJobPosition, IdJobPositionDB),
-CONSTRAINT fk_Career_JobPosition FOREIGN KEY (IdCareer)
-REFERENCES Career(IdCareer)
-);
-
-USE UTNAppDB;
-
 /*DROP TABLE IF EXISTS JobOffer;*/
 
 CREATE TABLE JobOffer
@@ -91,9 +61,6 @@ IdJobPosition INT NOT NULL,
 IdCompany INT NOT NULL,
 
 Primary Key (IdJobOffer),
-
-FOREIGN KEY (IdJobPosition)
-REFERENCES JobPosition(IdJobPosition),
 
 FOREIGN KEY (IdCompany)
 REFERENCES Company(IdCompany)
@@ -141,103 +108,6 @@ create trigger PostulationTrigger_Insert_H_Postulation after insert on Postulati
    //
    
 -- (2) PROGRAMABILIY --
-
-USE UTNAppDB;
-
-DROP PROCEDURE IF EXISTS DeleteCareer;
-
-DELIMITER //
-
-CREATE PROCEDURE DeleteCareer
-(
-	IN IdCareerDBParam INT 
-)
-BEGIN
-	DELETE FROM Career WHERE IdCareerDB = IdCareerParamDB;
-END //
-
-DELIMITER ;
-
-USE UTNAppDB;
-
-DROP PROCEDURE IF EXISTS GetAllCareers;
-
-DELIMITER //
-
-CREATE PROCEDURE GetAllCareers()
-BEGIN
-	SELECT * FROM Career;
-END //
-
-DELIMITER ;
-
-USE UTNAppDB;
-
-DROP PROCEDURE IF EXISTS  GetCareerById;
-
-DELIMITER //
-
-CREATE PROCEDURE GetCareerById
-(
-	IN IdCareerDBParam INT
-)
-BEGIN
-	SELECT * FROM Career WHERE IdCareerDB = IdCareerDBParam;
-END //
-
-DELIMITER ;
-
-USE UTNAppDB;
-
-DROP PROCEDURE IF EXISTS InsertCareer;
-
-DELIMITER //
-
-CREATE PROCEDURE InsertCareer 
-(
-	IN IdCareer int, 
-	IN Description varchar(200), 
-	IN Active int
-
-)
-BEGIN
-	INSERT INTO Career
-    (
-		IdCareer,
-        Description,
-        Active
-    )
-    VALUES
-    (
-		IdCareer,
-        Description,
-        Active
-    );
-END //
-
-DELIMITER ;
-
-USE UTNAppDB;
-
-DROP PROCEDURE IF EXISTS UpdateCareer;
-
-DELIMITER //
-
-CREATE PROCEDURE UpdateCareer
-(
-	IN IdCareerDBParam int, 
-	IN Description varchar(200), 
-	IN Active int
-)
-BEGIN
-	UPDATE Career 
-	SET
-        Description = Description,
-        Active = Active
-	WHERE IdCareer = IdCareerDBParam;
-END //
-
-DELIMITER ;
 
 USE UTNAppDB;
 
@@ -564,102 +434,6 @@ BEGIN
         IdJobPosition = IdJobPosition,
         IdCompany = IdCompany
 	WHERE IdJobOffer = IdJobOfferParam;
-END //
-
-DELIMITER ;
-
-USE UTNAppDB;
-
-DROP PROCEDURE IF EXISTS DeleteJobPosition;
-
-DELIMITER //
-
-CREATE PROCEDURE DeleteJobPosition
-(
-	IN IdJobPositionDBParam INT 
-)
-BEGIN
-	DELETE FROM JobPosition WHERE IdJobPositionDB = IdJobPositionDBParam;
-END //
-
-DELIMITER ;
-
-USE UTNAppDB;
-
-DROP PROCEDURE IF EXISTS GetAllJobPositions;
-
-DELIMITER //
-
-CREATE PROCEDURE GetAllJobPositions()
-BEGIN
-	SELECT * FROM jobposition;
-END //
-
-DELIMITER ;
-
-USE UTNAppDB;
-
-DROP PROCEDURE IF EXISTS  GetJobPositionById;
-
-DELIMITER //
-
-CREATE PROCEDURE GetJobPositionById
-(
-	IN IdJobPositionDBParam INT
-)
-BEGIN
-	SELECT * FROM JobPosition WHERE IdJobPositionDB = IdJobPositionDBParam;
-END //
-
-DELIMITER ;
-
-USE UTNAppDB;
-
-DROP PROCEDURE IF EXISTS InsertJobPosition;
-
-DELIMITER //
-
-CREATE PROCEDURE InsertJobPosition 
-(
-	IN IdJobPosition int,		
-	IN IdCareer	int,		
-	IN Description varchar(200)			
-)
-BEGIN
-	INSERT INTO JobPosition 
-    (
-		IdJobPosition,		
-		IdCareer,	
-        Description	
-    )
-    VALUES
-    (
-		IdJobPosition,		
-		IdCareer,	
-        Description	
-    );
-END //
-
-DELIMITER ;
-
-USE UTNAppDB;
-
-DROP PROCEDURE IF EXISTS UpdateJobPosition;
-
-DELIMITER //
-
-CREATE PROCEDURE UpdateJobPosition
-(
-	IN IdJobPositionDBParam int,		
-	IN IdCompany int,		
-	IN Description varchar(200)
-)
-BEGIN
-	UPDATE JobPosition 
-	SET
-		IdCompany = IdCompany,
-        Description = Description
-	WHERE IdJobPositionDB = IdJobPositionParamDB;
 END //
 
 DELIMITER ;

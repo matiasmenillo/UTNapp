@@ -17,11 +17,6 @@
  
              return $this->JobPositionDAO->GetAll();
          }
-
-         public function CheckApi()
-         {
-            $this->JobPositionDAO->getJobPositionsFromAPI();
-         }
      }
 
 
