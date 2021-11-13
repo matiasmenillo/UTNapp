@@ -40,7 +40,7 @@
                 }
                 else
                 {
-                    echo "<script>alert('Contraseña o E-Mail invalido/a.')</script>";
+                    echo "<script>alert('Contraseña o E-Mail invalido/a.')</script>"; // Se muestra un solo mensaje de error, para no especificarle al usuario cual es el dato errone, de esta manera protegemos su informacion.
                     require_once(VIEWS_PATH . "index.php");
                 }
            }

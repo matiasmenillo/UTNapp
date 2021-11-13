@@ -3,7 +3,8 @@
 ==========================================================================================================================================
 EN LA RUTA: \UTNapp\UTNAppDB\Scripts UTNAppDB\GetDBReady
 1-) EJECUTAR "(1) EXECUTE_SCHEMA_AND_SPs_DB".
-3-) EJECUTAR "(2) ADD_ADMINS".
+2-) EJECUTAR "(2) ADD_ADMINS".
+3-) Configurar Config.php
 4-) EJECUTAR "(3) ADD_TEST_DATA". --> EXEC Luego de logearse en la app.
 ==========================================================================================================================================
 							   <-- GUIA SPs -->
