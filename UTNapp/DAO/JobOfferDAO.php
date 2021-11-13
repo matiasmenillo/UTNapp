@@ -3,6 +3,7 @@
 
     use DAO\IJobOfferDAO as IJobOfferDAO;
     use Models\JobOffer as JobOffer;
+    use Models\JobPosition as JobPosition;
     use \Exception as Exception;
     use DAO\Connection as Connection;
 
@@ -81,10 +82,11 @@
                 {   
                     $JobOffer = new JobOffer();
                     $CompanyDAO = new CompanyDAO;
-                    $JobPositionDAO = new JobPositionDAO;
+                    $JobPosition = new JobPosition;
+                    $JobPosition->setJobPositionId($row["IdJobPosition"]);
 
                     $JobOffer->setJobOfferId($row["IdJobOffer"]);
-                    $JobOffer->setJobPosition($JobPositionDAO->GetById($row["IdJobPosition"]));
+                    $JobOffer->setJobPosition($JobPosition);
                     $JobOffer->setCompany($CompanyDAO->GetById($row["IdCompany"]));
 
                     array_push($JobOfferList, $JobOffer);

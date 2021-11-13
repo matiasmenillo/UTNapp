@@ -44,6 +44,7 @@ class PostulationController{
                 {
                     if ($JobPosition->GetJobPositionId() == $JobOffer->GetJobPosition()->GetJobPositionId())
                     {
+                        $JobOffer->setJobPosition($JobPosition);
                         array_push($JobOffersList, $JobOffer);
                     }
                 }
@@ -112,6 +113,7 @@ class PostulationController{
                 {
                     if ($JobPosition->GetJobPositionId() == $JobOffer->GetJobPosition()->GetJobPositionId())
                     {
+                        $JobOffer->setJobPosition($JobPosition);
                         array_push($JobOffersList, $JobOffer);
                     }
                 }
@@ -121,7 +123,20 @@ class PostulationController{
 
              if ($_SESSION["loggedUser"]->getAdmin() == 0)
              {
-                $PostulationHistory = $this->PostulationDAO->GetAllHistoryByStudent($_SESSION["loggedStudent"]);
+                $Postulations = $this->PostulationDAO->GetAllHistoryByStudent($_SESSION["loggedStudent"]);
+                $PostulationHistory = array();
+
+                foreach($Postulations as $Postulation)
+                {
+                    foreach($JobOffersList as $JobOffer)
+                    {
+                        if ($Postulation->getJobOffer()->getJobOfferId() == $JobOffer->getJobOfferId())
+                        {
+                            $Postulation->setJobOffer($JobOffer);
+                            array_push($PostulationHistory, $Postulation);
+                        }
+                    }   
+                }
 
                 $PostulacionVigente = $this->PostulationDAO->GetByStudent($_SESSION["loggedStudent"]->getStudentId());
 
