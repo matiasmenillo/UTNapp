@@ -4,6 +4,7 @@
     use Controllers\StudentController as StudentController;
     use Controllers\UserController as UserController;
     use DAO\CareerDAO as CareerDAO;
+    use DAO\CompanyDAO AS CompanyDAO;
 
     class LoginController
     {
@@ -19,7 +20,7 @@
            {
                 if ($LoggedUser->getPassword() == $user_password)
                 {
-                    if ($LoggedUser->getAdmin() == 0)
+                    if ($LoggedUser->getRol() == 0)
                     {
                             $student = $StudentController->GetByEmail($LoggedUser->getEmail());
                             if($student != null)
@@ -35,6 +36,14 @@
                     else
                     {
                         $_SESSION["loggedUser"] = $LoggedUser;
+
+                        if ($LoggedUser->getRol() == 2)
+                        {
+                            $CompanyDAO = new CompanyDAO;
+                            $company = $CompanyDAO->getCompanyByName($LoggedUser->GetFirstName())[0];
+                            $_SESSION["loggedCompany"] = $company;
+                        }
+
                         require(VIEWS_PATH . "home.php");
                     }
                 }

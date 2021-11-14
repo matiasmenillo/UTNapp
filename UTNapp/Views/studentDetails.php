@@ -1,5 +1,13 @@
 <?php
-        require_once("nav-barAdmin.php");
+        if (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"]->getRol() == 1)
+        {
+            $rol = 'admin';
+            require_once("nav-barAdmin.php");
+        }
+        else
+        {
+            require_once("nav-barCompany.php");
+        }
 ?>
 <br>
 <div style="margin:left;padding-left:10px">

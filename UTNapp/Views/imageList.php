@@ -2,7 +2,7 @@
 if(isset($_SESSION['loggedUser']))
 {
 
-    if($_SESSION['loggedUser']->getAdmin() == 0)
+    if($_SESSION['loggedUser']->getRol() == 0)
     {
           require_once('nav-barStudent.php');
           $student = $_SESSION['loggedUser'];
@@ -18,7 +18,7 @@ if(isset($_SESSION['loggedUser']))
                </div>
 <main>
      <?php 
-          if ($_SESSION['loggedUser']->getAdmin() == 0)
+          if ($_SESSION['loggedUser']->getRol() == 0)
           {
      ?>
           <h2 class="mb-4;" style="color:white;text-align:center;">Mis CVs</h2>
@@ -70,7 +70,7 @@ if(isset($_SESSION['loggedUser']))
                          <table>
                               <thead>
                                    <?php
-                                   if ($_SESSION['loggedUser']->getAdmin() == 1) 
+                                   if ($_SESSION['loggedUser']->getRol() == 1) 
                                    {
                                         ?> <th>Estudiante</th> <?php
                                    }
@@ -87,7 +87,7 @@ if(isset($_SESSION['loggedUser']))
                                              ?>
                                                   <tr>
                                                   <?php
-                                                  if ($_SESSION['loggedUser']->getAdmin() == 1) 
+                                                  if ($_SESSION['loggedUser']->getRol() == 1) 
                                                   {
                                                       ?> <td><?php echo $image->getStudent()->getFirstName() . " " . $image->getStudent()->getLastName() ?></td> <?php
                                                   }

@@ -1,7 +1,7 @@
 <?php
 if(isset($_SESSION['loggedUser']))
 {
-     if($_SESSION['loggedUser']->getAdmin() == 0)
+     if($_SESSION['loggedUser']->getRol() == 0)
      {
            require_once('nav-barStudent.php');
       }

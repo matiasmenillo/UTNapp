@@ -13,17 +13,17 @@
 
         public function Add(User $user)
         {   
-            if ($this->checkApi($user) || $user->getAdmin() == 1)
+            if ($this->checkApi($user) || $user->getRol() != 0)
             {
                 try
                 {
-                    $query = "CALL InsertUser(:FirstName, :LastName, :Email, :Password, :Admin);";
+                    $query = "CALL InsertUser(:FirstName, :LastName, :Email, :Password, :Rol);";
                     
                     $parameters["FirstName"] = $user->getFirstName();
                     $parameters["LastName"] = $user->getLastName();
                     $parameters["Email"] = $user->getEmail();
                     $parameters["Password"] = $user->getPassword();
-                    $parameters["Admin"] = $user->getAdmin();
+                    $parameters["Rol"] = $user->getRol();
 
                     $this->connection = Connection::GetInstance();
                     
@@ -91,7 +91,7 @@
                     $user->setLastName($row["LastName"]);
                     $user->setEmail($row["Email"]);
                     $user->setPassword($row["Password"]);
-                    $user->setAdmin($row["Admin"]);
+                    $user->setRol($row["Rol"]);
                    
                     array_push($userList, $user);
                 }
@@ -123,7 +123,7 @@
                 $user->setLastName($row["LastName"]);
                 $user->setEmail($row["Email"]);
                 $user->setPassword($row["Password"]);
-                $user->setAdmin($row["Admin"]);
+                $user->setRol($row["Rol"]);
                 
                 return $user;
             }

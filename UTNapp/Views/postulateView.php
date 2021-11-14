@@ -1,14 +1,19 @@
 <?php
 
-    if (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"]->getAdmin() == 1)
+    if (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"]->getRol() == 1)
     {
         $rol = 'admin';
         require_once("nav-barAdmin.php");
     }
-    else
+    else if (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"]->getRol() == 0)
     {
         $rol = 'student';
         require_once("nav-barStudent.php");
+    }
+    else if (isset($_SESSION["loggedUser"]))
+    {
+        $rol = 'company';
+        require_once("nav-barCompany.php");
     }
 ?>
 <br>
@@ -17,7 +22,17 @@
                     <button type="submit" class='btn'>Volver</button>
                </form>
                </div>
-<h2 style="text-align:center; color:white">Ofertas Laborales disponibles</h2>
+
+<?php
+    if ( $rol == 'company')
+    {   
+        ?> <h2 style="text-align:center; color:white">Ofertas Laborales disponibles de <?php echo $_SESSION["loggedCompany"]->getName() ?></h2> <?php
+    }
+    else
+    {
+        ?> <h2 style="text-align:center; color:white">Ofertas Laborales disponibles</h2> <?php
+    }
+?>
 <br>
     <table style="text-align:center;">
     <form action="<?php echo FRONT_ROOT ?>JobOffer/FilterJobOffersByJobPosition" method="get">
@@ -60,17 +75,27 @@
         <tr>
             <th style="width: 15%;">DESCRIPCION</th>
             <th style="width: 30%;">CARRERA</th>
-            <th style="width: 30%;">EMPRESA</th>
-
+            <?php if ($rol != 'company'){?><th style="width: 30%;">EMPRESA</th><?php }?>
 
             <?php
-                if ($rol == 'admin')
+                if ($rol != 'student')
                 {
+                    if ($rol == 'admin')
+                     {
                     ?>
                         <th style="width: 10%;"></th>
                         <th style="width: 30%;"></th>
                         <th style="width: 30%;"></th>
                     <?php
+                    } 
+                    else
+                    {
+                        ?>
+                        <th style="width: 10%;"></th>
+                        <th style="width: 10%;"></th>
+                        <th style="width: 10%;"></th>
+                        <?php
+                    }
                 }
                 else
                 {
@@ -102,16 +127,13 @@
                                 </td>
                         <?php   
                     }
-                    ?>
-
-                    <?php
-                        if ($rol == 'admin')
-                        {       
+                    else
+                    {       
                     ?>
                         </tr>
                                 <td style="color:black"><?php echo $JobOffer->getJobPosition()->getDescription()?></td>
                                 <td style="color:black"><?php echo $JobOffer->getJobPosition()->getCareer()->getDescription() ?></td>
-                                <td style="color:black"><?php echo $JobOffer->getCompany()->getName() ?></td>
+                                <?php if ($rol != 'company'){?><td style="color:black"><?php echo $JobOffer->getCompany()->getName() ?></td><?php }?>
                             <td>
                                 <form action="<?php echo FRONT_ROOT ?>JobOffer/Remove" method="POST">
                                     <button type="submit" class="btn" name="remove" value="<?php echo  $JobOffer->getJobOfferId();?>"> Remove </button>

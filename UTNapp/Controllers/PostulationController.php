@@ -52,7 +52,18 @@ class PostulationController{
                             {
                                 $JobPosition->setCareer($career);
                                 $JobOffer->setJobPosition($JobPosition);
-                                array_push($JobOffersList, $JobOffer);
+
+                                if ($_SESSION["loggedUser"]->GetRol() == 2)
+                                {
+                                    if ($_SESSION["loggedCompany"]->getId() == $JobOffer->getCompany()->getId())
+                                    {
+                                        array_push($JobOffersList, $JobOffer);
+                                    }
+                                }
+                                else
+                                {
+                                    array_push($JobOffersList, $JobOffer);
+                                }
                             }
                         }
                     }
@@ -118,7 +129,7 @@ class PostulationController{
             $JobPositionsList = $JobPositionDAO->GetAll();
             $JobOffersList = array();
 
-            foreach($JobOfferDAO->GetAll() as $JobOffer)
+            foreach($JobOfferDAO->GetAllHistoric() as $JobOffer)
             {
                 foreach($JobPositionsList as $JobPosition)
                 {
@@ -139,7 +150,7 @@ class PostulationController{
 
              $CompanyList =  $this->CompanyDAO->GetAll();
 
-             if ($_SESSION["loggedUser"]->getAdmin() == 0)
+             if ($_SESSION["loggedUser"]->getRol() == 0)
              {
                 $Postulations = $this->PostulationDAO->GetAllHistoryByStudent($_SESSION["loggedStudent"]);
                 $PostulationHistory = array();
@@ -160,7 +171,7 @@ class PostulationController{
 
                 require_once(VIEWS_PATH . "postulationHistoryList.php");
              }
-             else
+             else if ($_SESSION["loggedUser"]->getRol() == 1)
              {
 
                 $PostulationHistory = array();
@@ -179,6 +190,25 @@ class PostulationController{
                 }
 
                 require_once(VIEWS_PATH . "postulationHistoryListAdmin.php");
+             }
+             else
+             {
+                $PostulationHistory = array();
+                $Postulations = $this->PostulationDAO->GetAllHistory();
+
+                foreach($Postulations as $Postulation)
+                {
+                    foreach($JobOffersList as $JobOffer)
+                    {
+                        if ($Postulation->getJobOffer()->getJobOfferId() == $JobOffer->getJobOfferId() && $JobOffer->getCompany()->getId() == $_SESSION["loggedCompany"]->getId())
+                        {
+                            $Postulation->setJobOffer($JobOffer);
+                            array_push($PostulationHistory, $Postulation);
+                        }
+                    }
+                }
+
+                require_once(VIEWS_PATH . "postulationHistoryListCompany.php");
              }
 
         }

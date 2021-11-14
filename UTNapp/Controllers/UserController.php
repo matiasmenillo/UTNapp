@@ -5,6 +5,7 @@
      use DAO\StudentDAO as StudentDAO;
      use DAO\CareerDAO as CareerDAO;
      use DAO\UserDAO as UserDAO;
+     use DAO\CompanyDAO AS CompanyDAO;
      use Controllers\HomeController as HomeController;
  
      class UserController{
@@ -18,16 +19,17 @@
              $this->StudentDAO = new StudentDAO;
              $this->CareerDAO = new CareerDAO;
              $this->UserDAO = new UserDAO;
+             $this->CompanyDAO = new CompanyDAO;
          }
 
-         public function Add($user_FirstName, $user_LastName, $user_email, $user_password, $user_rol){
-
+         public function Add($user_FirstName, $user_LastName, $user_email, $user_password, $user_rol)
+         {
             $newUser = new User;
             $newUser->setFirstName($user_FirstName);
             $newUser->setLastName($user_LastName);
             $newUser->setEmail($user_email);
             $newUser->setPassword($user_password);
-            $newUser->setAdmin(intval($user_rol));
+            $newUser->setRol(intval($user_rol));
         
             $error = $this->UserDAO->Add($newUser);
 
@@ -35,13 +37,25 @@
             {
                 echo "<script>alert('". $error ."')</script>";
                 unset($error);
-                $this->AddUserView();
+
+                if ($newUser->getRol() == 0)
+                {
+                    $this->AddUserStudentView();
+                }
+                else if ($newUser->getRol() == 1)
+                {
+                    $this->ShowAddAdminView();
+                }
+                else
+                {
+                    $this->AddUserCompanyView();
+                }
             }
             else
             {
                 echo "<script>alert('Registrado correctamente!')</script>";
 
-                if ($newUser->getAdmin() == 0)
+                if ($newUser->getRol() == 0)
                 {
                     $this->LoginView();
                 }
@@ -61,9 +75,16 @@
              return $this->UserDAO->GetByEmail($email);
          }
 
-         public function AddUserView(){
+         public function AddUserStudentView(){
 
             require_once(VIEWS_PATH . "userRegister.php"); 
+         }
+
+         public function AddUserCompanyView()
+         {
+            $companyList = $this->CompanyDAO->GetAll();
+
+            require_once(VIEWS_PATH . "userComapanyRegister.php"); 
          }
 
          public function ShowAddAdminView()

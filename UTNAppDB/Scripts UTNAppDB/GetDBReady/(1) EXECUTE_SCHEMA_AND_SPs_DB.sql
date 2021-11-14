@@ -22,6 +22,18 @@ CREATE TABLE Images
 
 USE UTNAppDB;
 
+/*DROP TABLE IF EXISTS UserRol;*/
+
+CREATE TABLE UserRol
+(
+IdUserRol INT unique NOT NULL,
+Name VARCHAR(200) NOT NULL,
+
+Primary Key (IdUserRol)
+);
+
+USE UTNAppDB;
+
 /*DROP TABLE IF EXISTS Users;*/
 
 CREATE TABLE Users
@@ -31,23 +43,26 @@ FirstName VARCHAR(200) NOT NULL,
 LastName VARCHAR(200) NOT NULL,
 Email VARCHAR(200) unique NOT NULL,
 Password VARCHAR(200) NOT NULL,
-Admin INT NOT NULL,
+Rol INT NOT NULL,
 
-Primary Key (IdUser, Email)
+Primary Key (IdUser, Email),
+CONSTRAINT FK_Rol FOREIGN KEY (Rol) REFERENCES UserRol(IdUserRol)
 );
+
+USE UTNAppDB;
 
 CREATE TABLE Company
 (
 IdCompany INT Unique auto_increment NOT NULL,
-Name VARCHAR(200) NOT NULL,
+Name VARCHAR(200) Unique NOT NULL,
 AboutUs VARCHAR(200) NULL,
 Status BIT NOT NULL,
 CompanyLink VARCHAR(200) NULL,
-Cuit BIGINT NOT NULL,
+Cuit BIGINT UNIQUE NOT NULL,
 Description VARCHAR(200) NULL,
 Sector VARCHAR(200) NULL,
 
-Primary Key (Name, Cuit)
+Primary Key (Name)
 );
 
 USE UTNAppDB;
@@ -96,6 +111,20 @@ Primary Key (IdHPostulation)
 
 USE UTNAppDB;
 
+/*DROP TABLE IF EXISTS H_JobOffer;*/
+
+CREATE TABLE H_JobOffer
+(
+IdHJobOffer INT Unique auto_increment NOT NULL,
+IdJobOffer INT NOT NULL,
+IdJobPosition INT NOT NULL,
+IdCompany INT NOT NULL,
+
+Primary Key (IdHJobOffer)
+);
+
+USE UTNAppDB;
+
 /*DROP TRIGGER IF EXISTS PostulationTrigger_Insert_H_Postulation;*/
 
 delimiter //
@@ -104,6 +133,18 @@ create trigger PostulationTrigger_Insert_H_Postulation after insert on Postulati
    FOR EACH ROW
 		BEGIN
 			INSERT INTO H_Postulation(IdStudent , IdJobOffer, PostulationDate) values (new.IdStudent, new.IdJobOffer, new.PostulationDate);
+		END//
+
+USE UTNAppDB;
+
+/*DROP TRIGGER IF EXISTS PostulationTrigger_Insert_H_JobOffer;*/
+
+delimiter //
+
+create trigger PostulationTrigger_Insert_H_JobOffer after insert on JobOffer
+   FOR EACH ROW
+		BEGIN
+			INSERT INTO H_JobOffer(IdJobOffer, IdJobPosition, IdCompany) values (new.IdJobOffer, new.IdJobPosition, new.IdCompany);
 		END
    //
    
@@ -297,6 +338,35 @@ CREATE PROCEDURE GetAllHistoricPostulationsByStudent
 )
 BEGIN
 	SELECT * FROM H_Postulation WHERE IdStudent = IdStudentParam;
+END //
+
+DELIMITER ;
+
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS GetAllHistoricJobOffers;
+
+DELIMITER //
+
+CREATE PROCEDURE GetAllHistoricJobOffers()
+BEGIN
+	SELECT * FROM H_JobOffer;
+END //
+
+DELIMITER ;
+
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS  GetAllHistoricJobOffersById;
+
+DELIMITER //
+
+CREATE PROCEDURE GetAllHistoricJobOffersById
+(
+	IN IdJobOfferParam INT
+)
+BEGIN
+	SELECT * FROM H_JobOffer WHERE IdJobOffer = IdJobOfferParam;
 END //
 
 DELIMITER ;
@@ -608,7 +678,7 @@ CREATE PROCEDURE InsertUser
 	IN LastName varchar(200), 
 	IN Email varchar(200), 
 	IN Password varchar(200), 
-	IN Admin INT
+	IN Rol INT
 )
 BEGIN
 	INSERT INTO Users
@@ -617,7 +687,7 @@ BEGIN
 		LastName, 
 		Email, 
 		Password,  
-		Admin
+		Rol
     )
     VALUES
     (
@@ -625,7 +695,7 @@ BEGIN
 		LastName, 
 		Email, 
 		Password, 
-		Admin
+		Rol
     );
 END //
 

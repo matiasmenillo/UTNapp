@@ -1,12 +1,16 @@
 <?php 
     include_once('header.php'); 
 
-    if($_SESSION["loggedUser"]->getAdmin() == 1){
+    if($_SESSION["loggedUser"]->getRol() == 1){
       include_once('nav-barAdmin.php'); 
+    }
+    else if ($_SESSION["loggedUser"]->getRol() == 0)
+    {
+      include_once('nav-barStudent.php');
     }
     else
     {
-      include_once('nav-barStudent.php');
+      include_once('nav-barCompany.php');
     }
 
 ?>
@@ -21,7 +25,7 @@
     <table style="text-align:center; color:orange">
     <thead>
         <tr>
-            <?php if ($_SESSION["loggedUser"]->getAdmin() == 0)
+            <?php if ($_SESSION["loggedUser"]->getRol() == 0)
                   {
                     ?><th style="width: 3%;">Legajo</th>
                     <th style="width: 1%;">Carrera</th>
@@ -36,7 +40,7 @@
   </thead>
   <tbody>
   <tr>
-      <?php if ($_SESSION["loggedUser"]->getAdmin() == 0) 
+      <?php if ($_SESSION["loggedUser"]->getRol() == 0) 
       {
         ?><td style="color:black"><?php echo $_SESSION["loggedStudent"]->getFileNumber(); ?></td>
         <td style="color:black"><?php echo $_SESSION["loggedStudent"]->getCareer()->getDescription(); ?></td>

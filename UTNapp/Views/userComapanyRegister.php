@@ -2,7 +2,7 @@
 
     if (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"]->getRol() == 1)
     {
-        $rol = 'admin';
+        $admin = $_SESSION["loggedUser"];
         require_once("nav-barAdmin.php");
     }
 ?>
@@ -14,26 +14,34 @@
         <button type="submit" class='btn'>Volver</button>
     </form>
     </div>
-<h2 style="text-align:center; color:white">Cargar administrador</h2>
+<h2 style="text-align:center; color:white">Registrar usario de empresa</h2>
     <form action="<?php echo FRONT_ROOT ?> User/Add" method="POST">
 
-        <label for="user_firstName" style="color:White;text-align:center">Nombre</label>
-        <input style="margin:auto" type="text" name="user_firstName" style="color:black" required>
+        <label for="user_FirstName" style="color:White;text-align:center">Nombre</label>
 
-        <label for="user_lastName" style="color:White;text-align:center">Apellido</label>
-        <input style="margin:auto" type="text" name="user_lastName" style="color:black" required>
+        <select name="user_FirstName" style="color:black;margin:auto" required>
+        <?php
+            foreach($companyList as $company)
+            {
+                if ($company->getStatus() == 1)
+                {
+                    echo "<option value='".$company->getName()."'>".$company->getName()."</option>";
+                }
+            }
+        ?>
+        </select>
+
+        <input type="hidden" name="user_LastName" value="">
 
         <label for="user_email" style="color:White;text-align:center">Email</label>
         <input style="margin:auto" type="text" name="user_email" style="color:black" required>
-        
+
         <label for="user_password" style="color:White;text-align:center">Contraseña</label>
         <input style="margin:auto" type="password" name="user_password" style="color:black" required>
 
-        <input type="hidden" name="user_admin" value="1">
-
+        <input type="hidden" name="user_rol" value="2">
         <br>
-
-        <button style="margin:auto;" type="submit">Agregar</button>
+        <button style="margin:auto" type="submit" style="color:White;text-align:center">Registrar</button>
     </form>
 </body>
 </html>

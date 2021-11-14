@@ -20,12 +20,12 @@
         <input type="password" name="user_password" placeholder="Contraseña" required>    
         <br><br>    
         <button type="submit" style="color:black">Ingresar</button>      
-        <br><br>    
-
+        <br>
     </form> 
-    <form action="<?php echo FRONT_ROOT?>User/AddUserView" method="POST" > 
-        <button type="submit" style="color:black">Registrarse</button>   
-    </form>   
+    <br><br>
+        <form action="<?php echo FRONT_ROOT?>User/AddUserStudentView" method="POST" > 
+            <button type="submit" style="color:black">Registrarse</button>   
+        </form> 
 </div>    
 </body>    
 </html>

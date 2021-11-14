@@ -1,5 +1,5 @@
 <?php
-    if (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"]->getAdmin() == 1)
+    if (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"]->getRol() == 1)
     {
         $rol = 'admin';
         require_once("nav-barAdmin.php");

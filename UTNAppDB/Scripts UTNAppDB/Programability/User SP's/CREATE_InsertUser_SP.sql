@@ -10,7 +10,7 @@ CREATE PROCEDURE InsertUser
 	IN LastName varchar(200), 
 	IN Email varchar(200), 
 	IN Password varchar(200), 
-	IN Admin INT
+	IN Rol INT
 )
 BEGIN
 	INSERT INTO Users
@@ -19,7 +19,7 @@ BEGIN
 		LastName, 
 		Email, 
 		Password,  
-		Admin
+		Rol
     )
     VALUES
     (
@@ -27,7 +27,7 @@ BEGIN
 		LastName, 
 		Email, 
 		Password, 
-		Admin
+		Rol
     );
 END //
 

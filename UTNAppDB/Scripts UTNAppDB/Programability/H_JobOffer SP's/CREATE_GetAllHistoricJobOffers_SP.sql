@@ -1,0 +1,12 @@
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS GetAllHistoricJobOffers;
+
+DELIMITER //
+
+CREATE PROCEDURE GetAllHistoricJobOffers()
+BEGIN
+	SELECT * FROM H_JobOffer;
+END //
+
+DELIMITER ;

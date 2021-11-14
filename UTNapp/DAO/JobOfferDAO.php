@@ -99,6 +99,40 @@
             }
         }
 
+        
+        public function GetAllHistoric(){
+
+            try
+            {
+                $JobOfferList = array();
+
+                $query = "CALL GetAllHistoricJobOffers();";
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {   
+                    $JobOffer = new JobOffer();
+                    $CompanyDAO = new CompanyDAO;
+                    $JobPosition = new JobPosition;
+                    $JobPosition->setJobPositionId($row["IdJobPosition"]);
+
+                    $JobOffer->setJobOfferId($row["IdJobOffer"]);
+                    $JobOffer->setJobPosition($JobPosition);
+                    $JobOffer->setCompany($CompanyDAO->GetById($row["IdCompany"]));
+
+                    array_push($JobOfferList, $JobOffer);
+                }
+                return $JobOfferList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
         public function GetById($JobOfferId){
 
             try
