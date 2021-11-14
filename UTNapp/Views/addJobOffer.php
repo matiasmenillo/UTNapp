@@ -1,5 +1,13 @@
 <?php
-    require_once("nav-barAdmin.php");
+    if (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"]->getRol() == 1)
+    {
+        $rol = 'admin';
+        require_once("nav-barAdmin.php");
+    }
+    else
+    {
+        require_once("nav-barCompany.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,11 +33,20 @@
         <button type="submit" class='btn'>Volver</button>
     </form>
     </div>
-    <h2 style="color:white;text-align:center">Seleccione las opciones para crear la oferta laboral</h2>
+
+    <?php 
+        if ($_SESSION["loggedUser"]->getRol() == 1)
+        { 
+            ?> <h2 style="color:white;text-align:center">Seleccione las opciones para crear la oferta laboral</h2> <?php
+        }
+        else
+        {
+            ?> <h2 style="color:white;text-align:center">Seleccione la opción para crear la oferta laboral</h2> <?php
+        }
+    ?>
     <br>
     <form action="<?php echo FRONT_ROOT?> JobOffer/Add" method="POST">
-    
-    <label for="jobPositionId" style="color:White;text-align:center">Seleccione la Posicion</label>
+    <label for="jobPositionId" style="color:White;text-align:center">Seleccione la Posición</label>
         <select name="jobPositionId" style="color:black;margin:auto" required>
         <?php
             foreach($jobPositionList as $jobPosition)
@@ -39,18 +56,28 @@
         ?>
         </select>
 
-    <label for="companyId" style="color:White;text-align:center">Seleccione una Empresa</label>
-        <select name="companyId" style="color:black;margin:auto" required>
-        <?php
-            foreach($companyList as $company)
-            {
-                if ($company->getStatus() == 1)
-                {
-                    echo "<option value='".$company->getId()."'>".$company->getName()."</option>";
-                }
-            }
+        <?php if ($_SESSION["loggedUser"]->getRol() == 1) 
+        { 
         ?>
-        </select>
+            <label for="companyId" style="color:White;text-align:center">Seleccione una Empresa</label>
+                <select style="margin:auto;color:black" name="companyId" style="color:black" required>
+                    <?php
+                        foreach($companyList as $company)
+                        {
+                            if ($company->getStatus() == 1)
+                            {
+                                echo "<option value='".$company->getId()."' selected>".$company->getName()."</option>";
+                            }
+                        }
+                    ?>
+                </select>
+        <?php 
+        }
+        else
+        {
+            ?> <input type="hidden" name="companyId" value="<?php echo $_SESSION["loggedCompany"]->getId(); ?>"> <?php
+        } 
+        ?>
         <br>
         <button type="submit" style="color:black; margin:auto">Agregar</button>
     </form>
