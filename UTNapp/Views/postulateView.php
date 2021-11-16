@@ -136,7 +136,7 @@
                                 <?php if ($rol != 'company'){?><td style="color:black"><?php echo $JobOffer->getCompany()->getName() ?></td><?php }?>
                             <td>
                                 <form action="<?php echo FRONT_ROOT ?>JobOffer/Remove" method="POST">
-                                    <button type="submit" class="btn" name="remove" value="<?php echo  $JobOffer->getJobOfferId();?>"> Remove </button>
+                                    <button type="submit" class="btn" name="remove" value="<?php echo  $JobOffer->getJobOfferId();?>"> Finalizar </button>
                                 </form>
                             </td>
                             <td style="color:black">
@@ -144,7 +144,7 @@
                                     <input type="hidden" name="JobOfferId" value="<?php echo $JobOffer->getJobOfferId(); ?>">
                                     <input type="hidden" name="JobPositionId" value="<?php echo $JobOffer->getJobPosition()->getJobPositionId(); ?>">
                                     <input type="hidden" name="CompanyId" value="<?php echo $JobOffer->getCompany()->getId(); ?>">
-                                    <button type="submit" class="btn" name="modify"> Modify </button>
+                                    <button type="submit" class="btn" name="modify"> Modificar </button>
                                 </form>
                             </td>
 
