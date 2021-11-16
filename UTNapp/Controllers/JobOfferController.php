@@ -201,7 +201,8 @@
             }
             else
             {
-                $this->MailController->SendEndMail($ModifJobOffer);
+                $MailController = new MailController;
+                $MailController->SendEndMail($ModifJobOffer);
             }
 
             $this->ShowJobOfferListView();

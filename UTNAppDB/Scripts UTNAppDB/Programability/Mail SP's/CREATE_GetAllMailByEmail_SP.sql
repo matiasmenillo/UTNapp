@@ -9,7 +9,7 @@ CREATE PROCEDURE GetAllMailByEMail
 	IN EMailParam VARCHAR(200) 
 )
 BEGIN
-	SELECT * FROM Mail WHERE Email = EMailParam;
+	SELECT * FROM Mail WHERE Email = EMailParam order by sentDate desc;
 END //
 
 DELIMITER ;

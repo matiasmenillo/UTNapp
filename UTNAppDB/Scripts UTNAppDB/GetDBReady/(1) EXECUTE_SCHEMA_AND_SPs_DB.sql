@@ -350,6 +350,22 @@ DELIMITER ;
 
 USE UTNAppDB;
 
+DROP PROCEDURE IF EXISTS  GetAllHistoricPostulationsByJobOffer;
+
+DELIMITER //
+
+CREATE PROCEDURE GetAllHistoricPostulationsByJobOffer
+(
+	IN IdJobOfferParam INT
+)
+BEGIN
+	SELECT * FROM H_Postulation WHERE IdJobOffer = IdJobOfferParam;
+END //
+
+DELIMITER ;
+
+USE UTNAppDB;
+
 DROP PROCEDURE IF EXISTS  GetAllHistoricPostulationsByStudent;
 
 DELIMITER //
@@ -794,7 +810,7 @@ CREATE PROCEDURE GetAllMailByEMail
 	IN EMailParam VARCHAR(200) 
 )
 BEGIN
-	SELECT * FROM Mail WHERE Email = EMailParam;
+	SELECT * FROM Mail WHERE Email = EMailParam order by sentDate desc;
 END //
 
 USE UTNAppDB;
@@ -808,7 +824,7 @@ CREATE PROCEDURE GetMailById
 	IN IdMailParam INT 
 )
 BEGIN
-	SELECT * FROM Mail WHERE IdMail = IdMailParam;
+	SELECT * FROM Mail WHERE IdMail = IdMailParam order by sentDate desc;
 END //
 
 DELIMITER ;

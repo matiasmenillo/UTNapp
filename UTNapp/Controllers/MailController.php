@@ -6,6 +6,7 @@
      use DAO\MailDAO as MailDAO;
      use DAO\PostulationDAO as PostulationDAO;
      use DAO\StudentDAO as StudentDAO;
+     use DAO\UserDAO as UserDAO;
 
 class MailController
 {
@@ -16,6 +17,7 @@ class MailController
         $this->MailDAO = new MailDAO;
         $this->PostulationDAO = new PostulationDAO;
         $this->StudentDAO = new StudentDAO;
+        $this->UserDAO = new UserDAO;
     }
 
     private function GetAllByUser(User $user)
@@ -50,7 +52,7 @@ class MailController
 
     public function SendEndMail($JobOffer)
     {
-        $postulationsList = $this->PostulationDAO->GetByJobOffer($JobOffer->getJobOfferId());
+        $postulationsList = $this->PostulationDAO->GetAllHistoryByJobOffer($JobOffer);
         $studentList = $this->StudentDAO->GetAll();
 
         $header = "Fin oferta: " . $JobOffer->getJobPosition()->getDescription() . " - " . $JobOffer->getCompany()->getName();

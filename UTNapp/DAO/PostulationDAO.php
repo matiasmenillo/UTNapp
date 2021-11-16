@@ -237,5 +237,41 @@
                 throw $ex;
             }
         }
+
+        public function GetAllHistoryByJobOffer(JobOffer $jobOfferParam){
+
+            try
+            {
+                $PostulationList = array();
+
+                $query = "CALL GetAllHistoricPostulationsByJobOffer(:IdJobOffer);";
+
+                $parameters["IdJobOffer"] = $jobOfferParam->getjobOfferId();
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query, $parameters);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $Postulation = new Postulation();
+                    $studentDAO = new studentDAO();
+                    $jobOffer = new JobOffer;
+                    $jobOffer->setjobOfferId($row["IdJobOffer"]);
+
+                    $Postulation->setJobOffer($jobOffer);
+                    $Postulation->setStudent($studentDAO->GetById($row["IdStudent"]));
+                    $Postulation->setPostulationDate($row["PostulationDate"]);
+
+                    array_push($PostulationList, $Postulation);
+                }
+
+                return $PostulationList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
     }
 ?>
