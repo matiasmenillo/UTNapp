@@ -125,6 +125,28 @@ Primary Key (IdHJobOffer)
 
 USE UTNAppDB;
 
+/*DROP TABLE IF EXISTS Mail;*/
+
+CREATE TABLE Mail
+(
+IdMail INT Unique auto_increment NOT NULL,
+Email VARCHAR(200) NOT NULL,
+IdCompany INT NOT NULL,
+Header VARCHAR(200) NOT NULL,
+Message VARCHAR(1000) NOT NULL,
+SentDate DATETIME NOT NULL,
+
+Primary Key (IdMail),
+
+CONSTRAINT fk_User_Mail FOREIGN KEY (Email)
+REFERENCES Users(Email),
+
+CONSTRAINT fk_Comapany_Mail FOREIGN KEY (IdCompany)
+REFERENCES company(IdCompany)
+);
+
+USE UTNAppDB;
+
 /*DROP TRIGGER IF EXISTS PostulationTrigger_Insert_H_Postulation;*/
 
 delimiter //
@@ -382,6 +404,7 @@ CREATE PROCEDURE DeleteJobOffer
 	IN IdJobOfferParam INT 
 )
 BEGIN
+	DELETE FROM Postulation WHERE IdJobOffer = IdJobOfferParam;
 	DELETE FROM JobOffer WHERE IdJobOffer = IdJobOfferParam;
 END //
 
@@ -718,3 +741,74 @@ CREATE PROCEDURE DeleteImage
 BEGIN
 	DELETE FROM Images WHERE imageId = imageIdDBParam;
 END //
+
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS InsertMail;
+
+DELIMITER //
+
+CREATE PROCEDURE InsertMail 
+(
+	IN Email VARCHAR(200),
+    IN IdCompany INT,
+	IN Header VARCHAR(200), 
+	IN Message VARCHAR(1000)
+
+)
+BEGIN
+	INSERT INTO Mail VALUES
+    (
+		Email,
+        IdCompany,
+        Header,
+        Message,
+        current_timestamp()
+    );
+END //
+
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS DeleteMail;
+
+DELIMITER //
+
+CREATE PROCEDURE DeleteMail
+(
+	IN IdMailParam INT 
+)
+BEGIN
+	DELETE FROM Mail WHERE IdMail = IdMailParam;
+END //
+
+DELIMITER ;
+
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS GetAllMailByEMail;
+
+DELIMITER //
+
+CREATE PROCEDURE GetAllMailByEMail
+(
+	IN EMailParam VARCHAR(200) 
+)
+BEGIN
+	SELECT * FROM Mail WHERE Email = EMailParam;
+END //
+
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS GetMailById;
+
+DELIMITER //
+
+CREATE PROCEDURE GetMailById
+(
+	IN IdMailParam INT 
+)
+BEGIN
+	SELECT * FROM Mail WHERE IdMail = IdMailParam;
+END //
+
+DELIMITER ;

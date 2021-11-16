@@ -28,6 +28,7 @@ class PostulationController{
              $this->CompanyDAO = new CompanyDAO;
              $this->StudentDAO = new StudentDAO;
              $this->ImageDAO = new ImageDAO;
+             $this->MailController = new MailController;
          }
 
          public function ShowPostulateView()
@@ -101,6 +102,8 @@ class PostulationController{
                 
                     $this->PostulationDAO->Add($newPostulation);
 
+                    $this->MailController->SendWelcomeMail($newPostulation->getJobOffer());
+
                     echo "<script>alert('¡Postulado correctamente!')</script>";
                     $this->ShowPostulateView();
                 }
@@ -168,6 +171,31 @@ class PostulationController{
                 }
 
                 $PostulacionVigente = $this->PostulationDAO->GetByStudent($_SESSION["loggedStudent"]->getStudentId());
+
+                if ($PostulacionVigente != null)
+                {
+                    foreach($this->JobOfferDAO->GetAll() as $jobOffer)
+                    {
+                        if ($PostulacionVigente->getJobOffer()->getjobOfferId() == $jobOffer->getjobOfferId())
+                        {
+                            foreach($JobPositionsList as $jobposition)
+                            {
+                                if ($jobposition->getJobPositionId() == $jobOffer->getJobPosition()->getJobPositionId())
+                                {
+                                    foreach($CareersList as $career)
+                                    {
+                                        if ($career->getCareerId() == $jobposition->getCareer()->getCareerId())
+                                        {
+                                            $jobposition->setCareer($career);
+                                            $jobOffer->setJobPosition($jobposition);
+                                            $PostulacionVigente->setJobOffer($jobOffer);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
 
                 require_once(VIEWS_PATH . "postulationHistoryList.php");
              }

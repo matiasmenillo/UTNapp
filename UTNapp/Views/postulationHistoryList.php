@@ -26,26 +26,20 @@
             </thead>
             <tbody>
                 <?php
-                    foreach($JobOffersList as $JobOffer)
-                    {
-                        if ($JobOffer->GetJobOfferId() == $PostulacionVigente->GetJobOffer()->GetJobOfferId())
-                        {
-                            ?>
-                                <tr>
-                                <td style="color:black"><?php echo $JobOffer->getJobPosition()->getDescription()?></td>
-                                <td style="color:black"><?php echo $JobOffer->getJobPosition()->getCareer()->getDescription() ?></td>
-                                <td style="color:black"><?php echo $JobOffer->getCompany()->GetName() ?></td>
-                                <td style="color:black"><?php echo $PostulacionVigente->getPostulationDate() ?></td>
-                                <td>
-                                    <form action="<?php echo FRONT_ROOT ?>Postulation/Remove" method="POST">
-                                    <input type="hidden" name="studentId" value="<?php echo  $_SESSION["loggedStudent"]->getStudentId();?>">
-                                    <button type="submit" class="btn" >Dar de Baja</button>
-                                    </form>
-                                </tr>
+                    ?>
+                        <tr>
+                        <td style="color:black"><?php echo $PostulacionVigente->getJobOffer()->getJobPosition()->getDescription()?></td>
+                        <td style="color:black"><?php echo $PostulacionVigente->getJobOffer()->getJobPosition()->getCareer()->getDescription() ?></td>
+                        <td style="color:black"><?php echo $PostulacionVigente->getJobOffer()->getCompany()->GetName() ?></td>
+                        <td style="color:black"><?php echo $PostulacionVigente->getPostulationDate() ?></td>
+                        <td>
+                            <form action="<?php echo FRONT_ROOT ?>Postulation/Remove" method="POST">
+                            <input type="hidden" name="studentId" value="<?php echo  $_SESSION["loggedStudent"]->getStudentId();?>">
+                            <button type="submit" class="btn" >Dar de Baja</button>
+                            </form>
+                        </tr>
 
-                            <?php
-                        }
-                    }
+                    <?php
                 ?>
             </tbody>
     </div>

@@ -1,0 +1,15 @@
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS GetAllMailByEMail;
+
+DELIMITER //
+
+CREATE PROCEDURE GetAllMailByEMail
+(
+	IN EMailParam VARCHAR(200) 
+)
+BEGIN
+	SELECT * FROM Mail WHERE Email = EMailParam;
+END //
+
+DELIMITER ;

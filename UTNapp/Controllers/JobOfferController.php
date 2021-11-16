@@ -26,6 +26,7 @@
             $this->JobPositionDAO = new JobPositionDAO;
             $this->StudentDAO = new StudentDAO;
             $this->PostulationDAO = new PostulationDAO;
+            $this->MailController = new MailController;
 
          }
 
@@ -191,13 +192,16 @@
 
         public function Remove($jobOfferId)
         {
-            $ModifJobOffer = new JobOffer();
-            $ModifJobOffer->setjobOfferId($jobOfferId);
+            $ModifJobOffer = $this->JobOfferDAO->GetById($jobOfferId);
             $result = $this->JobOfferDAO->Remove($ModifJobOffer);
 
             if ($result != null)
             {
                 echo "<script>alert('". $result ."')</script>";
+            }
+            else
+            {
+                $this->MailController->SendEndMail($ModifJobOffer);
             }
 
             $this->ShowJobOfferListView();

@@ -1,0 +1,15 @@
+USE UTNAppDB;
+
+DROP PROCEDURE IF EXISTS DeleteMail;
+
+DELIMITER //
+
+CREATE PROCEDURE DeleteMail
+(
+	IN IdMailParam INT 
+)
+BEGIN
+	DELETE FROM Mail WHERE IdMail = IdMailParam;
+END //
+
+DELIMITER ;
