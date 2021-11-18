@@ -35,6 +35,7 @@
                         <td>
                             <form action="<?php echo FRONT_ROOT ?>Postulation/Remove" method="POST">
                             <input type="hidden" name="studentId" value="<?php echo  $_SESSION["loggedStudent"]->getStudentId();?>">
+                            <input type="hidden" name="JobOfferId" value="<?php echo $PostulacionVigente->getJobOffer()->getJobOfferId(); ?>">
                             <button type="submit" class="btn" >Dar de Baja</button>
                             </form>
                         </tr>

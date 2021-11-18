@@ -80,6 +80,26 @@ class MailController
         }   
     }
 
+    public function SendRejectedPostulationMail($postulation)
+    {
+
+        $header = "Postulacion Rechazada: " . $postulation->getJobOffer()->getJobPosition()->getDescription() . " - " . $postulation->getJobOffer()->getCompany()->getName();
+            
+        $message = "Lamentamos informarle que su postulacion la oferta laboral: " . $postulation->getJobOffer()->getJobPosition()->getDescription() . ". 
+        fue rechazada.
+        Muchas gracias por su interes en nuestra oferta.
+        Saludos.
+        ". $postulation->getJobOffer()->getCompany()->getName();
+
+        $newMail = new Mail;
+        $newMail->setUser($this->UserDAO->GetByEmail($postulation->getStudent()->getEmail()));
+        $newMail->setCompany($postulation->getJobOffer()->getCompany());
+        $newMail->setMessage($message);
+        $newMail->setHeader($header);
+
+        $this->Add($newMail);  
+    }
+
     private function Add(Mail $mail)
     {
         $this->MailDAO->Add($mail);

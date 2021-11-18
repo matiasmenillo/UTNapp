@@ -36,6 +36,7 @@
             <th style="width: 10%;">Fecha de Nacimiento</th>
             <th style="width: 10%;">Número de telefono</th>
             <th style="width: 1%;">Activo</th>
+            <th style="width: 5%;"></th>
         </tr>
         </thead>
         <tbody>
@@ -64,6 +65,13 @@
                                 echo "No";
                             }
                 ?></td>
+                <td>
+                    <form action="<?php echo FRONT_ROOT ?>Postulation/Remove" method="POST">
+                        <input type="hidden" name="StudentId" value="<?php echo $student->getStudentId(); ?>">
+                        <input type="hidden" name="JobOfferId" value="<?php echo $JobOffer->getJobOfferId(); ?>">
+                        <button type="submit" class="btn" name="ViewStudent"> Rechazar </button>
+                    </form>
+                </td>
                 </tr>
                 <?php
                 }

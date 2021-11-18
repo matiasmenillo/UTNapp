@@ -60,7 +60,7 @@
             $bodyContent = $message;
 
             $mail->Subject = $subject;
-            $bodyContent = 'Querido '.$fname.':';
+            $bodyContent = 'Querido/a '.$fname.':';
             $bodyContent .='<p>'.$message.'</p>';
             $mail->Body = $bodyContent;
 

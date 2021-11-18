@@ -241,11 +241,18 @@ class PostulationController{
 
         }
 
-        public function Remove($StudentId)
+        public function Remove($StudentId, $JobOfferId)
         {
-            $RemovePostulation = new Postulation();
-            $RemovePostulation->setStudent($this->StudentDAO->GetById($StudentId));
+            $RemovePostulation = $this->PostulationDAO->GetByStudent($StudentId);
+
             $this->PostulationDAO->Remove($RemovePostulation);
+
+            if ($_SESSION["loggedUser"]->getRol() != 0)
+            {
+                $RemovePostulation->setJobOffer($this->JobOfferDAO->GetById($JobOfferId));
+
+                $this->MailController->SendRejectedPostulationMail($RemovePostulation);
+            }
 
             $this->showPostulationHistoryView();
         }
