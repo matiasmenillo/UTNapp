@@ -6,6 +6,7 @@
     use DAO\Connection as Connection;
     use Models\Mail as Mail;
     use Models\User as User;
+    use PHPMailer\PHPMailer\PHPMailer;
 
     class MailDAO implements IMailDAO{
 
@@ -26,11 +27,44 @@
                 $this->connection = Connection::GetInstance();
 
                 $this->connection->ExecuteNonQuery($query, $parameters);
+
+                $this->SendEmail($mail);
             }
             catch(Exception $ex)
             {
                 throw $ex;
             }
+        }
+
+        private function SendEmail(Mail $oMail)
+        {
+            $mail = new PHPMailer;
+
+            $fname = $oMail->getUser()->getFirstName() . " " . $oMail->getUser()->getLastName();		
+            $toemail = ReceiverAdress; // --> Config.php setea esta variable, en un caso real, deberia ser el mail que llega en $oMail->getUser()->getEmail().
+            $subject = $oMail->getHeader();	
+            $message = $oMail->getMessage();
+            $mail->isSMTP();                           
+            $mail->Host = 'smtp.gmail.com';            
+            $mail->SMTPAuth = true;                    
+            $mail->Username = SenderAdress; // --> Config.php setea esta variable
+            $mail->Password = SenderPassword; // --> Config.php setea esta variable
+            $mail->SMTPSecure = 'tls';          
+            $mail->Port = 587;                  
+            $mail->setFrom(SenderAdress, SenderName); // --> Config.php setea estas variables
+            $mail->addReplyTo(SenderAdress, SenderName); // --> Config.php setea estas variables
+            $mail->addAddress($toemail);   
+
+            $mail->isHTML(true); 
+
+            $bodyContent = $message;
+
+            $mail->Subject = $subject;
+            $bodyContent = 'Querido '.$fname.':';
+            $bodyContent .='<p>'.$message.'</p>';
+            $mail->Body = $bodyContent;
+
+            $mail->send();
         }
 
         public function GetAllByUser(User $user)

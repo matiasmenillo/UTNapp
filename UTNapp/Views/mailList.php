@@ -7,7 +7,7 @@
                     <button type="submit" class='btn'>Volver</button>
                </form>
                </div>
-<h2 style="text-align:center;color:white; padding-bottom:10px;"><?php echo $_SESSION["loggedUser"]->GetEmail(); ?></h2>
+<h2 style="text-align:center;color:white; padding-bottom:10px;"> Notificaciones de <?php echo $_SESSION["loggedUser"]->getFirstName() . " " . $_SESSION["loggedUser"]->getLastName(); ?></h2>
     <div>
         <table style="text-align:center;">
             <thead>

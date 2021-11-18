@@ -18,13 +18,13 @@
 
             <li><a class="drop" href="#" style="color:white">Alumno</a>
               <ul>
+                <li><a href="<?php echo FRONT_ROOT."Mail/ShowMailListView"?>">Ver Notificaciones</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Student/ShowStudentListView" ?>">Lista Alumnos</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Company/ShowCompanyListView" ?>">Lista de Empresas</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Postulation/ShowPostulateView" ?>">Aplicar a propuesta</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Postulation/showPostulationHistoryView" ?>">Historial de Postulaciones</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Image/ShowUploadView"?>">Cargar CVs</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Image/ShowListView"?>">Ver CVs</a></li>
-                <li><a href="<?php echo FRONT_ROOT."Mail/ShowMailListView"?>">Ver Mails</a></li>
               </ul>
             </li>
         </ul>

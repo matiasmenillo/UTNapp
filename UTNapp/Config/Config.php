@@ -20,5 +20,11 @@ define("DB_HOST", "localhost");
 define("DB_NAME", "UTNAppDB");
 define("DB_USER", "root");
 define("DB_PASS", "1234");
+
+//Mailer Basic Config (Checkear SPAM, los mails suelen llegar ahi)
+define("SenderAdress", "UTNApp2021@gmail.com");
+define("SenderPassword", "UTNAppPuerto");
+define("SenderName", "UTNApp");
+define("ReceiverAdress", "mauroporzio02@gmail.com"); //"-> Remplazar con la direccion que desea utilizar para recibir los mails a modo de test, entre las "".
 ?>
 
