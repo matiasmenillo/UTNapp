@@ -35,6 +35,13 @@
             $PostulationController->ShowPostulateView();
         }
 
+        public function ShowPDFView($jobOfferId){
+            $jobOffer = $this->JobOfferDAO->GetById($jobOfferId);
+            $studentList = $this->StudentDAO->GetAll();
+            $postulationList = $this->PostulationDAO->GetAll();
+            require_once(VIEWS_PATH . "pdfView.php");
+        }
+
         public function ShowAddView(){
 
             $careerList = $this->CareerDAO->GetAll();

@@ -2,11 +2,18 @@
 
         require_once("nav-barAdmin.php");
 ?>
+<br>
 <div style="margin:left;padding-left:10px">
                <form action="<?php echo FRONT_ROOT?> Postulation/ShowPostulateView" method="POST">
                     <button type="submit" class='btn'>Volver</button>
                </form>
                </div>
+<div style="float: right; margin-top: -40px; padding-right:10px">
+         <form action="<?php echo FRONT_ROOT?> JobOffer/ShowPDFView" method="POST">
+             <input type="hidden" name='jobOfferId' value='<?php echo $JobOffer->getJobOfferId() ?>'>
+             <button type="submit" class='btn'>Descargar Plantilla</button>
+        </form>
+</div>
 <table style="text-align:center;">
 <caption style="text-align:center;color:white;padding-bottom:20px;padding-top:10px;">Oferta laboral</caption>
 <thead>
