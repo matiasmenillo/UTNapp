@@ -37,11 +37,9 @@
 
         public function ShowPDFView($jobOfferId)
         {
-            var_dump($jobOfferId);
-
             $jobOffer = $this->JobOfferDAO->GetById($jobOfferId);
-            $studentList = $this->StudentDAO->GetAll();
-            $postulationList = $this->PostulationDAO->GetAll();
+            $postulationList = $this->PostulationDAO->GetByJobOffer($jobOfferId);
+
             require_once(VIEWS_PATH . "pdfView.php");
         }
 
