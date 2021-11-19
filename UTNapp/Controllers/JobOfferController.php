@@ -35,7 +35,10 @@
             $PostulationController->ShowPostulateView();
         }
 
-        public function ShowPDFView($jobOfferId){
+        public function ShowPDFView($jobOfferId)
+        {
+            var_dump($jobOfferId);
+
             $jobOffer = $this->JobOfferDAO->GetById($jobOfferId);
             $studentList = $this->StudentDAO->GetAll();
             $postulationList = $this->PostulationDAO->GetAll();

@@ -8,11 +8,15 @@
                     <button type="submit" class='btn'>Volver</button>
                </form>
                </div>
+
+
+
+
 <div style="float: right; margin-top: -40px; padding-right:10px">
-         <form action="<?php echo FRONT_ROOT?> JobOffer/ShowPDFView" method="POST">
-             <input type="hidden" name='jobOfferId' value='<?php echo $JobOffer->getJobOfferId() ?>'>
-             <button type="submit" class='btn'>Descargar Plantilla</button>
-        </form>
+        <a 
+        type="btn" href="<?php echo FRONT_ROOT?>JobOffer/ShowPDFView?JobOfferId=<?php echo $JobOffer->getJobOfferId() ?>" 
+        target="_blank" class='btn btn-success'> Descargar Plantilla
+        </a>
 </div>
 <table style="text-align:center;">
 <caption style="text-align:center;color:white;padding-bottom:20px;padding-top:10px;">Oferta laboral</caption>

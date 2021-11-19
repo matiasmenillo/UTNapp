@@ -1,5 +1,4 @@
 <?php
-
     ob_start();
     require_once('Fpdf/fpdf.php');
     $pdf = new FPDF();
@@ -39,7 +38,7 @@
    
 
     
-    $pdf->Output();
+    $pdf->Output('I');
     ob_end_flush(); 
 
 
