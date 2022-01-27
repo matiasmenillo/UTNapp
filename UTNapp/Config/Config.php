@@ -19,7 +19,7 @@ define("HTTPHEADER", ['x-api-key:4f3bceed-50ba-4461-a910-518598664c08']);
 define("DB_HOST", "localhost");
 define("DB_NAME", "UTNAppDB");
 define("DB_USER", "root");
-define("DB_PASS", "1234");
+define("DB_PASS", "");
 
 //Mailer Basic Config (Checkear SPAM, los mails suelen llegar ahi)
 define("SenderAdress", "UTNApp2021@gmail.com");

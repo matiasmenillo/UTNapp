@@ -123,7 +123,7 @@
                 $user->setLastName($row["LastName"]);
                 $user->setEmail($row["Email"]);
                 $user->setPassword($row["Password"]);
-                $user->setRol($row["Rol"]);
+                $user->setRol($row["Admin"]);
                 
                 return $user;
             }
